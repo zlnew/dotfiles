@@ -2,23 +2,34 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = {
-      -- component_separators = "",
-      -- icons_enabled = true,
-      -- sections_separators = { left = "", right = "" },
       refresh = {
         statusline = 1500,
         tabline = 1500,
         winbar = 1500,
       },
-      sections = {
-        lualine_a = { "branch" },
-        lualine_b = {},
-        lualine_x = {},
-        lualine_y = {
-          { "progress", separator = " ", padding = { left = 1, right = 0 } },
-          { "location", padding = { left = 0, right = 1 } },
+      options = {
+        globalstatus = true,
+        theme = {
+          normal = { c = { bg = "none" } },
+          inactive = { c = { bg = "none" } },
         },
-        lualine_z = {},
+        section_separators = '',
+      },
+      sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "branch", "filename" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { "diff" },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "branch", "filename" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { "diff" },
       },
       extensions = {},
     },
