@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Setup script for dotfiles
+
+set -e  # Exit on error
+
+echo "🔧 Setting up your dotfiles..."
+
+# Ensure ~/.local/bin exists
+if [ ! -d "$HOME/.local/bin" ]; then
+  echo "📁 ~/.local/bin does not exist. Creating it..."
+  mkdir -p "$HOME/.local/bin"
+fi
+
+# 1. Symlink nvim_switch
+ln -sf "$HOME/www/dotfiles/.local/bin/nvim_switch" "$HOME/.local/bin/nvim_switch"
+echo "✅ Symlinked nvim_switch"
+
+# 2. Symlink .bashrc
+ln -sf "$HOME/www/dotfiles/.bashrc" "$HOME/.bashrc"
+echo "✅ Symlinked .bashrc"
+
+# 3. Run nvim_switch
+echo "🚀 Running nvim_switch..."
+"$HOME/.local/bin/nvim_switch"
+
