@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- Customize Mason
 
@@ -17,11 +17,10 @@ return {
         -- install vue related servers
         "vue-language-server",
         "typescript-language-server",
-        "tailwind-language-server",
+        "tailwindcss-language-server",
         "html-lsp",
         "eslint-lsp",
         "eslint_d",
-        "prettier",
         "prettierd",
 
         -- install php related servers
@@ -34,9 +33,6 @@ return {
 
         -- install formatters
         "stylua",
-
-        -- install debuggers
-        "debugpy",
 
         -- install any other package
         "tree-sitter-cli",
