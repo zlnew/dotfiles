@@ -8,5 +8,8 @@ if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
+  -- { import = "astrocommunity.colortheme.catppuccin" },
+  { import = "astrocommunity.recipes.disable-tabline" },
+  { import = "astrocommunity.recipes.ai" },
   -- import/override with your plugins folder
 }

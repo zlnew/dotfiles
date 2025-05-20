@@ -9,6 +9,15 @@ return {
     ensure_installed = {
       "lua",
       "vim",
+
+      "vue",
+      "typescript",
+      "javascript",
+      "css",
+      "html",
+
+      "php",
+      "json"
       -- add more arguments for adding more treesitter parsers
     },
   },

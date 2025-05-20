@@ -14,6 +14,24 @@ return {
         -- install language servers
         "lua-language-server",
 
+        -- install vue related servers
+        "vue-language-server",
+        "typescript-language-server",
+        "tailwind-language-server",
+        "html-lsp",
+        "eslint-lsp",
+        "eslint_d",
+        "prettier",
+        "prettierd",
+
+        -- install php related servers
+        "intelephense",
+        "phpstan",
+        "pint",
+
+        -- install md related servers
+        "markdownlint",
+
         -- install formatters
         "stylua",
 
