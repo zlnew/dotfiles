@@ -17,10 +17,14 @@ return {
         max_items = 10,
         selection = {
           preselect = true,
-          auto_insert = false,
+          auto_insert = true,
         },
       },
       ghost_text = { enabled = true },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+      },
     }
 
     opts.sources = {

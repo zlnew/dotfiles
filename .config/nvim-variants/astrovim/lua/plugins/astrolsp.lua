@@ -26,6 +26,7 @@ return {
         "vtsls",
         "ts_ls",
         "volar",
+        "eslint-lsp",
       },
       timeout_ms = 30000,
     },

@@ -91,6 +91,7 @@ alias refresh='source ~/.bashrc'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ggc='git-generate-commit-gemini'
 
 alias vendro='vendor/bin/pint'
 alias vendrojs='npm run lint-staged'
@@ -145,3 +146,15 @@ export PATH="$HOME/.local/bin:$PATH"
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+
+# --- Source personal API keys/environment variables ---
+DOTFILES_ENV_PATH="$HOME/www/dotfiles/.env"
+
+if [ -f "$DOTFILES_ENV_PATH" ]; then
+  # Source the .env file to load variables into the current shell session
+  source "$DOTFILES_ENV_PATH"
+  # Optional: You can uncomment the line below for debugging to see if it loaded
+  # echo "Loaded environment variables from $DOTFILES_ENV_PATH"
+else
+  echo "Warning: $DOTFILES_ENV_PATH not found."
+fi

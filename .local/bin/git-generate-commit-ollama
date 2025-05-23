@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Get staged git diff
+diff=$(git diff --staged)
+
+if [[ -z "$diff" ]]; then
+  echo "No staged changes. Add files first."
+  exit 1
+fi
+
+# Build the prompt
+read -r -d '' prompt <<EOF
+Generate a concise git commit message in imperative mood (e.g. Add, Fix, Refactor) for the following git diff:
+
+$diff
+EOF
+
+# Query the local model
+commit_msg=$(echo "$prompt" | ollama run codellama:7b-code | head -n 20 | tail -n 1)
+
+# Copy to clipboard
+echo -n "$commit_msg" | xclip -selection clipboard
+
+# Output to terminal
+echo "Generated commit message:"
+echo "$commit_msg"
+

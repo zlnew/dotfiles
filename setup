@@ -12,15 +12,18 @@ if [ ! -d "$HOME/.local/bin" ]; then
   mkdir -p "$HOME/.local/bin"
 fi
 
-# 1. Symlink nvim_switch
-ln -sf "$HOME/www/dotfiles/.local/bin/nvim_switch" "$HOME/.local/bin/nvim_switch"
-echo "✅ Symlinked nvim_switch"
+# 1. Symlink nvim-0witch
+ln -sf "$HOME/www/dotfiles/.local/bin/nvim-switch" "$HOME/.local/bin/nvim-switch"
+echo "✅ Symlinked nvim-switch"
 
-# 2. Symlink .bashrc
+# 2. Symlink git-generate-commit-gemini
+ln -sf "$HOME/www/dotfiles/git-generate-commit-gemini" "$HOME/git-generate-commit-gemini"
+echo "✅ Symlinked git-generate-commit-gemini"
+
+# 3. Symlink .bashrc
 ln -sf "$HOME/www/dotfiles/.bashrc" "$HOME/.bashrc"
 echo "✅ Symlinked .bashrc"
 
-# 3. Run nvim_switch
-echo "🚀 Running nvim_switch..."
-"$HOME/.local/bin/nvim_switch"
-
+# Run nvim_switch
+# echo "🚀 Running nvim_switch..."
+# "$HOME/.local/bin/nvim_switch"
