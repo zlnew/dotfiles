@@ -6,14 +6,24 @@ return {
   opts_extend = { "ensure_installed" },
   opts = {
     ensure_installed = {
-      "stylua",
-      "shfmt",
+      -- php
       "intelephense",
       "pint",
+
+      -- js linter
       "eslint_d",
       "prettierd",
+
+      -- vue
+      "vtsls",
       "vue-language-server",
+
+      -- css
       "tailwindcss-language-server",
+
+      -- other
+      "stylua",
+      "shfmt",
     },
   },
   ------@param opts MasonSettings | {ensure_installed: string[]}
