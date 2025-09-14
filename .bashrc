@@ -93,11 +93,13 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ggc='git-generate-commit-gemini'
 
+alias reck='vendor/bin/rector'
 alias vendro='vendor/bin/pint'
 alias vendrojs='npm run lint-staged'
 alias vendrojsall='npm run format; npm run lint; npm run type-check'
 alias laraservex='php artisan serve --host 192.168.11.121 --port 8000'
 alias clip_diff='git diff --staged | xclip -sel clip'
+alias gas='git add .; vendrojs; npm run type-check; clip_diff'
 
 alias nbakeyon='sudo systemctl start evremap-nba2k16'
 alias nbakeyoff='sudo systemctl stop evremap-nba2k16'
