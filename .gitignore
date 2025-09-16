@@ -4,6 +4,3 @@
 *.pem
 *.key
 *.json
-*.env
-.config/vesktop/sessionData/
-.config/vesktop/Cache/
