@@ -1,6 +1,6 @@
 # Dotfiles
 
-My personal dotfiles with **GNU Stow** + multi-device setup.
+My personal dotfiles with multi-device setup.
 
 ## Installation
 
