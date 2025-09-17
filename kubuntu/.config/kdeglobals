@@ -21,13 +21,13 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=12,110,71
+BackgroundAlternate=12,109,71
 BackgroundNormal=40,40,40
-DecorationFocus=1,140,85
-DecorationHover=1,140,85
-ForegroundActive=1,140,85
+DecorationFocus=1,139,85
+DecorationHover=1,139,85
+ForegroundActive=1,139,85
 ForegroundInactive=55,115,117
-ForegroundLink=2,232,141
+ForegroundLink=2,231,141
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=235,219,178
@@ -35,19 +35,19 @@ ForegroundPositive=39,174,96
 ForegroundVisited=127,140,141
 
 [Colors:Complementary]
-DecorationFocus=1,140,85
-DecorationHover=1,140,85
-ForegroundActive=1,140,85
-ForegroundLink=2,232,141
+DecorationFocus=1,139,85
+DecorationHover=1,139,85
+ForegroundActive=1,139,85
+ForegroundLink=2,231,141
 
 [Colors:Selection]
-BackgroundAlternate=12,110,71
-BackgroundNormal=12,110,71
-DecorationFocus=1,140,85
-DecorationHover=1,140,85
-ForegroundActive=1,140,85
+BackgroundAlternate=12,109,71
+BackgroundNormal=12,109,71
+DecorationFocus=1,139,85
+DecorationHover=1,139,85
+ForegroundActive=1,139,85
 ForegroundInactive=255,255,255
-ForegroundLink=1,102,62
+ForegroundLink=1,101,62
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=255,255,255
@@ -57,11 +57,11 @@ ForegroundVisited=189,195,199
 [Colors:Tooltip]
 BackgroundAlternate=60,56,54
 BackgroundNormal=40,40,40
-DecorationFocus=1,140,85
-DecorationHover=1,140,85
-ForegroundActive=1,140,85
+DecorationFocus=1,139,85
+DecorationHover=1,139,85
+ForegroundActive=1,139,85
 ForegroundInactive=55,115,117
-ForegroundLink=2,232,141
+ForegroundLink=2,231,141
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=235,219,178
@@ -71,11 +71,11 @@ ForegroundVisited=127,140,141
 [Colors:View]
 BackgroundAlternate=60,56,54
 BackgroundNormal=40,40,40
-DecorationFocus=1,140,85
-DecorationHover=1,140,85
-ForegroundActive=1,140,85
+DecorationFocus=1,139,85
+DecorationHover=1,139,85
+ForegroundActive=1,139,85
 ForegroundInactive=55,115,117
-ForegroundLink=2,232,141
+ForegroundLink=2,231,141
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=235,219,178
@@ -85,11 +85,11 @@ ForegroundVisited=127,140,141
 [Colors:Window]
 BackgroundAlternate=60,56,54
 BackgroundNormal=40,40,40
-DecorationFocus=1,140,85
-DecorationHover=1,140,85
-ForegroundActive=1,140,85
+DecorationFocus=1,139,85
+DecorationHover=1,139,85
+ForegroundActive=1,139,85
 ForegroundInactive=55,115,117
-ForegroundLink=2,232,141
+ForegroundLink=2,231,141
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=235,219,178
@@ -101,7 +101,7 @@ DirSelectDialog Size=820,584
 History Items[$e]=file:$HOME/www/duanaga/core-api,file:$HOME/www/duanaga/dragon-bridge,file:$HOME/www/duanaga/dragon-bridge
 
 [General]
-AccentColor=1,140,85
+AccentColor=1,139,85
 ColorSchemeHash=68f7da041112b660ac4e6911cf4bf8a7b361feda
 TerminalApplication=alacritty
 TerminalService=Alacritty.desktop

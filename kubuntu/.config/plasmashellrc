@@ -3,7 +3,7 @@
 2 screens: Width=960
 
 [PlasmaViews][Panel 2]
-floating=1
+floating=0
 panelOpacity=2
 panelVisibility=0
 
