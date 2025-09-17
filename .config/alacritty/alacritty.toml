@@ -5,7 +5,7 @@ WINIT_X11_SCALE_FACTOR = "1"
 [window]
 dynamic_padding = true
 decorations = "full"
-title = "Alacritty@CachyOS"
+title = "Alacritty"
 opacity = 0.8
 decorations_theme_variant = "Dark"
 
@@ -159,6 +159,6 @@ key = "Key0"
 mods = "Control"
 action = "ResetFontSize"
 
-[general]
-live_config_reload = true
-working_directory = "None"
+# [general]
+# live_config_reload = true
+# working_directory = "None"
