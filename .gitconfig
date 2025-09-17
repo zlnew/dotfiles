@@ -1,0 +1,65 @@
+[user]
+    name = Maulana Aprizqy Sumaryanto
+    email = maulana4pz@gmail.com
+
+[core]
+    editor = nvim
+    autocrlf = input
+    fileMode = false
+    pager = delta
+
+[init]
+    defaultBranch = main
+
+[color]
+    ui = auto
+
+[merge]
+    tool = nvimdiff
+    conflictstyle = diff3
+
+[diff]
+    tool = nvimdiff
+    algorithm = patience
+    colorMoved = default
+
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+
+[mergetool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$BASE" "$REMOTE" "$MERGED" -c 'wincmd J'
+
+[pull]
+    rebase = true
+
+[rebase]
+    autosquash = true
+    autostash = true
+
+[push]
+    default = current
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    line-numbers = true
+    navigate = true
+    side-by-side = true
+    syntax-theme = gruvbox-dark
+    features = line-numbers decorations
+
+[credential]
+    helper = store
+
+[log]
+    date = iso
+
+[commit]
+    template = ~/.gitmessage.txt
+
+

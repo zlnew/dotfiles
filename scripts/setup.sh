@@ -34,6 +34,14 @@ setup_global_configs() {
   done
 }
 
+setup_git_configs() {
+  echo "🔗 Linking .gitconfig..."
+  link "$(pwd)/.gitconfig" "$HOME/.gitconfig"
+
+  echo "🔗 Linking .gitmessage.txt..."
+  link "$(pwd)/.gitmessage.txt" "$HOME/.gitmessage.txt"
+}
+
 setup_bashrc() {
   echo "🔗 Linking .bashrc..."
   link "$(pwd)/.bashrc" "$HOME/.bashrc"
@@ -72,6 +80,7 @@ case $choice in
 1)
   setup_global_bin
   setup_global_configs
+  setup_git_configs
   setup_bashrc
   setup_device_specific
   ;;
@@ -82,6 +91,9 @@ case $choice in
 
   read -rp "Setup global configs? [y/N]: " configs_choice
   [[ $configs_choice =~ ^[Yy]$ ]] && setup_global_configs
+
+  read -rp "Setup git configs? [y/N]: " git_configs_choice
+  [[ $git_configs_choice =~ ^[Yy]$ ]] && setup_git_configs
 
   read -rp "Setup .bashrc? [y/N]: " bashrc_choice
   [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc

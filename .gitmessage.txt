@@ -1,0 +1,16 @@
+# Conventional Commit Format:
+# <type>(<scope>): <short description>
+#
+# Types: feat | fix | docs | style | refactor | perf | test | chore
+# Scope: optional, what part of code is affected (ui, db, api, etc)
+# Description: short, imperative (max 50 chars)
+
+# Example:
+# feat(auth): add JWT login endpoint
+#
+# Longer description (wrap at 72 chars):
+# - Explain why the change was made
+# - Mention related issues/PRs
+# - Add any context for reviewers
+
+

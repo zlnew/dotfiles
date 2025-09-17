@@ -11,7 +11,7 @@ echo "📄 Files staged for commit:"
 echo "$added_files"
 
 # Generate commit message using Gemini
-commit_msg=$(git diff --cached | gemini --model gemini-2.5-flash --prompt "Generate a concise commit message")
+commit_msg=$(git diff --cached | gemini --model gemini-2.5-flash --prompt "Generate a concise commit message:")
 
 # Check if commit message is empty
 if [ -z "$commit_msg" ]; then
