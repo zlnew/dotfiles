@@ -11,6 +11,7 @@ alias zl="zellij --layout ~/.config/zellij/config.kdl"
 alias zl_edit="nvim ~/.config/zellij/config.kdl"
 alias fish_edit="nvim ~/.config/fish/config.fish"
 alias fish_update="source ~/.config/fish/config.fish"
+alias gcm="git-commit-message.sh"
 ## PHP
 alias reck="vendor/bin/rector"
 alias vendro="vendor/bin/pint"
