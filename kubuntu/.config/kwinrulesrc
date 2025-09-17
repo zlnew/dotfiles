@@ -1,0 +1,28 @@
+[17e9fc30-68a1-47e8-87c2-3ddcc36c1c6b]
+Description=Settings for Yazi
+wmclass=Yazi
+wmclasscomplete=true
+wmclassmatch=1
+
+[7ee33702-73e0-48e0-9ef8-33b972ec32b9]
+Description=Settings for Alacritty
+wmclass=Alacritty
+wmclasscomplete=true
+wmclassmatch=1
+
+[9a09550f-600c-4d5c-95ce-7b9919d3ae94]
+Description=Settings for Kitty
+wmclass=Kitty
+wmclasscomplete=true
+wmclassmatch=1
+
+[General]
+count=4
+rules=ecada846-3a0b-4588-991b-b19f9956f286,7ee33702-73e0-48e0-9ef8-33b972ec32b9,17e9fc30-68a1-47e8-87c2-3ddcc36c1c6b,9a09550f-600c-4d5c-95ce-7b9919d3ae94
+
+[ecada846-3a0b-4588-991b-b19f9956f286]
+Description=Global Windows Settings
+noborder=true
+noborderrule=2
+types=1
+wmclasscomplete=true

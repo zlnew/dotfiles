@@ -1,0 +1,142 @@
+[ColorEffects:Disabled]
+ChangeSelectionColor=
+Color=56,56,56
+ColorAmount=0
+ColorEffect=0
+ContrastAmount=0.65000000000000002
+ContrastEffect=1
+Enable=
+IntensityAmount=0.10000000000000001
+IntensityEffect=2
+
+[ColorEffects:Inactive]
+ChangeSelectionColor=true
+Color=112,111,110
+ColorAmount=0.025000000000000001
+ColorEffect=2
+ContrastAmount=0.10000000000000001
+ContrastEffect=2
+Enable=true
+IntensityAmount=0
+IntensityEffect=0
+
+[Colors:Button]
+BackgroundAlternate=12,110,71
+BackgroundNormal=40,40,40
+DecorationFocus=1,140,85
+DecorationHover=1,140,85
+ForegroundActive=1,140,85
+ForegroundInactive=55,115,117
+ForegroundLink=2,232,141
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+ForegroundNormal=235,219,178
+ForegroundPositive=39,174,96
+ForegroundVisited=127,140,141
+
+[Colors:Complementary]
+DecorationFocus=1,140,85
+DecorationHover=1,140,85
+ForegroundActive=1,140,85
+ForegroundLink=2,232,141
+
+[Colors:Selection]
+BackgroundAlternate=12,110,71
+BackgroundNormal=12,110,71
+DecorationFocus=1,140,85
+DecorationHover=1,140,85
+ForegroundActive=1,140,85
+ForegroundInactive=255,255,255
+ForegroundLink=1,102,62
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+ForegroundNormal=255,255,255
+ForegroundPositive=39,174,96
+ForegroundVisited=189,195,199
+
+[Colors:Tooltip]
+BackgroundAlternate=60,56,54
+BackgroundNormal=40,40,40
+DecorationFocus=1,140,85
+DecorationHover=1,140,85
+ForegroundActive=1,140,85
+ForegroundInactive=55,115,117
+ForegroundLink=2,232,141
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+ForegroundNormal=235,219,178
+ForegroundPositive=39,174,96
+ForegroundVisited=127,140,141
+
+[Colors:View]
+BackgroundAlternate=60,56,54
+BackgroundNormal=40,40,40
+DecorationFocus=1,140,85
+DecorationHover=1,140,85
+ForegroundActive=1,140,85
+ForegroundInactive=55,115,117
+ForegroundLink=2,232,141
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+ForegroundNormal=235,219,178
+ForegroundPositive=39,174,96
+ForegroundVisited=127,140,141
+
+[Colors:Window]
+BackgroundAlternate=60,56,54
+BackgroundNormal=40,40,40
+DecorationFocus=1,140,85
+DecorationHover=1,140,85
+ForegroundActive=1,140,85
+ForegroundInactive=55,115,117
+ForegroundLink=2,232,141
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+ForegroundNormal=235,219,178
+ForegroundPositive=39,174,96
+ForegroundVisited=127,140,141
+
+[DirSelect Dialog]
+DirSelectDialog Size=820,584
+History Items[$e]=file:$HOME/www/duanaga/core-api,file:$HOME/www/duanaga/dragon-bridge,file:$HOME/www/duanaga/dragon-bridge
+
+[General]
+AccentColor=1,140,85
+ColorSchemeHash=68f7da041112b660ac4e6911cf4bf8a7b361feda
+TerminalApplication=alacritty
+TerminalService=Alacritty.desktop
+accentColorFromWallpaper=true
+
+[Icons]
+Theme=breeze-dark
+
+[KDE]
+widgetStyle=Breeze
+
+[KFileDialog Settings]
+Allow Expansion=false
+Automatically select filename extension=true
+Breadcrumb Navigation=true
+Decoration position=0
+LocationCombo Completionmode=5
+PathCombo Completionmode=5
+Show Bookmarks=false
+Show Full Path=false
+Show Inline Previews=true
+Show Preview=false
+Show Speedbar=true
+Show hidden files=true
+Sort by=Date
+Sort directories first=true
+Sort hidden files last=false
+Sort reversed=true
+Speedbar Width=140
+View Style=Simple
+
+[WM]
+activeBackground=39,39,39
+activeBlend=235,219,178
+activeForeground=235,219,178
+inactiveBackground=40,40,40
+inactiveBlend=60,56,54
+inactiveForeground=204,190,155
