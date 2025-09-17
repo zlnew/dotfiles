@@ -17,6 +17,12 @@ link() {
   ln -s "$src" "$dest"
 }
 
+# === Global bin ===
+mkdir -p "$HOME/.local/bin"
+for file in $(ls -1 .local/bin); do
+  link "$(pwd)/.local/bin/$file" "$HOME/.local/bin/$file"
+done
+
 # === Global configs ===
 echo "🔗 Linking universal configs..."
 for dir in $(ls -1 .config); do
