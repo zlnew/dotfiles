@@ -17,42 +17,83 @@ link() {
   ln -s "$src" "$dest"
 }
 
-# === Global bin ===
-mkdir -p "$HOME/.local/bin"
-for file in $(ls -1 .local/bin); do
-  link "$(pwd)/.local/bin/$file" "$HOME/.local/bin/$file"
-done
+# === FUNCTIONS ===
 
-# === Global configs ===
-echo "🔗 Linking universal configs..."
-for dir in $(ls -1 .config); do
-  link "$(pwd)/.config/$dir" "$HOME/.config/$dir"
-done
-
-# Link .bashrc from repo
-link "$(pwd)/.bashrc" "$HOME/.bashrc"
-
-# === Device-specific ===
-if [[ $HOST == "cachyos-pc" ]]; then
-  echo "⚠️  Linking CachyOS-specific configs..."
-  for dir in $(ls -1 cachyos/.config); do
-    link "$(pwd)/cachyos/.config/$dir" "$HOME/.config/$dir"
+setup_global_bin() {
+  echo "📦 Setting up global bin..."
+  mkdir -p "$HOME/.local/bin"
+  for file in $(ls -1 .local/bin); do
+    link "$(pwd)/.local/bin/$file" "$HOME/.local/bin/$file"
   done
+}
 
-elif [[ $HOST == "kubuntu-laptop" ]]; then
-  echo "⚠️  Linking Kubuntu-specific configs..."
-  for dir in $(ls -1 kubuntu/.config); do
-    link "$(pwd)/kubuntu/.config/$dir" "$HOME/.config/$dir"
+setup_global_configs() {
+  echo "🔗 Linking universal configs..."
+  for dir in $(ls -1 .config); do
+    link "$(pwd)/.config/$dir" "$HOME/.config/$dir"
   done
+}
 
-else
-  echo "⚠️ Unknown host: $HOST. Skipping device-specific configs."
-fi
+setup_bashrc() {
+  echo "🔗 Linking .bashrc..."
+  link "$(pwd)/.bashrc" "$HOME/.bashrc"
+}
+
+setup_device_specific() {
+  echo "💻 Setting up device-specific configs for $HOST..."
+  if [[ $HOST == "cachyos-pc" ]]; then
+    for dir in $(ls -1 cachyos/.config); do
+      link "$(pwd)/cachyos/.config/$dir" "$HOME/.config/$dir"
+    done
+  elif [[ $HOST == "kubuntu-laptop" ]]; then
+    for dir in $(ls -1 kubuntu/.config); do
+      link "$(pwd)/kubuntu/.config/$dir" "$HOME/.config/$dir"
+    done
+  else
+    echo "⚠️ Unknown host: $HOST. Skipping device-specific configs."
+  fi
+}
+
+reload_hyprland() {
+  if command -v hyprctl >/dev/null 2>&1; then
+    echo "🔄 Reloading Hyprland..."
+    hyprctl reload || echo "⚠️ Failed to reload Hyprland"
+  fi
+}
+
+# === MENU ===
+
+echo "🔧 Dotfiles Setup for $HOST"
+echo "1) Full setup"
+echo "2) Partial setup"
+read -rp "Choose an option [1-2]: " choice
+
+case $choice in
+1)
+  setup_global_bin
+  setup_global_configs
+  setup_bashrc
+  setup_device_specific
+  ;;
+2)
+  echo "Partial setup selected. Choose what to apply:"
+  read -rp "Setup global bin? [y/N]: " bin_choice
+  [[ $bin_choice =~ ^[Yy]$ ]] && setup_global_bin
+
+  read -rp "Setup global configs? [y/N]: " configs_choice
+  [[ $configs_choice =~ ^[Yy]$ ]] && setup_global_configs
+
+  read -rp "Setup .bashrc? [y/N]: " bashrc_choice
+  [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
+
+  read -rp "Setup device-specific configs? [y/N]: " device_choice
+  [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific
+  ;;
+*)
+  echo "❌ Invalid choice. Exiting."
+  exit 1
+  ;;
+esac
 
 echo "✅ Dotfiles applied for $HOST"
-
-# Reload Hyprland if available
-if command -v hyprctl >/dev/null 2>&1; then
-  echo "🔄 Reloading Hyprland..."
-  hyprctl reload || echo "⚠️ Failed to reload Hyprland"
-fi
+reload_hyprland
