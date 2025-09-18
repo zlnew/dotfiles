@@ -1,0 +1,9 @@
+[ids]
+1a2c:6180 = *
+
+[main]
+pageup = home
+pagedown = end
+home = `
+rightalt = rightmeta
+
