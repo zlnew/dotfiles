@@ -6,4 +6,4 @@ pageup = home
 pagedown = end
 home = `
 rightalt = rightmeta
-
+capslock = leftcontrol

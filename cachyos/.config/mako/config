@@ -1,6 +1,6 @@
-# ───────────────────────────────────────────────
-# Mako Gruvbox Theme (Dark)
-# ───────────────────────────────────────────────
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                        Mako Gruvbox                         ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 max-visible=10
 layer=top
@@ -13,24 +13,24 @@ margin=10
 padding=10
 width=300
 border-size=2
-border-radius=4
+border-radius=6
 
-background-color=#282828cc
-text-color=#ebdbb2
-border-color=#d79921cc
+background-color=$(get bg)cc
+text-color=$(get fg)
+border-color=$(get yellow)cc
 
 [urgency=low]
-background-color=#32302fcc
-text-color=#a89984
-border-color=#83a598cc
+background-color=$(get bg1)cc
+text-color=$(get grey)
+border-color=$(get blue)cc
 
 [urgency=normal]
-background-color=#282828cc
-text-color=#ebdbb2
-border-color=#d79921cc
+background-color=$(get bg)cc
+text-color=$(get fg)
+border-color=$(get yellow)cc
 
 [urgency=critical]
-background-color=#cc241dcc
+background-color=$(get red)cc
 text-color=#fbf1c7
 border-color=#fb4934cc
 

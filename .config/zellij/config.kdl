@@ -248,16 +248,6 @@ keybinds clear-defaults=true {
     }
 }
 
-// CUSTOM
-theme "gruvbox"
-pane_frames false
-simplified_ui true
-layout {
-    tab name="main" {
-        pane
-    }
-}
-
 // Plugin aliases - can be used to change the implementation of Zellij
 // changing these requires a restart to take effect
 plugins {
@@ -285,18 +275,27 @@ load_plugins {
 web_client {
     font "monospace"
 }
+
+// Layout
+layout {
+    tab name="main" {
+        pane
+    }
+}
+
+import "~/.config/colors/gruvbox-zellij.kdl"
  
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
 //   - true
 //   - false (Default)
 // 
-// simplified_ui true
+simplified_ui true
  
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-// theme "dracula"
+theme "gruvbox"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -315,7 +314,7 @@ web_client {
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "compact"
+// default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -341,7 +340,7 @@ web_client {
 //   - true (default, enabled)
 //   - false
 // 
-// pane_frames false
+pane_frames false
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

@@ -1,0 +1,22 @@
+[manager]
+bg = "#282828"
+fg = "#ebdbb2"
+
+[status]
+normal_fg = "#d5c4a1"
+normal_bg = "#3c3836"
+info_fg = "#458588"
+warning_fg = "#d79921"
+error_fg = "#cc241d"
+
+[selection]
+fg = "#282828"
+bg = "#458588"
+
+[marker]
+fg = "#d79921"
+bg = "#282828"
+
+[preview]
+bg = "#3c3836"
+fg = "#d5c4a1"

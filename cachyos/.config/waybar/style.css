@@ -1,16 +1,4 @@
-/* Gruvbox color palette */
-@define-color bg #282828;
-@define-color fg #ebdbb2;
-@define-color accent #d79921;
-@define-color bg-alt #3c3836;
-@define-color red #cc241d;
-@define-color green #98971a;
-@define-color yellow #d79921;
-@define-color blue #458588;
-@define-color magenta #b16286;
-@define-color cyan #689d6a;
-@define-color orange #d65d0e;
-@define-color gray #a89984;
+@import url("/home/zlnew/.config/colors/gruvbox-waybar.css");
 
 * {
     font-family: "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
@@ -21,16 +9,13 @@
     border: none;
     border-radius: 4px;
     min-height: 0;
-    transition-property: background-color;
-    transition-duration: 0.5s;
 }
 
-/* The whole bar */
 #waybar {
-    background-color: transparent;
-    color: transparent;
-    border-radius: 0px;
-    margin: 0px;
+    background-color: @bg;
+    color: @fg;
+    border-radius: 4px;
+    margin: 0;
     transition: background-color 0.5s;
 }
 
@@ -43,8 +28,7 @@ window#waybar.hidden {
     margin: 3px 5px;
     border-radius: 4px;
     color: @fg;
-    background-color: @bg-alt;
-    transition: all 0.3s ease-in-out;
+    background-color: @bg1;
     font-size: 13px;
 }
 
@@ -54,23 +38,17 @@ window#waybar.hidden {
 }
 
 #workspaces button:hover {
-    background: @gray;
+    background: @bg2;
 }
 
 #workspaces button.urgent {
     background-color: @red;
 }
 
-/* Window title */
 #window {
-    background-color: @bg-alt;
     font-size: 15px;
     font-weight: 800;
     color: @fg;
-    border-radius: 4px;
-    padding: 3px 6px;
-    margin: 2px;
-    opacity: 1;
 }
 
 /* Common modules styling */
@@ -95,7 +73,6 @@ window#waybar.hidden {
 #custom-screenshot_t,
 #custom-hyprPicker,
 #custom-launcher {
-    /* background-color: @bg-alt; */
     border-radius: 4px;
     padding: 6px;
     color: @fg;
@@ -104,12 +81,14 @@ window#waybar.hidden {
 /* Specific color overrides */
 #cpu { color: @fg; }
 #memory { color: @yellow; }
-#clock { color: @accent; }
-#pulseaudio { color: @cyan; }
+#clock { color: @blue; }
+#pulseaudio { color: @aqua; }
 #battery { color: @fg; }
+
 #battery.charging,
 #battery.full,
 #battery.plugged { color: @green; }
+
 #battery.critical:not(.charging) {
     color: @red;
     animation: blink 0.5s linear infinite alternate;
@@ -118,11 +97,11 @@ window#waybar.hidden {
 #temperature { color: @orange; }
 #temperature.critical { color: @red; }
 
-#bluetooth { color: @magenta; }
+#bluetooth { color: @purple; }
 #bluetooth.disconnected { color: @red; }
 
 #custom-launcher {
-    background-color: @bg-alt;
+    background-color: @bg1;
     color: @blue;
     border-radius: 4px;
     padding: 3px 6px;
@@ -131,7 +110,7 @@ window#waybar.hidden {
 @keyframes blink {
     to {
         background-color: rgba(60, 56, 54, 0.5);
-        color: @gray;
+        color: @fg1;
     }
 }
 
