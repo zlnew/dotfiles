@@ -278,8 +278,12 @@ web_client {
 
 // Layout
 layout {
-    tab name="main" {
+    pane split_direction="vertical" {
         pane
+        pane split_direction="horizontal" {
+            pane
+            pane
+        }
     }
 }
 
@@ -340,7 +344,7 @@ theme "gruvbox"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames false
+pane_frames true
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
