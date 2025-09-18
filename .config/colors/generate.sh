@@ -173,7 +173,7 @@ window {
   border: 2px solid $(get bg1);
   background-color: $(get bg);
   border-radius: 4px;
-  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-family: "Fira Code Nerd Font", monospace;
   font-size: 14px;
   color: $(get fg);
 }
@@ -186,6 +186,10 @@ window {
   color: $(get fg);
   background-color: #1d2021;
   caret-color: $(get yellow);
+}
+
+#input:focus {
+  box-shadow: 0 0 0 2px $(get aqua);
 }
 
 #inner-box,
@@ -208,7 +212,7 @@ window {
 }
 
 #entry:selected {
-  background-color: $(get blue);
+  background-color: $(get bg2);
   color: $(get bg);
   border-radius: 4px;
 }
