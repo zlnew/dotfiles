@@ -287,8 +287,6 @@ layout {
     }
 }
 
-import "~/.config/colors/gruvbox-zellij.kdl"
- 
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
 //   - true
@@ -299,7 +297,7 @@ simplified_ui true
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "gruvbox"
+theme "everforest-dark"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -345,6 +343,13 @@ theme "gruvbox"
 //   - false
 // 
 pane_frames true
+
+ui {
+  pane_frames {
+    rounded_corners true
+    hide_session_name true
+  }
+}
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

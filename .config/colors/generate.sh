@@ -4,7 +4,6 @@ set -euo pipefail
 YML=".config/colors/gruvbox.yml"
 WAYBAR=".config/colors/gruvbox-waybar.css"
 GTK=".config/colors/gruvbox-gtk.css"
-ZELLIJ=".config/colors/gruvbox-zellij.kdl"
 ALACRITTY=".config/colors/gruvbox-alacritty.toml"
 KITTY=".config/colors/gruvbox-kitty.conf"
 HYPR=".config/colors/gruvbox-hypr.conf"
@@ -57,27 +56,6 @@ window, dialog, popover, .background { background-color: @bg; }
 .selection, .selected, .view:selected { background-color: @blue; color: @bg; }
 .link, .hyperlink { color: @aqua; }
 .warning { color: @yellow; } .error { color: @red; } .success { color: @green; }
-EOF
-
-# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃                        Zellij KDL                           ┃
-# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-cat >"$ZELLIJ" <<EOF
-themes {
-  gruvbox {
-      fg      "$(get fg)"
-      bg      "$(get bg)"
-      black   "$(get bg1)"
-      red     "$(get red)"
-      green   "$(get green)"
-      yellow  "$(get yellow)"
-      blue    "$(get blue)"
-      magenta "$(get purple)"
-      cyan    "$(get aqua)"
-      white   "$(get fg1)"
-      orange  "$(get orange)"
-  }
-}
 EOF
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -263,7 +241,6 @@ EOF
 echo "✅ Generated:"
 echo "  - $WAYBAR (Waybar)"
 echo "  - $GTK (GTK)"
-echo "  - $ZELLIJ (Zellij)"
 echo "  - $ALACRITTY (Alacritty)"
 echo "  - $KITTY (Kitty)"
 echo "  - $HYPR (Hyprland)"
