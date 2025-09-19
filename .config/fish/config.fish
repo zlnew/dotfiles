@@ -13,6 +13,7 @@ alias fish_edit="nvim ~/.config/fish/config.fish"
 alias fish_update="source ~/.config/fish/config.fish"
 alias gcm="git-commit-message.sh"
 alias gws="git-work-summary.sh"
+alias dnc_log="~/www/duanaga/logbook/api.sh"
 ## PHP
 alias reck="vendor/bin/rector"
 alias vendro="vendor/bin/pint"
