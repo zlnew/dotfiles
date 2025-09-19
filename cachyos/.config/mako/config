@@ -1,5 +1,5 @@
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-# ┃                        Mako Gruvbox                         ┃
+# ┃                 Mako Gruvbox Material (Dark Hard)            ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 max-visible=10
@@ -12,25 +12,25 @@ anchor=top-right
 margin=10
 padding=10
 width=300
-border-size=2
+border-size=1
 border-radius=6
 
-background-color=#282828cc
-text-color=#ebdbb2
-border-color=#d79921cc
+background-color=#1d2021cc
+text-color=#d4be98
+border-color=#d8a657cc
 
 [urgency=low]
-background-color=#3c3836cc
-text-color=#504945
-border-color=#458588cc
+background-color=#32302fcc
+text-color=#ddc7a1
+border-color=#7daea3cc
 
 [urgency=normal]
-background-color=#282828cc
-text-color=#ebdbb2
-border-color=#d79921cc
+background-color=#1d2021cc
+text-color=#d4be98
+border-color=#d8a657cc
 
 [urgency=critical]
-background-color=#cc241dcc
-text-color=#fbf1c7
-border-color=#fb4934cc
+background-color=#ea6962cc
+text-color=#f9f5d7
+border-color=#ea6962cc
 

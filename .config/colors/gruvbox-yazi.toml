@@ -1,22 +1,22 @@
 [manager]
-bg = "#282828"
-fg = "#ebdbb2"
+bg = "#1d2021"
+fg = "#d4be98"
 
 [status]
-normal_fg = "#d5c4a1"
-normal_bg = "#3c3836"
-info_fg = "#458588"
-warning_fg = "#d79921"
-error_fg = "#cc241d"
+normal_fg = "#ddc7a1"
+normal_bg = "#32302f"
+info_fg = "#7daea3"
+warning_fg = "#d8a657"
+error_fg = "#ea6962"
 
 [selection]
-fg = "#282828"
-bg = "#458588"
+fg = "#1d2021"
+bg = "#7daea3"
 
 [marker]
-fg = "#d79921"
-bg = "#282828"
+fg = "#d8a657"
+bg = "#1d2021"
 
 [preview]
-bg = "#3c3836"
-fg = "#d5c4a1"
+bg = "#32302f"
+fg = "#ddc7a1"
