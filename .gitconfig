@@ -54,7 +54,7 @@
     features = line-numbers decorations
 
 [credential]
-    helper = store
+    helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 
 [log]
     date = iso

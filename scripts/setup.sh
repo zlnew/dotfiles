@@ -22,15 +22,15 @@ link() {
 setup_global_bin() {
   echo "📦 Setting up global bin..."
   mkdir -p "$HOME/.local/bin"
-  for file in $(ls -1 .local/bin); do
-    link "$(pwd)/.local/bin/$file" "$HOME/.local/bin/$file"
+  for file in .local/bin/*; do
+    link "$(pwd)/$file" "$HOME/.local/bin/$(basename "$file")"
   done
 }
 
 setup_global_configs() {
   echo "🔗 Linking universal configs..."
-  for dir in $(ls -1 .config); do
-    link "$(pwd)/.config/$dir" "$HOME/.config/$dir"
+  for dir in .config/*; do
+    link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
   done
 }
 
@@ -42,6 +42,11 @@ setup_git_configs() {
   link "$(pwd)/.gitmessage.txt" "$HOME/.gitmessage.txt"
 }
 
+setup_aliases() {
+  echo "🔗 Linking .aliases..."
+  link "$(pwd)/.aliases" "$HOME/.aliases"
+}
+
 setup_bashrc() {
   echo "🔗 Linking .bashrc..."
   link "$(pwd)/.bashrc" "$HOME/.bashrc"
@@ -50,12 +55,12 @@ setup_bashrc() {
 setup_device_specific() {
   echo "💻 Setting up device-specific configs for $HOST..."
   if [[ $HOST == "cachyos-pc" ]]; then
-    for dir in $(ls -1 cachyos/.config); do
-      link "$(pwd)/cachyos/.config/$dir" "$HOME/.config/$dir"
+    for dir in cachyos/.config/*; do
+      link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
   elif [[ $HOST == "kubuntu-laptop" ]]; then
-    for dir in $(ls -1 kubuntu/.config); do
-      link "$(pwd)/kubuntu/.config/$dir" "$HOME/.config/$dir"
+    for dir in kubuntu/.config/*; do
+      link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
   else
     echo "⚠️ Unknown host: $HOST. Skipping device-specific configs."
@@ -81,6 +86,7 @@ case $choice in
   setup_global_bin
   setup_global_configs
   setup_git_configs
+  setup_aliases
   setup_bashrc
   setup_device_specific
   ;;
@@ -94,6 +100,9 @@ case $choice in
 
   read -rp "Setup git configs? [y/N]: " git_configs_choice
   [[ $git_configs_choice =~ ^[Yy]$ ]] && setup_git_configs
+
+  read -rp "Setup aliases? [y/N]: " aliases_choice
+  [[ $aliases_choice =~ ^[Yy]$ ]] && setup_aliases
 
   read -rp "Setup .bashrc? [y/N]: " bashrc_choice
   [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc

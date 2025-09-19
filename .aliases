@@ -1,0 +1,43 @@
+# .aliases
+
+# General
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Editors
+alias bash_edit='nvim ~/.bashrc'
+alias fish_edit='nvim ~/.config/fish/config.fish'
+alias zl_edit='nvim ~/.config/zellij/config.kdl'
+
+# Shell Updates
+alias bash_update='source ~/.bashrc'
+alias fish_update='source ~/.config/fish/config.fish'
+
+# Git
+alias gcm='git-commit-message.sh'
+alias gws='git-work-summary.sh'
+# Note: The following aliases have different versions for X11 (xclip) and Wayland (wl-copy)
+# You might want to create a script to handle this based on the environment.
+# alias clip_diff='git diff --staged | xclip -sel clip' # For X11
+alias clip_diff='git diff --staged | wl-copy' # For Wayland
+alias gas='git add .; vendrojs; npm run type-check; clip_diff'
+
+# PHP
+alias reck='vendor/bin/rector'
+alias vendro='vendor/bin/pint'
+alias php_config='sudo update-alternatives --config php'
+
+# JavaScript/TypeScript
+alias vendrojs='npm run lint-staged'
+alias vendrojsall='npm run format; npm run lint; npm run type-check'
+
+# Other
+alias zl='zellij --layout ~/.config/zellij/config.kdl'
+alias dnc_log='~/www/duanaga/logbook/api.sh'
+alias mode_check='powerprofilesctl'
+alias mode_powersave='powerprofilesctl set power-saver'
+alias mode_balance='powerprofilesctl set balanced'
+alias mode_performance='powerprofilesctl set performance'

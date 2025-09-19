@@ -6,22 +6,10 @@ function fish_greeting
     # smth smth
 end
 
-# Aliases
-alias zl="zellij --layout ~/.config/zellij/config.kdl"
-alias zl_edit="nvim ~/.config/zellij/config.kdl"
-alias fish_edit="nvim ~/.config/fish/config.fish"
-alias fish_update="source ~/.config/fish/config.fish"
-alias gcm="git-commit-message.sh"
-alias gws="git-work-summary.sh"
-alias dnc_log="~/www/duanaga/logbook/api.sh"
-## PHP
-alias reck="vendor/bin/rector"
-alias vendro="vendor/bin/pint"
-## TS
-alias vendrojs="npm run lint-staged"
-alias vendrojsall="npm run format; npm run lint; npm run type-check"
-alias clip_diff="git diff --staged | wl-copy"
-alias gas="git add .; vendrojs; npm run type-check; clip_diff"
+# Source custom aliases
+if test -f ~/.aliases
+    source ~/.aliases
+end
 
 # Auto-start zellij
 if status is-interactive
@@ -54,19 +42,20 @@ end
 # PHP Switcher
 function phpswitch
     if test (count $argv) -eq 0
-        echo "Usage: phpswitch <version> (e.g. 82, 83)"
+        echo "Usage: phpswitch <version> (e.g. 8.2, 8.3)"
         return 1
     end
 
-    set phpver $argv[1]
+    set php_version $argv[1]
+    set php_path "/usr/bin/php$php_version"
 
-    if not test -x /usr/bin/php$phpver
-        echo "❌ /usr/bin/php$phpver not found!"
+    if not test -x "$php_path"
+        echo "❌ PHP version $php_version not found at $php_path"
         return 1
     end
 
-    # Switch PHP CLI
-    sudo ln -sf /usr/bin/php$phpver /usr/bin/php
-    echo "✅ PHP switched to:"
+    # Prepend the selected PHP version to the PATH
+    set -x PATH "/usr/bin/php$php_version/bin" $PATH
+    echo "✅ Switched to PHP $php_version"
     php -v
 end
