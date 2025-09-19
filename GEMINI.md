@@ -19,7 +19,7 @@ The primary technologies and tools configured in this repository are:
 
 There is no "build" process for this project. The primary action is to "install" or "set up" the dotfiles by creating symbolic links from the repository to the home directory.
 
-The main script for this is `scripts/setup.sh`. It can be run in two modes:
+The main script for this is `bin/setup.sh`. It can be run in two modes:
 
 *   **Full setup:** This will symlink all the configurations.
 *   **Partial setup:** This will prompt the user to choose which parts of the configuration to apply.
@@ -27,12 +27,12 @@ The main script for this is `scripts/setup.sh`. It can be run in two modes:
 To run the setup script:
 
 ```bash
-./scripts/setup.sh
+./bin/setup.sh
 ```
 
 The script will detect the hostname and apply device-specific configurations if available. The supported hosts are `cachyos-pc` and `kubuntu-laptop`.
 
-There is also an `update.sh` script, which is likely used to pull the latest changes from the git repository and apply any updates.
+There is also an `bin/update.sh` script, which is likely used to pull the latest changes from the git repository and apply any updates.
 
 ## Development Conventions
 

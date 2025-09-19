@@ -7,7 +7,7 @@ My personal dotfiles with multi-device setup.
 ```bash
 git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./scripts/setup.sh
+./bin/setup.sh
 
 ```
 

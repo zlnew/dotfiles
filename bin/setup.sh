@@ -3,10 +3,34 @@ set -e
 
 HOST=$(hostname)
 
+# Backup Helper
+backup() {
+  local dest=$1
+  local backup_dir="$HOME/.dotfiles_backup"
+
+  mkdir -p "$backup_dir"
+
+  if [[ -e "$dest" && ! -L "$dest" ]]; then
+    echo "📦 Backing up existing: $dest to $backup_dir"
+    mv "$dest" "$backup_dir/"
+  fi
+}
+
 # Symlink Overwrite Helper
 link() {
   local src=$1
   local dest=$2
+
+  # Check if the destination exists and is not already a symlink to the source
+  if [[ -e "$dest" && ! -L "$dest" ]]; then
+    backup "$dest"
+  elif [[ -L "$dest" && "$(readlink "$dest")" != "$src" ]]; then
+    echo "⚠️  Removing existing symlink (not ours): $dest"
+    rm -rf "$dest"
+  elif [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+    echo "✅ Already linked: $dest -> $src"
+    return 0 # Already correctly linked, nothing to do
+  fi
 
   if [[ -e "$dest" || -L "$dest" ]]; then
     echo "⚠️  Removing existing: $dest"
