@@ -3,7 +3,10 @@ function load_nvm --on-variable PWD --description "Auto switch Node versions"
         return # nvm not available
     end
 
-    set -l current_node_version (node -v 2>/dev/null | string match -r 'v(\d+\.\d+).*' | string replace -- "$1" '')
+    set -l current_node_version ""
+    if type -q node
+        set current_node_version (node -v 2>/dev/null | string match -r 'v(\d+\.\d+).*' | string replace -- "$1" '')
+    end
 
     if test -f .nvmrc
         set -l nvmrc_version (cat .nvmrc | string trim)
