@@ -28,8 +28,8 @@
         "memory",
         "cpu",
         "temperature",
+        "wireplumber",
         "battery",
-        "wireplumber"
     ],
 
 
