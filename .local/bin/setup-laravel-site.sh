@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Simple Laravel + nginx + php82-fpm setup for Arch/CachyOS
+# Simple Laravel + nginx + phpenv setup
 
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <domain> <project_path>"
@@ -30,10 +30,10 @@ server {
         try_files \$uri \$uri/ /index.php?\$query_string;
     }
 
-    location ~ \.php\$ {
+    location ~ \.php$ {
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_pass unix:/run/php82-fpm/php-fpm.sock;
+        fastcgi_pass 127.0.0.1:9000;
         fastcgi_index index.php;
     }
 
@@ -61,8 +61,10 @@ HOME_DIR=$(eval echo ~$USER)
 sudo chmod 751 $HOME_DIR
 
 # 5. Restart services
-echo "♻️ Restarting nginx & php82-fpm..."
-sudo systemctl restart php82-fpm
+echo "♻️ Restarting nginx & php-fpm..."
+pkill php-fpm || true
+sleep 1
+phpenv exec php-fpm -D
 sudo nginx -t && sudo systemctl reload nginx
 
 # 6. Update /etc/hosts
@@ -71,4 +73,3 @@ if ! grep -q "$DOMAIN" /etc/hosts; then
 fi
 
 echo "✅ Done! Open http://${DOMAIN} in your browser."
-
