@@ -23,7 +23,6 @@ function load_nvm --on-variable PWD --description "Auto switch Node versions"
         if test "$current_node_version" != "22"
             nvm use 22 >/dev/null
             if test $status -eq 0
-                echo "⬢ Using default Node 22"
             else
                 echo "❌ Failed to use default Node 22"
             end
