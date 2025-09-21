@@ -1,7 +1,7 @@
 @import url("/home/zlnew/.config/colors/gruvbox-waybar.css");
 
 * {
-    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "FiraCode Nerd Font Mono", "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 900;
     margin: 0;
@@ -79,8 +79,8 @@ window#waybar.hidden {
 }
 
 /* Specific color overrides */
-#cpu { color: @fg; }
-#memory { color: @yellow; }
+#cpu { color: @red; }
+#memory { color: @green }
 #clock { color: @blue; }
 #pulseaudio { color: @aqua; }
 #battery { color: @fg; }
@@ -94,7 +94,7 @@ window#waybar.hidden {
     animation: blink 0.5s linear infinite alternate;
 }
 
-#temperature { color: @orange; }
+#temperature { color: @blue; }
 #temperature.critical { color: @red; }
 
 #bluetooth { color: @purple; }
