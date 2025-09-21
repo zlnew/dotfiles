@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-HOST=$(hostname)
-
 # Backup Helper
 backup() {
   local dest=$1
@@ -33,7 +31,7 @@ link() {
   fi
 
   if [[ -e "$dest" || -L "$dest" ]]; then
-    echo "⚠️  Removing existing: $dest"
+    echo "⚠️  Removing existing file or directory: $dest"
     rm -rf "$dest"
   fi
 
@@ -52,7 +50,7 @@ setup_global_bin() {
 }
 
 setup_global_configs() {
-  echo "🔗 Linking universal configs..."
+  echo "🔗 Linking common configurations..."
   for dir in .config/*; do
     link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
   done
@@ -77,18 +75,33 @@ setup_bashrc() {
 }
 
 setup_device_specific() {
-  echo "💻 Setting up device-specific configs for $HOST..."
-  if [[ $HOST == "cachyos-pc" ]]; then
+  echo "💻 Setting up device-specific configs..."
+  echo "1) CachyOS"
+  echo "2) Kubuntu"
+  echo "3) None"
+  read -rp "Choose a device-specific configuration [1-3]: " device_choice
+
+  case $device_choice in
+  1)
+    echo "Setting up for CachyOS..."
     for dir in cachyos/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
-  elif [[ $HOST == "kubuntu-laptop" ]]; then
+    reload_hyprland
+    ;;
+  2)
+    echo "Setting up for Kubuntu..."
     for dir in kubuntu/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
-  else
-    echo "⚠️ Unknown host: $HOST. Skipping device-specific configs."
-  fi
+    ;;
+  3)
+    echo "Skipping device-specific configs."
+    ;;
+  *)
+    echo "⚠️ Invalid choice. Skipping device-specific configs."
+    ;;
+  esac
 }
 
 reload_hyprland() {
@@ -100,7 +113,7 @@ reload_hyprland() {
 
 # === MENU ===
 
-echo "🔧 Dotfiles Setup for $HOST"
+echo "🔧 Dotfiles Setup"
 echo "1) Full setup"
 echo "2) Partial setup"
 read -rp "Choose an option [1-2]: " choice
@@ -119,7 +132,7 @@ case $choice in
   read -rp "Setup global bin? [y/N]: " bin_choice
   [[ $bin_choice =~ ^[Yy]$ ]] && setup_global_bin
 
-  read -rp "Setup global configs? [y/N]: " configs_choice
+  read -rp "Setup common configurations? [y/N]: " configs_choice
   [[ $configs_choice =~ ^[Yy]$ ]] && setup_global_configs
 
   read -rp "Setup git configs? [y/N]: " git_configs_choice
@@ -140,5 +153,4 @@ case $choice in
   ;;
 esac
 
-echo "✅ Dotfiles applied for $HOST"
-reload_hyprland
+echo "✅ Dotfiles applied"
