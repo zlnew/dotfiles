@@ -1,14 +1,62 @@
 # Dotfiles
 
-My personal dotfiles with multi-device setup.
+My personal dotfiles with multi-device setup. This repository contains my personal configurations for various tools, aiming for a consistent and efficient development environment across multiple machines.
+
+## Features
+
+*   **Multi-device support:** The setup script can apply different configurations for different hosts (`cachyos-pc` and `kubuntu-laptop`).
+*   **Interactive setup:** The setup script allows for a full or partial installation, giving you control over what gets configured.
+*   **Comprehensive tool configuration:** Includes settings for shells, editors, terminals, window managers, and more.
+*   **Gruvbox theming:** Most of the tools are themed with the popular Gruvbox color scheme.
+*   **Neovim with Lazy.nvim:** The Neovim configuration is managed using `lazy.nvim` for easy plugin management.
+
+## Structure
+
+The dotfiles are organized by tool under the `.config` directory. Device-specific configurations are located in the `cachyos` and `kubuntu` directories. The `bin` directory contains setup and update scripts.
+
+```
+.
+├── .config/                # Shared tool configurations
+│   ├── alacritty/
+│   ├── fish/
+│   ├── kitty/
+│   ├── nvim/
+│   └── ...
+├── cachyos/                # CachyOS specific configurations
+│   └── .config/
+│       ├── hypr/
+│       └── ...
+├── kubuntu/                # Kubuntu specific configurations
+│   └── .config/
+│       ├── kwinrc
+│       └── ...
+├── bin/                    # Scripts
+│   ├── setup.sh
+│   └── update.sh
+└── ...
+```
 
 ## Installation
 
-```bash
-git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./bin/setup.sh
+1.  Clone the repository:
 
+    ```bash
+    git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
+    ```
+
+2.  Run the setup script:
+
+    ```bash
+    cd ~/dotfiles
+    ./bin/setup.sh
+    ```
+
+The script will guide you through the setup process, allowing you to choose between a full or partial installation.
+
+To update the dotfiles, you can run the `update.sh` script:
+
+```bash
+./bin/update.sh
 ```
 
 ## Prerequisites
@@ -17,62 +65,39 @@ To make your dotfiles fully functional, you would need to install most, if not a
 
 ### Core Tools
 
-These are fundamental command-line utilities that are either used in scripts or are essential for the dotfiles to function correctly.
-
 *   **`git`**: For version control.
 *   **`bash`**: The setup script is written in Bash.
 *   **`fish`**: The primary shell being configured.
-*   **`stow` or `ln`**: The setup script uses `ln` to create symbolic links. GNU Stow is a common alternative for managing dotfiles.
 *   **`curl` or `wget`**: Often used for downloading installers or other files.
-*   **`make`**: Required for building the `git-credential-libsecret` helper.
+*   **`make`**: Required for building some tools.
 
 ### Development Environment
 
-This category includes tools for software development, such as language runtimes, version managers, and build tools.
-
-*   **`nvm`**: Node Version Manager, used to manage Node.js versions.
-*   **`node.js` and `npm`**: Required for JavaScript/TypeScript development and for tools like `prettierd` and `eslint_d`.
-*   **`php`**: The `phpswitch` function is for managing PHP versions.
-*   **`composer`**: The PHP package manager, likely needed for projects using `rector` and `pint`.
+*   **`nvm`**: Node Version Manager.
+*   **`node.js` and `npm`**: For JavaScript/TypeScript development.
+*   **`php`**: For PHP development.
+*   **`composer`**: PHP package manager.
 
 ### Text Editor (Neovim)
 
-These are the dependencies for your Neovim setup, primarily managed by Mason.
-
-*   **`nvim`**: The Neovim editor itself.
-*   **Language Servers:**
-    *   `intelephense` (for PHP)
-    *   `vtsls` (for Vue, TypeScript, JavaScript)
-    *   `vue-language-server` (for Vue)
-    *   `tailwindcss-language-server` (for Tailwind CSS)
-*   **Linters and Formatters:**
-    *   `pint` (for PHP)
-    *   `eslint_d` (for JavaScript/TypeScript/Vue)
-    *   `prettierd` (for various web development file types)
-    *   `stylua` (for Lua)
-    *   `shfmt` (for shell scripts)
+*   **`nvim`**: The Neovim editor.
+*   **Language Servers:** `intelephense`, `vtsls`, `vue-language-server`, `tailwindcss-language-server`.
+*   **Linters and Formatters:** `pint`, `eslint_d`, `prettierd`, `stylua`, `shfmt`.
 
 ### Desktop and Window Management
 
-These are specific to your graphical environment on different systems.
-
-*   **For CachyOS:**
-    *   `hyprland`: The Wayland compositor/window manager.
-    *   `hyprctl`: The command-line utility for Hyprland.
-    *   `waybar`: The status bar.
-    *   `wofi`: An application launcher.
-    *   `mako`: A notification daemon.
-    *   `swaylock`: A screen locker.
-    *   `wl-copy`: For clipboard integration.
-*   **For Kubuntu:**
-    *   KDE Plasma Desktop and its associated tools.
+*   **For CachyOS:** `hyprland`, `hyprctl`, `waybar`, `wofi`, `mako`, `swaylock`, `wl-copy`.
+*   **For Kubuntu:** KDE Plasma Desktop.
 
 ### Other Tools
-
-This category includes various other utilities that are part of your workflow.
 
 *   **`alacritty` and `kitty`**: Terminal emulators.
 *   **`zellij`**: A terminal multiplexer.
 *   **`delta`**: A diff viewer for Git.
 *   **`zoxide`**: A "smarter `cd` command".
 *   **`lazygit`**: A terminal UI for Git.
+*   **`yazi`**: A terminal file manager.
+
+## Screenshots
+
+*Coming soon...*
