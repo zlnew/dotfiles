@@ -30,7 +30,7 @@
     cmd = nvim -d "$LOCAL" "$BASE" "$REMOTE" "$MERGED" -c 'wincmd J'
 
 [pull]
-    rebase = true
+    rebase = false
 
 [rebase]
     autosquash = true
