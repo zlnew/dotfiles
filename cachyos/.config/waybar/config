@@ -21,6 +21,7 @@
           "hyprland/window"
       ],
       "modules-center": [
+          "mpris",
           "clock"
       ],
       "modules-right": [
