@@ -19,29 +19,15 @@ echo "📅 Using since: $since_date"
 
 # Fetch logs (today only)
 if [[ -n "$author_name" ]]; then
-  logs=$(git log --since="$since_date" --author="$author_name" \
+  logs=$(git log --all --since="$since_date" --author="$author_name" \
     --pretty=format:"%h - %an, %ar : %s" || true)
 else
-  logs=$(git log --since="$since_date" \
+  logs=$(git log --all --since="$since_date" \
     --pretty=format:"%h - %an, %ar : %s" || true)
 fi
 
-# Fallback to yesterday if empty
 if [[ -z "$logs" ]]; then
-  echo "⚠️  No logs found for today (author: ${author_name:-ANY}), trying yesterday..."
-  since_yesterday="$(date -d "yesterday" +%Y-%m-%dT00:00:00%z)"
-  echo "📅 Using since: $since_yesterday"
-  if [[ -n "$author_name" ]]; then
-    logs=$(git log --since="$since_yesterday" --until="$since_date" --author="$author_name" \
-      --pretty=format:"%h - %an, %ar : %s" || true)
-  else
-    logs=$(git log --since="$since_yesterday" --until="$since_date" \
-      --pretty=format:"%h - %an, %ar : %s" || true)
-  fi
-fi
-
-if [[ -z "$logs" ]]; then
-  echo "⚠️  Still no logs found. Aborting."
+  echo "⚠️  No logs found. Aborting."
   exit 1
 fi
 
