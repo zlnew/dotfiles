@@ -27,3 +27,7 @@ if status is-interactive
     load_nvm
 end
 
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

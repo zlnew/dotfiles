@@ -9,7 +9,7 @@ KITTY=".config/colors/gruvbox-kitty.conf"
 HYPR=".config/colors/gruvbox-hypr.conf"
 WOFI=".config/colors/gruvbox-wofi.css"
 YAZI=".config/colors/gruvbox-yazi.toml"
-
+FOOT=".config/colors/gruvbox-foot.ini" 
 get() { yq ".colors.$1" "$YML" | tr -d '"'; }
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -236,6 +236,40 @@ fg = "$(get fg1)"
 EOF
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                         Foot INI                            ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+cat >"$FOOT" <<EOF
+[colors]
+alpha=0.9
+background=$(get bg)
+foreground=$(get fg)
+
+regular0=$(get bg1)
+regular1=$(get red)
+regular2=$(get green)
+regular3=$(get yellow)
+regular4=$(get blue)
+regular5=$(get purple)
+regular6=$(get aqua)
+regular7=$(get fg1)
+
+bright0=$(get bg2)
+bright1=$(get red)
+bright2=$(get green)
+bright3=$(get yellow)
+bright4=$(get blue)
+bright5=$(get purple)
+bright6=$(get aqua)
+bright7=$(get fg)
+
+cursor=$(get yellow)
+cursor-text=$(get bg)
+
+selection-background=$(get blue)
+selection-foreground=$(get bg)
+EOF
+
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                      Generation Log                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 echo "✅ Generated:"
@@ -246,3 +280,4 @@ echo "  - $KITTY (Kitty)"
 echo "  - $HYPR (Hyprland)"
 echo "  - $WOFI (Wofi)"
 echo "  - $YAZI (Yazi)"
+echo "  - $FOOT (Foot)"

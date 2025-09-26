@@ -16,3 +16,6 @@ vim.keymap.set("v", "<C-S-Down>", ":m '>+1<CR>gv-gv", opts)
 -- Insert mode (exit insert, move, re-indent, return to insert at same spot)
 vim.keymap.set("i", "<C-S-Up>", "<Esc>:m .-2<CR>==gi", opts)
 vim.keymap.set("i", "<C-S-Down>", "<Esc>:m .+1<CR>==gi", opts)
+
+-- Dadbod UI Toggle
+vim.keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Toggle Dadbod UI" })
