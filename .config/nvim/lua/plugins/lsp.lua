@@ -10,17 +10,15 @@ return {
         filetypes = { "html", "php" },
       }
 
-      local vue_language_server_path = vim.fn.stdpath("data")
-        .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
-
       local vue_plugin = {
         name = "@vue/typescript-plugin",
-        location = vue_language_server_path,
+        location = "/home/zlnew/.bun/bin/vue-language-server",
         languages = { "vue" },
         configNamespace = "typescript",
       }
 
-      local vtsls_config = {
+      local vts_ls_config = {
+        cmd = { "bun", "/home/zlnew/.bun/bin/vtsls", "--stdio" },
         settings = {
           vtsls = {
             tsserver = {
@@ -40,6 +38,7 @@ return {
       }
 
       local vue_ls_config = {
+        cmd = { "bun", "/home/zlnew/.bun/bin/vue-language-server", "--stdio" },
         on_init = function(client)
           client.handlers["tsserver/request"] = function(_, result, context)
             local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
@@ -63,9 +62,26 @@ return {
         end,
       }
 
+      local tailwindcss_ls_config = {
+        cmd = { "bun", "/home/zlnew/.bun/bin/tailwindcss-language-server", "--stdio" },
+        filetypes = {
+          "typescript",
+          "javascript",
+          "javascriptreact",
+          "typescriptreact",
+          "vue",
+        },
+      }
+
+      local intelephense_ls_config = {
+        cmd = { "bun", "/home/zlnew/.bun/bin/intelephense", "--stdio" },
+      }
+
       opts.servers = opts.servers or {}
-      opts.servers.vtsls = vim.tbl_deep_extend("force", opts.servers.vtsls or {}, vtsls_config)
+      opts.servers.vtsls = vim.tbl_deep_extend("force", opts.servers.vtsls or {}, vts_ls_config)
       opts.servers.volar = vim.tbl_deep_extend("force", opts.servers.volar or {}, vue_ls_config)
+      opts.servers.tailwindcss = vim.tbl_deep_extend("force", opts.servers.tailwindcss or {}, tailwindcss_ls_config)
+      opts.servers.intelephense = vim.tbl_deep_extend("force", opts.servers.intelephense or {}, intelephense_ls_config)
     end,
   },
 }
