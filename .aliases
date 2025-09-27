@@ -29,8 +29,8 @@ alias vendro='vendor/bin/pint'
 alias php_config='sudo update-alternatives --config php'
 
 # JavaScript/TypeScript
-alias vendrojs='npm run lint-staged'
-alias vendrojsall='npm run format; npm run lint; npm run type-check'
+alias vendrojs='bun run lint-staged || npm run lint-staged'
+alias vendrojsall='bun run format || npm run format; bun run lint || npm run lint; bun run type-check || npm run type-check'
 
 # Other
 alias zl='zellij --layout ~/.config/zellij/config.kdl'
