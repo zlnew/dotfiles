@@ -6,6 +6,7 @@ alias grep='grep --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias cl='clear'
 
 # Editors
 alias v='nvim'
@@ -17,20 +18,24 @@ alias zl_edit='nvim ~/.config/zellij/config.kdl'
 alias bash_update='source ~/.bashrc'
 alias fish_update='source ~/.config/fish/config.fish'
 
-# Git
-alias gcm='git-commit-message.sh'
-alias gws='git-work-summary.sh'
-alias clip_diff='git diff --staged | wl-copy' # For Wayland
-alias gas='git add .; vendrojs; npm run type-check; clip_diff'
-
 # PHP
 alias reck='vendor/bin/rector'
 alias vendro='vendor/bin/pint'
-alias php_config='sudo update-alternatives --config php'
 
 # JavaScript/TypeScript
+alias fjs='bun run format || npm run format'
+alias ljs='bun run lint || npm run lint'
+alias tjs='bun run type-check || npm run type-check'
 alias vendrojs='bun run lint-staged || npm run lint-staged'
-alias vendrojsall='bun run format || npm run format; bun run lint || npm run lint; bun run type-check || npm run type-check'
+alias vendrojsall='fjs; ljs; tjs'
+
+# Git
+alias gp='git push'
+alias gl='git pull'
+alias gcm='git-commit-message.sh'
+alias gws='git-work-summary.sh'
+alias gas='git add .; vendrojs; tjs; gcm'
+alias clip_diff='git diff --staged | wl-copy'
 
 # Other
 alias zl='zellij --layout ~/.config/zellij/config.kdl'

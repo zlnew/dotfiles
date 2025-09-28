@@ -2,7 +2,7 @@ source ~/.config/fish/base.fish
 
 # overwrite greeting
 function fish_greeting
-    echo "Welcome, "(whoami)
+    echo (hostname)
 end
 
 # Source custom aliases
@@ -24,9 +24,10 @@ end
 
 # Ensure nvm is loaded
 if status is-interactive
-    load_nvm
+    if type -q nvm
+        load_nvm
+    end
 end
-
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
