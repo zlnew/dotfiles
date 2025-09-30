@@ -16,6 +16,11 @@ return {
           ignored = true,
         },
       },
+      formatters = {
+        file = {
+          truncate = 100,
+        },
+      },
     },
   },
 }
