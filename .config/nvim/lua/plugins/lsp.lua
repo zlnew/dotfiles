@@ -14,7 +14,6 @@ return {
       }
 
       local vts_ls_config = {
-        cmd = { "bun", "/home/zlnew/.bun/bin/vtsls", "--stdio" },
         settings = {
           vtsls = {
             tsserver = {
@@ -33,12 +32,9 @@ return {
         },
       }
 
-      local vue_ls_config = {
-        cmd = { "bun", "/home/zlnew/.bun/bin/vue-language-server", "--stdio" },
-      }
+      local vue_ls_config = {}
 
       local tailwindcss_ls_config = {
-        cmd = { "bun", "/home/zlnew/.bun/bin/tailwindcss-language-server", "--stdio" },
         filetypes = {
           "typescript",
           "javascript",
@@ -48,9 +44,7 @@ return {
         },
       }
 
-      local intelephense_ls_config = {
-        cmd = { "bun", "/home/zlnew/.bun/bin/intelephense", "--stdio" },
-      }
+      local intelephense_ls_config = {}
 
       opts.servers = opts.servers or {}
       opts.servers.vtsls = vim.tbl_deep_extend("force", opts.servers.vtsls or {}, vts_ls_config)
