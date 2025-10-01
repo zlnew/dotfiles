@@ -101,4 +101,6 @@ To make your dotfiles fully functional, you would need to install most, if not a
 
 ## Screenshots
 
-*Coming soon...*
+![Screenshot 1](screenshots/2025-10-01T17:28:51,372724276+07:00.png)
+![Screenshot 2](screenshots/2025-10-01T17:27:50,967586453+07:00.png)
+![Screenshot 3](screenshots/2025-10-01T17:27:16,214358722+07:00.png)
