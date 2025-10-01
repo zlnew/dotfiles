@@ -1,10 +1,10 @@
 # Dotfiles
 
-My personal dotfiles with multi-device setup. This repository contains my personal configurations for various tools, aiming for a consistent and efficient development environment across multiple machines.
+My personal dotfiles with multi-os setup. This repository contains my personal configurations for various tools, aiming for a consistent and efficient development environment across multiple machines.
 
 ## Features
 
-*   **Multi-device support:** The setup script can apply different configurations for different hosts (`cachyos-pc` and `kubuntu-laptop`).
+*   **Multi-os support:** The setup script can apply different configurations for different os (`cachyos` and `kubuntu`).
 *   **Interactive setup:** The setup script allows for a full or partial installation, giving you control over what gets configured.
 *   **Comprehensive tool configuration:** Includes settings for shells, editors, terminals, window managers, and more.
 *   **Gruvbox theming:** Most of the tools are themed with the popular Gruvbox color scheme.
@@ -61,7 +61,7 @@ To update the dotfiles, you can run the `update.sh` script:
 
 ## Prerequisites
 
-To make your dotfiles fully functional, you would need to install most, if not all, of the software listed below, depending on which host you are setting up. The `mason.nvim` configuration will handle the installation of many of the Neovim-related tools automatically.
+To make your dotfiles fully functional, you would need to install most, if not all, of the software listed below, depending on which os you are setting up. The `mason.nvim` configuration will handle the installation of many of the Neovim-related tools automatically.
 
 ### Core Tools
 
@@ -75,6 +75,7 @@ To make your dotfiles fully functional, you would need to install most, if not a
 
 *   **`nvm`**: Node Version Manager.
 *   **`node.js` and `npm`**: For JavaScript/TypeScript development.
+*   **`bun`**: JavaScript runtime and toolkit.
 *   **`php`**: For PHP development.
 *   **`composer`**: PHP package manager.
 
@@ -91,7 +92,7 @@ To make your dotfiles fully functional, you would need to install most, if not a
 
 ### Other Tools
 
-*   **`alacritty` and `kitty`**: Terminal emulators.
+*   **`alacritty`**, **`kitty`**, and **`foot`**: Terminal emulators.
 *   **`zellij`**: A terminal multiplexer.
 *   **`delta`**: A diff viewer for Git.
 *   **`zoxide`**: A "smarter `cd` command".

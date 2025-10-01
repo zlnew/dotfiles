@@ -74,6 +74,14 @@ setup_bashrc() {
   link "$(pwd)/.bashrc" "$HOME/.bashrc"
 }
 
+setup_wallpapers() {
+  echo "🖼️ Setting up wallpapers..."
+  mkdir -p "$HOME/.local/share/wallpapers"
+  for file in .local/share/wallpapers/*; do
+    link "$(pwd)/$file" "$HOME/.local/share/wallpapers/$(basename "$file")"
+  done
+}
+
 setup_device_specific() {
   echo "💻 Setting up device-specific configs..."
   echo "1) CachyOS"
@@ -125,6 +133,7 @@ case $choice in
   setup_git_configs
   setup_aliases
   setup_bashrc
+  setup_wallpapers
   setup_device_specific
   ;;
 2)
@@ -143,6 +152,9 @@ case $choice in
 
   read -rp "Setup .bashrc? [y/N]: " bashrc_choice
   [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
+
+  read -rp "Setup wallpapers? [y/N]: " wallpapers_choice
+  [[ $wallpapers_choice =~ ^[Yy]$ ]] && setup_wallpapers
 
   read -rp "Setup device-specific configs? [y/N]: " device_choice
   [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific

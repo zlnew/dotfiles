@@ -8,12 +8,13 @@ The primary technologies and tools configured in this repository are:
 
 *   **Shell:** Fish, Bash
 *   **Editor:** Neovim (with Lazy.nvim for plugin management)
-*   **Terminal:** Alacritty, Kitty
+*   **Terminals:** Alacritty, Kitty, Foot
 *   **Multiplexer:** Zellij
 *   **Version Control:** Git (with Delta for diffs)
 *   **Window Manager (for CachyOS):** Hyprland
 *   **Desktop Environment (for Kubuntu):** KDE Plasma
-*   **Other Tools:** `zoxide`, `nvm`, `lazygit`
+*   **Development:** `nvm`, `node`, `npm`, `bun`, `php`, `composer`
+*   **Other Tools:** `zoxide`, `lazygit`, `yazi`
 
 ## Building and Running
 
