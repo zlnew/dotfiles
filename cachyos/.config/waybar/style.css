@@ -1,15 +1,12 @@
 @import url("/home/zlnew/.config/colors/gruvbox-waybar.css");
 
 * {
-  font-family:
-    "FiraCode Nerd Font Mono", "Fira Sans Semibold", "Font Awesome 6 Free",
-    FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-family: "sans";
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 500;
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 4px;
   min-height: 0;
 }
 
@@ -26,30 +23,27 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-  padding: 3px 5px;
-  margin: 3px 5px;
-  border-radius: 4px;
-  color: @blue;
+  padding: 0 10px;
+  color: @fg;
+  opacity: 0.3;
   background-color: transparent;
-  font-size: 13px;
 }
 
 #workspaces button.active {
-  background: @green;
-  color: @bg;
+  color: @green;
+  opacity: 1;
 }
 
 #workspaces button:hover {
-  background: @bg2;
-  color: @blue;
+  background: transparent;
 }
 
 #workspaces button.urgent {
-  background-color: @red;
+  color: @red;
+  opacity: 1;
 }
 
 #window {
-  font-size: 15px;
   font-weight: 800;
   color: @fg;
 }

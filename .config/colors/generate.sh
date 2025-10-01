@@ -151,7 +151,7 @@ window {
   border: 2px solid $(get bg1);
   background-color: $(get bg);
   border-radius: 4px;
-  font-family: "Fira Code Nerd Font", monospace;
+  font-family: monospace;
   font-size: 14px;
   color: $(get fg);
 }

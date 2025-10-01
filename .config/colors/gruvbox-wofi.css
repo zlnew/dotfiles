@@ -3,7 +3,7 @@ window {
   border: 2px solid #32302f;
   background-color: #1d2021;
   border-radius: 4px;
-  font-family: "Fira Code Nerd Font", monospace;
+  font-family: monospace;
   font-size: 14px;
   color: #d4be98;
 }
