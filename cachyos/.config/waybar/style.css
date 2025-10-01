@@ -1,54 +1,57 @@
 @import url("/home/zlnew/.config/colors/gruvbox-waybar.css");
 
 * {
-    font-family: "FiraCode Nerd Font Mono", "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 900;
-    margin: 0;
-    padding: 0;
-    border: none;
-    border-radius: 4px;
-    min-height: 0;
+  font-family:
+    "FiraCode Nerd Font Mono", "Fira Sans Semibold", "Font Awesome 6 Free",
+    FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  min-height: 0;
 }
 
 #waybar {
-    background-color: @bg;
-    color: @fg;
-    border-radius: 4px;
-    margin: 0;
-    transition: background-color 0.5s;
+  background-color: transparent;
+  color: @fg;
+  border-radius: 4px;
+  margin: 0;
+  transition: background-color 0.5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0.2;
 }
 
 #workspaces button {
-    padding: 3px 5px;
-    margin: 3px 5px;
-    border-radius: 4px;
-    color: @blue;
-    background-color: @bg;
-    font-size: 13px;
+  padding: 3px 5px;
+  margin: 3px 5px;
+  border-radius: 4px;
+  color: @blue;
+  background-color: transparent;
+  font-size: 13px;
 }
 
 #workspaces button.active {
-    background: @green;
-    color: @bg;
+  background: @green;
+  color: @bg;
 }
 
 #workspaces button:hover {
-    background: @bg2;
+  background: @bg2;
+  color: @blue;
 }
 
 #workspaces button.urgent {
-    background-color: @red;
+  background-color: @red;
 }
 
 #window {
-    font-size: 15px;
-    font-weight: 800;
-    color: @fg;
+  font-size: 15px;
+  font-weight: 800;
+  color: @fg;
 }
 
 /* Common modules styling */
@@ -73,48 +76,71 @@ window#waybar.hidden {
 #custom-screenshot_t,
 #custom-hyprPicker,
 #custom-launcher {
-    border-radius: 4px;
-    padding: 6px;
-    color: @fg;
+  border-radius: 4px;
+  padding: 6px;
+  color: @fg;
 }
 
 /* Specific color overrides */
-#cpu { color: @red; }
-#memory { color: @green }
-#clock { color: @blue; }
-#pulseaudio { color: @aqua; }
-#battery { color: @fg; }
+#cpu {
+  color: @red;
+}
+#memory {
+  color: @green;
+}
+#clock {
+  color: @blue;
+}
+#pulseaudio {
+  color: @aqua;
+}
+#battery {
+  color: @fg;
+}
 
 #battery.charging,
 #battery.full,
-#battery.plugged { color: @green; }
-
-#battery.critical:not(.charging) {
-    color: @red;
-    animation: blink 0.5s linear infinite alternate;
+#battery.plugged {
+  color: @green;
 }
 
-#temperature { color: @blue; }
-#temperature.critical { color: @red; }
+#battery.critical:not(.charging) {
+  color: @red;
+  animation: blink 0.5s linear infinite alternate;
+}
 
-#bluetooth { color: @purple; }
-#bluetooth.disconnected { color: @red; }
+#temperature {
+  color: @blue;
+}
+#temperature.critical {
+  color: @red;
+}
+
+#bluetooth {
+  color: @purple;
+}
+#bluetooth.disconnected {
+  color: @red;
+}
 
 #custom-launcher {
-    background-color: @bg1;
-    color: @blue;
-    border-radius: 4px;
-    padding: 3px 6px;
+  background-color: @bg1;
+  color: @blue;
+  border-radius: 4px;
+  padding: 3px 6px;
 }
 
 @keyframes blink {
-    to {
-        background-color: rgba(60, 56, 54, 0.5);
-        color: @fg1;
-    }
+  to {
+    background-color: rgba(60, 56, 54, 0.5);
+    color: @fg1;
+  }
 }
 
 /* Remove extra margins for first/last modules */
-.modules-left > widget:first-child > #workspaces { margin-left: 0; }
-.modules-right > widget:last-child > #workspaces { margin-right: 0; }
-
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
