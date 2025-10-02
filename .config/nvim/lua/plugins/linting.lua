@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/plugins/linting.lua
 return {
   "mfussenegger/nvim-lint",
   opts = {
