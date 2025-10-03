@@ -1,5 +1,5 @@
 configuration {
-    font: "monospace 10";
+    font: "monospace 9";
 
     display-ssh:    "ssh:";
     display-run:    "run:";
