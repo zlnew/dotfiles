@@ -3,21 +3,19 @@
     bg1: #32302f;
     grey0: #7c6f64;
     fg0: #d4be98;
-
     blue: #7daea3;
     red: #ea6962;
     orange: #e78a4e;
     green: #a9b665;
-    bgStatusline3: #504945;
-
+    bgstatusline3: #504945;
     background-color: @bg0;
 }
 
 window {
     width: 600;
     border: 2;
-    border-radius: 8;
-    border-color: @bgStatusline3;
+    border-radius: 0;
+    border-color: @bgstatusline3;
 }
 
 mainbox {
@@ -33,14 +31,14 @@ inputbar {
 
 message {
     padding: 10;
-    background-color: @bgStatusline3;
+    background-color: @bgstatusline3;
 }
 
 listview {
     padding: 8;
-    border-radius: 0 0 8 8;
-    border: 2 2 2 2;
-    border-color: @bg1;
+    border-radius: 0;
+    border: 2 0 0 0;
+    border-color: @bgstatusline3;
     background-color: @bg1;
     dynamic: false;
 }
@@ -63,14 +61,10 @@ prompt {
 }
 
 element {
-    padding: 5;
+    padding: 4;
     vertical-align: 0.5;
-    border-radius: 6;
+    border-radius: 0;
     background-color: @bg1;
-}
-
-element.selected.normal {
-    background-color: @bg0;
 }
 
 element.normal.active, element.alternate.active {
@@ -94,6 +88,10 @@ element-text, element-icon {
     margin: 0 10 0 0;
     vertical-align: 0.5;
     background-color: inherit;
+    text-color: @grey0;
+}
+
+element-text.selected, element-icon.selected {
     text-color: @fg0;
 }
 
