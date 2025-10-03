@@ -1,0 +1,14 @@
+configuration {
+    font: "monospace 10";
+
+    display-ssh:    "ssh:";
+    display-run:    "run:";
+    display-drun:   "drun:";
+    display-window: "window:";
+    display-combi:  "combi:";
+    display-filebrowser: "filebrowser:";
+
+    dpi: 120;
+}
+
+@theme "gruvbox-material"
