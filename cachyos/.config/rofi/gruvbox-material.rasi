@@ -35,7 +35,7 @@ inputbar {
 
 message {
     padding: 10;
-    background-color: @bg0;
+    background-color: @bgStatusline3;
 }
 
 listview {
