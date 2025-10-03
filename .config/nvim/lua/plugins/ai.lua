@@ -16,8 +16,11 @@ return {
             javascript = true,
             html = true,
             css = true,
+            lua = true,
+            csv = true,
           },
           default_filetype_enabled = false,
+          accept_fallback = "<Tab>",
           key_bindings = {
             accept = "<Tab>",
             next = "<M-]>",
@@ -26,22 +29,13 @@ return {
           },
         },
       })
+
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "*.d.ts",
+        callback = function()
+          vim.cmd("Codeium Toggle")
+        end,
+      })
     end,
   },
-  --[[ { ]]
-  --[[   "saghen/blink.cmp", ]]
-  --[[   dependencies = { ]]
-  --[[     { ]]
-  --[[       "Exafunction/codeium.nvim", ]]
-  --[[     }, ]]
-  --[[   }, ]]
-  --[[   opts = { ]]
-  --[[     sources = { ]]
-  --[[       default = { "lsp", "path", "snippets", "buffer", "codeium" }, ]]
-  --[[       providers = { ]]
-  --[[         codeium = { name = "Codeium", module = "codeium.blink", async = true }, ]]
-  --[[       }, ]]
-  --[[     }, ]]
-  --[[   }, ]]
-  --[[ }, ]]
 }

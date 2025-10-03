@@ -1,9 +1,3 @@
-/**
- * Gruvbox Material (Medium) theme
- * Taken from: https://user-images.githubusercontent.com/58662350/213884019-cbcd5f00-5bef-4a37-9139-0570770330b6.png
- * Repository: https://github.com/hiimsergey/rofi-gruvbox-material
- */
-
 * {
     bg0: #282828;
     bg1: #32302f;
@@ -41,15 +35,15 @@ inputbar {
 
 message {
     padding: 10;
-    background-color: @grey0;
+    background-color: @bg0;
 }
 
 listview {
     padding: 8;
     border-radius: 0 0 8 8;
     border: 2 2 2 2;
-    border-color: @bg0;
-    background-color: @bg0;
+    border-color: @bg1;
+    background-color: @bg1;
     dynamic: false;
 }
 
@@ -78,11 +72,7 @@ element {
 }
 
 element.selected.normal {
-    background-color: @grey0;
-}
-
-element.alternate.normal {
-    background-color: inherit;
+    background-color: @bg0;
 }
 
 element.normal.active, element.alternate.active {
