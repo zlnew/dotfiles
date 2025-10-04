@@ -1,0 +1,25 @@
+Tools
+1. Git
+2. php-pear
+3. phpenv
+4. nvm
+5. bun
+6. zellij
+7. zoxide
+8. nvim
+9. composer
+10. postgres
+11. nginx
+12. register ssh key
+13. clone projects
+
+Node Package
+1. vue-language-server
+2. vtsls
+3. intelephense
+4. tree_sitter
+5. lua-language-server
+6. tailwindcss-language-server
+7. eslint_d
+8. prettierd
+9. gemini-cli
