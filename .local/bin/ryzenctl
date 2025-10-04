@@ -13,7 +13,7 @@ case "$COMMAND" in
       sudo ryzenadj --stapm-limit=45000 --fast-limit=45000 --slow-limit=45000
       notify-send "CPU Mode" "Performance mode activated (45W)"
     else
-      echo "Usage: cpuctl mode <eco|perf>"
+      echo "Usage: ryzenctl mode <eco|perf>"
       exit 1
     fi
     ;;
@@ -26,9 +26,9 @@ case "$COMMAND" in
     ;;
   *)
     echo "Usage:"
-    echo "  cpuctl mode <eco|perf>"
-    echo "  cpuctl info"
-    echo "  cpuctl reset"
+    echo "  ryzenctl mode <eco|perf>"
+    echo "  ryzenctl info"
+    echo "  ryzenctl reset"
     exit 1
     ;;
 esac
