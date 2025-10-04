@@ -86,8 +86,9 @@ setup_device_specific() {
   echo "💻 Setting up device-specific configs..."
   echo "1) CachyOS"
   echo "2) Kubuntu"
-  echo "3) None"
-  read -rp "Choose a device-specific configuration [1-3]: " device_choice
+  echo "3) Niri"
+  echo "4) None"
+  read -rp "Choose a device-specific configuration [1-4]: " device_choice
 
   case $device_choice in
   1)
@@ -104,6 +105,12 @@ setup_device_specific() {
     done
     ;;
   3)
+    echo "Setting up for Niri..."
+    for dir in niri/.config/*; do
+      link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
+    done
+    ;;
+  4)
     echo "Skipping device-specific configs."
     ;;
   *)

@@ -14,7 +14,7 @@
 window {
     width: 600;
     border: 2;
-    border-radius: 0;
+    border-radius: 16px;
     border-color: @bgstatusline3;
 }
 
