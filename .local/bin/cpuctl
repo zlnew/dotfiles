@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# This is for my laptop only (Ryzen 5 5600H)
+
+COMMAND=$1
+ARG=$2
+
+case "$COMMAND" in
+  mode)
+    if [[ "$ARG" == "eco" ]]; then
+      sudo ryzenadj --stapm-limit=30000 --fast-limit=30000 --slow-limit=30000
+      notify-send "CPU Mode" "Eco mode activated (30W)"
+    elif [[ "$ARG" == "perf" ]]; then
+      sudo ryzenadj --stapm-limit=45000 --fast-limit=45000 --slow-limit=45000
+      notify-send "CPU Mode" "Performance mode activated (45W)"
+    else
+      echo "Usage: cpuctl mode <eco|perf>"
+      exit 1
+    fi
+    ;;
+  info)
+    sudo ryzenadj --info | grep LIMIT
+    ;;
+  reset)
+    sudo ryzenadj --stapm-limit=45000 --fast-limit=54000 --slow-limit=54000
+    notify-send "CPU Mode" "Reset to BIOS default (TDP auto)"
+    ;;
+  *)
+    echo "Usage:"
+    echo "  cpuctl mode <eco|perf>"
+    echo "  cpuctl info"
+    echo "  cpuctl reset"
+    exit 1
+    ;;
+esac
+
