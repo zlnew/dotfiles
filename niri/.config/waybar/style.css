@@ -22,7 +22,7 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-  padding: 0 10px;
+  padding: 0;
   color: @fg;
   opacity: 0.3;
   background-color: transparent;
