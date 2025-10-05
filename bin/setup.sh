@@ -109,6 +109,7 @@ setup_device_specific() {
     for dir in niri/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
+    link "$(pwd)/niri/.profile" "$HOME/.profile"
     ;;
   4)
     echo "Skipping device-specific configs."

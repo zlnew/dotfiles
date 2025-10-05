@@ -278,13 +278,7 @@ web_client {
 
 // Layout
 layout {
-    pane split_direction="vertical" {
-        pane
-        pane split_direction="horizontal" {
-            pane
-            pane
-        }
-    }
+    pane
 }
 
 // Use a simplified UI without special fonts (arrow glyphs)

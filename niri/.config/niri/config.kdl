@@ -26,9 +26,16 @@ input {
 // You will have to remove "/-" and edit it before it takes effect.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
-/- output "DP-1" {
-    mode "2560x1440@359.979" // Set resolution and refresh rate
-    scale 1 // No scaling (use 2 for HiDPI)
+output "HDMI-A-1" {
+  mode "1920x1080@100"
+  scale 1
+  focus-at-startup
+}
+
+output "eDP-1" {
+  mode "1920x1200@60.003"
+  scale 1.25
+  focus-at-startup
 }
 
 // ────────────── Keybindings ──────────────
@@ -133,7 +140,7 @@ binds {
     MOD+TAB                             { focus-workspace-previous; }
 
     // ─── Layout Controls ───
-    MOD+RETURN                          { spawn-sh "~/.config/niri/scripts/toggle-full-column-width"; }
+    MOD+RETURN                          { maximize-column; }
     MOD+CTRL+F                          { expand-column-to-available-width; }
     MOD+C                               { center-column; }
     MOD+CTRL+C                          { center-visible-columns; }
@@ -157,7 +164,11 @@ binds {
     // It disables any active keyboard shortcut inhibitor, restoring control.
     MOD+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
+    // ─── Waybar ───
+    MOD+SHIFT+O                         { spawn-sh "~/.config/niri/scripts/waybar-restart.sh"; }
+
     // ─── Exit / Power ───
+    MOD+DELETE                          { spawn-sh "~/.config/niri/scripts/power-menu.sh"; }
     CTRL+ALT+DELETE                     { quit; } // Also quits Niri
     MOD+SHIFT+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
     MOD+O                               repeat=false { toggle-overview; }
