@@ -72,19 +72,19 @@ binds {
     MOD+H                               { focus-column-left; }
     MOD+RIGHT                           { focus-column-right; }
     MOD+L                               { focus-column-right; }
-    MOD+UP                              { focus-window-up; }
-    MOD+K                               { focus-window-up; }
-    MOD+DOWN                            { focus-window-down; }
-    MOD+J                               { focus-window-down; }
+    // MOD+UP                              { focus-window-up; }
+    // MOD+K                               { focus-window-up; }
+    // MOD+DOWN                            { focus-window-down; }
+    // MOD+J                               { focus-window-down; }
 
     MOD+CTRL+LEFT                       { move-column-left; }
     MOD+CTRL+H                          { move-column-left; }
     MOD+CTRL+RIGHT                      { move-column-right; }
     MOD+CTRL+L                          { move-column-right; }
-    MOD+CTRL+UP                         { move-window-up; }
-    MOD+CTRL+K                          { move-window-up; }
-    MOD+CTRL+DOWN                       { move-window-down; }
-    MOD+CTRL+J                          { move-window-down; }
+    // MOD+CTRL+UP                         { move-window-up; }
+    // MOD+CTRL+K                          { move-window-up; }
+    // MOD+CTRL+DOWN                       { move-window-down; }
+    // MOD+CTRL+J                          { move-window-down; }
 
     MOD+HOME                            { focus-column-first; }
     MOD+END                             { focus-column-last; }
@@ -138,6 +138,10 @@ binds {
     MOD+CTRL+9                          { move-column-to-workspace 9; }
 
     MOD+TAB                             { focus-workspace-previous; }
+    MOD+UP                              { focus-workspace-up; }
+    MOD+DOWN                            { focus-workspace-down; }
+    MOD+CTRL+UP                         { move-column-to-workspace-up; }
+    MOD+CTRL+DOWN                       { move-column-to-workspace-down; }
 
     // ─── Layout Controls ───
     MOD+RETURN                          { maximize-column; }
@@ -183,6 +187,11 @@ binds {
     spawn-sh-at-startup "waybar" // Launch waybar
     spawn-sh-at-startup "~/.config/niri/scripts/set-gtk-theme.sh" // Set GTK and QT Themes
 
+    // Slow app launch fix
+    spawn-sh-at-startup "systemctl --user import-environment"
+    spawn-sh-at-startup "hash dbus-update-activation-environment 2>/dev/null"
+    spawn-sh-at-startup "dbus-update-activation-environment --systemd"
+
     prefer-no-csd // Disable program decorations
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png" // Disable screenshot saving
 
@@ -192,6 +201,7 @@ binds {
     layout {
         gaps 8 // Gap between windows
         center-focused-column "never" // Don’t auto-center focused column
+        always-center-single-column
 
         preset-column-widths {
             proportion 0.33333
@@ -200,7 +210,7 @@ binds {
         }
 
         focus-ring {
-            width 2
+            width 0
             active-color "#89b482" // aqua
             inactive-color "#3c3836" // bg2
         }
@@ -212,7 +222,10 @@ binds {
             color "#0007"
         }
 
-        struts {}
+        struts {
+            left 8
+            right 8
+        }
     }
 
 // ────────────── Animation Settings ──────────────
