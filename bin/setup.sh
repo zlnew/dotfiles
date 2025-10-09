@@ -80,6 +80,10 @@ setup_wallpapers() {
   for file in .local/share/wallpapers/*; do
     link "$(pwd)/$file" "$HOME/.local/share/wallpapers/$(basename "$file")"
   done
+  mkdir -p "$HOME/.local/share/applications"
+  for file in .local/share/applications/*; do
+    link "$(pwd)/$file" "$HOME/.local/share/applications/$(basename "$file")"
+  done
 }
 
 setup_device_specific() {

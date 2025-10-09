@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+brave --app=https://open.spotify.com/ --new-window --disable-session-crashed-bubble

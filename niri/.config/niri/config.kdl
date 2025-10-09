@@ -17,6 +17,7 @@ input {
         natural-scroll // Enable natural (macOS-style) scrolling
     }
 
+    warp-mouse-to-focus mode="center-xy"
     focus-follows-mouse // Automatically focus windows under the mouse pointer
     workspace-auto-back-and-forth // Enable workspace back & forth switching
 }
@@ -187,11 +188,6 @@ binds {
     spawn-sh-at-startup "waybar" // Launch waybar
     spawn-sh-at-startup "~/.config/niri/scripts/set-gtk-theme.sh" // Set GTK and QT Themes
 
-    // Slow app launch fix
-    spawn-sh-at-startup "systemctl --user import-environment"
-    spawn-sh-at-startup "hash dbus-update-activation-environment 2>/dev/null"
-    spawn-sh-at-startup "dbus-update-activation-environment --systemd"
-
     prefer-no-csd // Disable program decorations
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png" // Disable screenshot saving
 
@@ -210,7 +206,7 @@ binds {
         }
 
         focus-ring {
-            width 0
+            off
             active-color "#89b482" // aqua
             inactive-color "#3c3836" // bg2
         }

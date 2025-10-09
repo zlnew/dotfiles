@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Notion
+Exec=webapp-notion
+Type=Application
+StartupNotify=false
+Terminal=false
+Categories=;Task;Progress;Work;
