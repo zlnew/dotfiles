@@ -47,3 +47,14 @@
 - Clone all projects to `~/www`
 
 ---
+
+## Minimal KDE Plasma
+
+- plasma-desktop
+- dolphin
+- kwalletmanager
+- plasma-nm
+- plasma-pa
+- kscreen
+
+---
