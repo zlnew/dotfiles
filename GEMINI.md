@@ -11,7 +11,7 @@ The primary technologies and tools configured in this repository are:
 *   **Terminals:** Alacritty, Kitty, Foot
 *   **Multiplexer:** Zellij
 *   **Version Control:** Git (with Delta for diffs)
-*   **Window Manager (for CachyOS):** Hyprland
+*   **Window Manager (for CachyOS):** Hyprland, Niri
 *   **Desktop Environment (for Kubuntu):** KDE Plasma
 *   **Development:** `nvm`, `node`, `npm`, `bun`, `php`, `composer`
 *   **Other Tools:** `zoxide`, `lazygit`, `yazi`
@@ -31,13 +31,13 @@ To run the setup script:
 ./bin/setup.sh
 ```
 
-The script will detect the hostname and apply device-specific configurations if available. The supported hosts are `cachyos-pc` and `kubuntu-laptop`.
+The script will detect the hostname and apply device-specific configurations if available.
 
 There is also an `bin/update.sh` script, which is likely used to pull the latest changes from the git repository and apply any updates.
 
 ## Development Conventions
 
-*   **Configuration Structure:** Configurations are organized by tool under the `.config` directory. Device-specific configurations are in the `cachyos` and `kubuntu` directories.
+*   **Configuration Structure:** Configurations are organized by tool under the `.config` directory. Device-specific configurations are in the `hyprland`, `kubuntu`, and `niri` directories.
 *   **Shell Scripting:** The setup script is written in Bash and uses a helper function `link()` to create symlinks.
 *   **Neovim Configuration:** Neovim is configured using Lua, with plugins managed by `lazy.nvim`. The main configuration is in `.config/nvim/lua/config/lazy.lua`.
 *   **Git Commits:** There is a `.gitmessage.txt` file, which suggests a standardized format for commit messages.

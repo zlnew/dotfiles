@@ -4,7 +4,7 @@ My personal dotfiles with multi-os setup. This repository contains my personal c
 
 ## Features
 
-*   **Multi-os support:** The setup script can apply different configurations for different os (`cachyos` and `kubuntu`).
+*   **Multi-os support:** The setup script can apply different configurations for different os (`hyprland`, `kubuntu`, and `niri`).
 *   **Interactive setup:** The setup script allows for a full or partial installation, giving you control over what gets configured.
 *   **Comprehensive tool configuration:** Includes settings for shells, editors, terminals, window managers, and more.
 *   **Gruvbox theming:** Most of the tools are themed with the popular Gruvbox color scheme.
@@ -12,7 +12,7 @@ My personal dotfiles with multi-os setup. This repository contains my personal c
 
 ## Structure
 
-The dotfiles are organized by tool under the `.config` directory. Device-specific configurations are located in the `cachyos` and `kubuntu` directories. The `bin` directory contains setup and update scripts.
+The dotfiles are organized by tool under the `.config` directory. Device-specific configurations are located in the `hyprland`, `kubuntu`, and `niri` directories. The `bin` directory contains setup and update scripts.
 
 ```
 .
@@ -22,13 +22,17 @@ The dotfiles are organized by tool under the `.config` directory. Device-specifi
 │   ├── kitty/
 │   ├── nvim/
 │   └── ...
-├── cachyos/                # CachyOS specific configurations
+├── hyprland/                # Hyprland specific configurations
 │   └── .config/
 │       ├── hypr/
 │       └── ...
 ├── kubuntu/                # Kubuntu specific configurations
 │   └── .config/
 │       ├── kwinrc
+│       └── ...
+├── niri/                   # Niri specific configurations
+│   └── .config/
+│       ├── niri/
 │       └── ...
 ├── bin/                    # Scripts
 │   ├── setup.sh
@@ -87,7 +91,7 @@ To make your dotfiles fully functional, you would need to install most, if not a
 
 ### Desktop and Window Management
 
-*   **For CachyOS:** `hyprland`, `hyprctl`, `waybar`, `wofi`, `mako`, `swaylock`, `wl-copy`.
+*   **For CachyOS:** `hyprland`, `hyprctl`, `niri`, `waybar`, `wofi`, `mako`, `swaylock`, `wl-copy`.
 *   **For Kubuntu:** KDE Plasma Desktop.
 
 ### Other Tools
