@@ -73,19 +73,11 @@ binds {
     MOD+H                               { focus-column-left; }
     MOD+RIGHT                           { focus-column-right; }
     MOD+L                               { focus-column-right; }
-    // MOD+UP                              { focus-window-up; }
-    // MOD+K                               { focus-window-up; }
-    // MOD+DOWN                            { focus-window-down; }
-    // MOD+J                               { focus-window-down; }
 
     MOD+CTRL+LEFT                       { move-column-left; }
     MOD+CTRL+H                          { move-column-left; }
     MOD+CTRL+RIGHT                      { move-column-right; }
     MOD+CTRL+L                          { move-column-right; }
-    // MOD+CTRL+UP                         { move-window-up; }
-    // MOD+CTRL+K                          { move-window-up; }
-    // MOD+CTRL+DOWN                       { move-window-down; }
-    // MOD+CTRL+J                          { move-window-down; }
 
     MOD+HOME                            { focus-column-first; }
     MOD+END                             { focus-column-last; }
@@ -140,9 +132,13 @@ binds {
 
     MOD+TAB                             { focus-workspace-previous; }
     MOD+UP                              { focus-workspace-up; }
+    MOD+K                               { focus-workspace-up ;}
     MOD+DOWN                            { focus-workspace-down; }
+    MOD+J                               { focus-workspace-down; }
     MOD+CTRL+UP                         { move-column-to-workspace-up; }
+    MOD+CTRL+K                          { move-column-to-workspace-up; }
     MOD+CTRL+DOWN                       { move-column-to-workspace-down; }
+    MOD+CTRL+J                          { move-column-to-workspace-down; }
 
     // ─── Layout Controls ───
     MOD+RETURN                          { maximize-column; }
