@@ -18,6 +18,10 @@ alias zl_edit='nvim ~/.config/zellij/config.kdl'
 alias bash_update='source ~/.bashrc'
 alias fish_update='source ~/.config/fish/config.fish'
 
+# Zeelij
+alias zl="zellij --config ~/.config/zellij/config.kdl"
+alias zl_dnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl"
+
 # PHP
 alias reck='vendor/bin/rector'
 alias vendro='vendor/bin/pint'
@@ -38,7 +42,6 @@ alias gas='git add .; vendrojs; tjs; gcm'
 alias clip_diff='git diff --staged | wl-copy'
 
 # Other
-alias zdnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl"
 alias dnc_log='~/www/duanaga/logbook/api.sh'
 alias mode_check='powerprofilesctl'
 alias mode_powersave='powerprofilesctl set power-saver'
