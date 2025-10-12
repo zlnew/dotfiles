@@ -74,48 +74,54 @@ setup_bashrc() {
   link "$(pwd)/.bashrc" "$HOME/.bashrc"
 }
 
-setup_wallpapers() {
-  echo "🖼️ Setting up wallpapers..."
+setup_local_share() {
+  echo "🖼️ Setting up local share..."
+
   mkdir -p "$HOME/.local/share/wallpapers"
   for file in .local/share/wallpapers/*; do
     link "$(pwd)/$file" "$HOME/.local/share/wallpapers/$(basename "$file")"
   done
+
   mkdir -p "$HOME/.local/share/applications"
   for file in .local/share/applications/*; do
     link "$(pwd)/$file" "$HOME/.local/share/applications/$(basename "$file")"
+  done
+
+  mkdir -p "$HOME/.local/share/themes"
+  for file in .local/share/themes/*; do
+    link "$(pwd)/$file" "$HOME/.local/share/themes/$(basename "$file")"
+  done
+
+  mkdir -p "$HOME/.local/share/icons"
+  for file in .local/share/icons/*; do
+    link "$(pwd)/$file" "$HOME/.local/share/icons/$(basename "$file")"
   done
 }
 
 setup_device_specific() {
   echo "💻 Setting up device-specific configs..."
-  echo "1) CachyOS"
-  echo "2) Kubuntu"
-  echo "3) Niri"
-  echo "4) None"
-  read -rp "Choose a device-specific configuration [1-4]: " device_choice
+  echo "1) Hyprland"
+  echo "2) Niri"
+  echo "3) None"
+  read -rp "Choose a device-specific configuration [1-3]: " device_choice
 
   case $device_choice in
   1)
-    echo "Setting up for CachyOS..."
-    for dir in cachyos/.config/*; do
+    echo "Setting up for Hyprland..."
+    for dir in hyprland/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
+    link "$(pwd)/niri/.profile" "$HOME/.profile"
     reload_hyprland
     ;;
   2)
-    echo "Setting up for Kubuntu..."
-    for dir in kubuntu/.config/*; do
-      link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
-    done
-    ;;
-  3)
     echo "Setting up for Niri..."
     for dir in niri/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
     link "$(pwd)/niri/.profile" "$HOME/.profile"
     ;;
-  4)
+  3)
     echo "Skipping device-specific configs."
     ;;
   *)
@@ -145,7 +151,7 @@ case $choice in
   setup_git_configs
   setup_aliases
   setup_bashrc
-  setup_wallpapers
+  setup_local_share
   setup_device_specific
   ;;
 2)
@@ -165,8 +171,8 @@ case $choice in
   read -rp "Setup .bashrc? [y/N]: " bashrc_choice
   [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
 
-  read -rp "Setup wallpapers? [y/N]: " wallpapers_choice
-  [[ $wallpapers_choice =~ ^[Yy]$ ]] && setup_wallpapers
+  read -rp "Setup local share? [y/N]: " local_share_choice
+  [[ $local_share_choice =~ ^[Yy]$ ]] && setup_local_share
 
   read -rp "Setup device-specific configs? [y/N]: " device_choice
   [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific

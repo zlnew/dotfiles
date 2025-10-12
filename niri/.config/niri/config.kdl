@@ -180,9 +180,9 @@ binds {
 
     spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
     spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
-    spawn-sh-at-startup "sleep 1 && swww img /home/zlnew/.local/share/wallpapers/xavier-cuenca-w4-3.jpg" // Set wallpaper
+    spawn-sh-at-startup "sleep 1 && swww img ~/.local/share/wallpapers/xavier-cuenca-w4-3.jpg" // Set wallpaper
     spawn-sh-at-startup "waybar" // Launch waybar
-    spawn-sh-at-startup "~/.config/niri/scripts/set-gtk-theme.sh" // Set GTK and QT Themes
+    // spawn-sh-at-startup "~/.config/niri/scripts/set-gtk-theme.sh" // Set GTK and QT Themes
 
     prefer-no-csd // Disable program decorations
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png" // Disable screenshot saving
