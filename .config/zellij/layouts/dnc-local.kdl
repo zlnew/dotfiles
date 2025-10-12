@@ -1,0 +1,30 @@
+layout {
+    // Session name
+    name "dnc-local"
+
+    // ────────────── Tab 1: PostgreSQL CLI ──────────────
+    tab name="pgcli" {
+        pane {
+            cwd "~/www/duanaga/core-api"
+            command "pgcli"
+            args "-u" "postgres" "-d" "dnc"
+        }
+    }
+
+    // ────────────── Tab 2: core-api ──────────────
+    tab name="core-api" {
+        pane {
+            cwd "~/www/duanaga/core-api"
+            command "fish"
+        }
+    }
+
+    // ────────────── Tab 3: dragon-bridge ──────────────
+    tab name="dragon-bridge" {
+        pane {
+            cwd "~/www/duanaga/dragon-bridge"
+            command "fish"
+        }
+    }
+}
+

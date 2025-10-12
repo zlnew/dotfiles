@@ -2,19 +2,12 @@ source ~/.config/fish/base.fish
 
 # overwrite greeting
 function fish_greeting
-    echo (hostname)
+  #
 end
 
 # Source custom aliases
 if test -f ~/.aliases
     source ~/.aliases
-end
-
-# Auto-start zellij
-if status is-interactive
-    if not set -q ZELLIJ
-        exec zellij --layout ~/.config/zellij/config.kdl
-    end
 end
 
 # Init zoxide

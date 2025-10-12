@@ -38,7 +38,7 @@ alias gas='git add .; vendrojs; tjs; gcm'
 alias clip_diff='git diff --staged | wl-copy'
 
 # Other
-alias zl='zellij --layout ~/.config/zellij/config.kdl'
+alias zdnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl"
 alias dnc_log='~/www/duanaga/logbook/api.sh'
 alias mode_check='powerprofilesctl'
 alias mode_powersave='powerprofilesctl set power-saver'
