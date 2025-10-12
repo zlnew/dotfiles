@@ -7,14 +7,14 @@
 input {
     keyboard {
         xkb {
-            layout "us" // Use the German keyboard layout
+            layout "us"
         }
-        numlock // Enable numlock on startup
+        numlock
     }
 
     touchpad {
-        tap // Enable tap-to-click
-        natural-scroll // Enable natural (macOS-style) scrolling
+        tap
+        natural-scroll
     }
 
     warp-mouse-to-focus mode="center-xy"
@@ -161,8 +161,6 @@ binds {
     CTRL+SHIFT+3                        { screenshot-window; }
 
     // ─── Emergency Escape Key ───
-    // Use this when a fullscreen app blocks your keybinds.
-    // It disables any active keyboard shortcut inhibitor, restoring control.
     MOD+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // ─── Waybar ───
@@ -170,29 +168,28 @@ binds {
 
     // ─── Exit / Power ───
     MOD+DELETE                          { spawn-sh "~/.config/niri/scripts/power-menu.sh"; }
-    CTRL+ALT+DELETE                     { quit; } // Also quits Niri
-    MOD+SHIFT+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
+    CTRL+ALT+DELETE                     { quit; }
+    MOD+SHIFT+P                         { power-off-monitors; }
     MOD+O                               repeat=false { toggle-overview; }
 }
 
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
-    spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit
-    spawn-sh-at-startup "swww-daemon" // Wallpaper daemon
-    spawn-sh-at-startup "sleep 1 && swww img ~/.local/share/wallpapers/xavier-cuenca-w4-3.jpg" // Set wallpaper
-    spawn-sh-at-startup "waybar" // Launch waybar
-    // spawn-sh-at-startup "~/.config/niri/scripts/set-gtk-theme.sh" // Set GTK and QT Themes
+    spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
+    spawn-sh-at-startup "swww-daemon"
+    spawn-sh-at-startup "sleep 1 && swww img ~/.local/share/wallpapers/xavier-cuenca-w4-3.jpg"
+    spawn-sh-at-startup "waybar"
 
-    prefer-no-csd // Disable program decorations
-    screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png" // Disable screenshot saving
+    prefer-no-csd
+    screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // ────────────── Layout Settings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
     layout {
-        gaps 8 // Gap between windows
-        center-focused-column "never" // Don’t auto-center focused column
+        gaps 8
+        center-focused-column "never"
         always-center-single-column
 
         preset-column-widths {
@@ -260,11 +257,11 @@ binds {
 
     window-rule {
         match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-        open-floating true // Always float Firefox PiP windows
+        open-floating true
     }
 
     window-rule {
-        geometry-corner-radius 16 // Set every window radius to 20
+        geometry-corner-radius 16
         clip-to-geometry true
     }
 
