@@ -20,7 +20,7 @@ alias fish_update='source ~/.config/fish/config.fish'
 
 # Zellij
 alias zl="zellij --config ~/.config/zellij/config.kdl"
-alias zl_dnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl attach -c dnc-local"
+alias zl_dnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl"
 
 # PHP
 alias reck='vendor/bin/rector'
