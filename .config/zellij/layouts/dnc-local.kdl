@@ -7,7 +7,7 @@ layout {
     }
 
     // ────────────── Tab 1: core-api ──────────────
-    tab name="1. core-api" {
+    tab name="core-api" {
         pane {
             cwd "~/www/duanaga/core-api"
             command "fish"
@@ -15,7 +15,7 @@ layout {
     }
 
     // ────────────── Tab 2: dragon-bridge ──────────────
-    tab name="2. dragon-bridge" {
+    tab name="dragon-bridge" {
         pane {
             cwd "~/www/duanaga/dragon-bridge"
             command "fish"
@@ -23,7 +23,7 @@ layout {
     }
 
     // ────────────── Tab 3: customer-portal ──────────────
-    tab name="3. customer-portal" {
+    tab name="customer-portal" {
         pane {
             cwd "~/www/duanaga/portal_customer"
             command "fish"
@@ -31,7 +31,7 @@ layout {
     }
 
     // ────────────── Tab 4: PostgreSQL CLI ──────────────
-    tab name="4. pgcli" {
+    tab name="pgcli" {
         pane {
             cwd "~/www/duanaga/core-api"
             command "fish"
@@ -40,7 +40,7 @@ layout {
     }
 
     // ────────────── Tab 5: Background Jobs ──────────────
-    tab name="5. background-jobs" {
+    tab name="background-jobs" {
         pane split_direction="vertical" {
           pane {
               cwd "~/www/duanaga/core-api"
