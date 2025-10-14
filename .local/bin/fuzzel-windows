@@ -14,7 +14,7 @@ fi
 if [ "$WM" = "hyprland" ]; then
   apps=$(hyprctl clients -j | jq -r '.[] | select(.title != "") | "\(.workspace.name) | \(.class) | \(.title)"' | sed '/^ | $/d')
 elif [ "$WM" = "niri" ]; then
-  apps=$(niri msg -j windows | jq -r '.[] | select(.app_id != null and .title != null) | "\(.workspace_name) | \(.class) | \(.title)"')
+  apps=$(niri msg -j windows | jq -r '.[] | select(.app_id != null and .title != null) | "\(.workspace_id) | \(.app_id) | \(.title)"')
 fi
 
 if [ -z "$apps" ]; then
@@ -30,18 +30,15 @@ choice=$(echo "$apps" | fuzzel --dmenu \
 [ -z "$choice" ] && exit 0
 
 workspace=$(echo "$choice" | cut -d'|' -f1 | xargs)
-title=$(echo "$choice" | cut -d'|' -f2- | xargs)
+title=$(echo "$choice" | cut -d'|' -f3- | xargs)
 
 if [ "$WM" = "hyprland" ]; then
-  # Switch to workspace first
   [ -n "$workspace" ] && hyprctl dispatch workspace "$workspace"
 
-  # Focus window by address
   address=$(hyprctl clients -j | jq -r --arg title "$title" '.[] | select(.title == $title) | .address')
   [ -n "$address" ] && hyprctl dispatch focuswindow address:"$address"
 
 elif [ "$WM" = "niri" ]; then
-  # Find window ID
   id=$(niri msg -j windows | jq -r --arg title "$title" '.[] | select(.title == $title) | .id')
 
   if [ -n "$id" ]; then
