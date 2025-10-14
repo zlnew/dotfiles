@@ -4,7 +4,7 @@ wifi_list=$(nmcli -t -f SSID,SIGNAL dev wifi list | awk -F: '{printf "%s (%s%%)\
 
 [ -z "$wifi_list" ] && exit 0
 
-choice=$(echo "$wifi_list" | fuzzel --dmenu -p "WiFi:")
+choice=$(echo "$wifi_list" | fuzzel --dmenu --prompt "WiFi > ")
 
 [ -z "$choice" ] && exit 0
 

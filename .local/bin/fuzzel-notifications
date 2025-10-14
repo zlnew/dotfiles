@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 
 if ! command -v makoctl &>/dev/null; then
-  notify-send "❌ fuzzel-notifications" "makoctl not found"
+  notify-send "fuzzel-notifications" "makoctl not found"
   exit 1
 fi
 
 raw=$(makoctl history 2>/dev/null)
 
 if [ -z "$raw" ]; then
-  notify-send "🔕 Notifications" "No notification history found"
+  notify-send "Notifications" "No notification history found"
   exit 0
 fi
 
 history=$(echo "$raw" | grep -E '^Notification [0-9]+' | sed 's/Notification //')
 
 if [ -z "$history" ]; then
-  notify-send "🔕 Notifications" "No notifications in history"
+  notify-send "Notifications" "No notifications in history"
   exit 0
 fi
 
-choice=$(echo "$history" | fuzzel --dmenu -p "Notifications:")
+choice=$(echo "$history" | fuzzel --dmenu --prompt "Notifications > " --lines 20 --width 100)
 
 [ -z "$choice" ] && exit 0
 
@@ -32,8 +32,8 @@ details=$(awk -v id="$id" '
 ' <<< "$raw")
 
 if [ -n "$details" ]; then
-  notify-send "📰 Notification $id" "$details"
+  notify-send "Notification $id" "$details"
 else
-  notify-send "📰 Notification $id" "No details available"
+  notify-send "Notification $id" "No details available"
 fi
 

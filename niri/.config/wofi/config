@@ -1,6 +1,0 @@
-style = /home/zlnew/.config/colors/gruvbox-wofi.css
-hide_scroll=true
-no_actions=true
-term=alacritty
-mode=drun
---show

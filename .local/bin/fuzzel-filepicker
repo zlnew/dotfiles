@@ -2,7 +2,7 @@
 
 DIR="${1:-$HOME}"
 
-FILE=$(find "$DIR" -maxdepth 3 -type f -o -type d | grep -v "/\." | fuzzel --dmenu -p "Open file:" --lines 20 --width 100)
+FILE=$(find "$DIR" -maxdepth 3 -type f -o -type d | grep -v "/\." | fuzzel --dmenu --prompt "File > " --lines 20 --width 100)
 
 [ -z "$FILE" ] && exit 0
 

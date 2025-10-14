@@ -51,13 +51,6 @@
         "artist-len": 20
       },
 
-      "custom/clipboard": {
-        "format": "📋 {}",
-        "exec": "~/.config/waybar/scripts/clipboard.sh",
-        "interval": 5,
-        "on-click": "cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-      },
-
       "custom/sp1": {
           "format": " | ",
           "tooltip": false

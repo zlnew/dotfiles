@@ -1,20 +1,53 @@
 #!/usr/bin/env bash
 
-apps=$(hyprctl clients -j | jq -r '.[] | "\(.workspace.name) | \(.title)"' | sed '/^ | $/d')
+set -euo pipefail
 
-[ -z "$apps" ] && exit 0
+if pgrep -x hyprland >/dev/null 2>&1; then
+  WM="hyprland"
+elif pgrep -x niri >/dev/null 2>&1; then
+  WM="niri"
+else
+  notify-send "Window Switcher" "Neither Hyprland nor Niri is running."
+  exit 1
+fi
 
-choice=$(echo "$apps" | fuzzel --dmenu -p "Windows:")
+if [ "$WM" = "hyprland" ]; then
+  apps=$(hyprctl clients -j | jq -r '.[] | select(.title != "") | "\(.workspace.name) | \(.class) | \(.title)"' | sed '/^ | $/d')
+elif [ "$WM" = "niri" ]; then
+  apps=$(niri msg -j windows | jq -r '.[] | select(.app_id != null and .title != null) | "\(.workspace_name) | \(.class) | \(.title)"')
+fi
+
+if [ -z "$apps" ]; then
+  notify-send "Window Switcher" "No open windows found."
+  exit 0
+fi
+
+choice=$(echo "$apps" | fuzzel --dmenu \
+  --prompt "Windows > " \
+  --lines 20 \
+  --width 100)
 
 [ -z "$choice" ] && exit 0
 
 workspace=$(echo "$choice" | cut -d'|' -f1 | xargs)
-window=$(echo "$choice" | cut -d'|' -f2- | xargs)
+title=$(echo "$choice" | cut -d'|' -f2- | xargs)
 
-if [ -n "$workspace" ]; then
-  hyprctl dispatch workspace "$workspace"
+if [ "$WM" = "hyprland" ]; then
+  # Switch to workspace first
+  [ -n "$workspace" ] && hyprctl dispatch workspace "$workspace"
+
+  # Focus window by address
+  address=$(hyprctl clients -j | jq -r --arg title "$title" '.[] | select(.title == $title) | .address')
+  [ -n "$address" ] && hyprctl dispatch focuswindow address:"$address"
+
+elif [ "$WM" = "niri" ]; then
+  # Find window ID
+  id=$(niri msg -j windows | jq -r --arg title "$title" '.[] | select(.title == $title) | .id')
+
+  if [ -n "$id" ]; then
+    niri msg action focus-window --id "$id" >/dev/null
+  else
+    notify-send "Window Switcher" "Unable to focus window: $title"
+  fi
 fi
-
-address=$(hyprctl clients -j | jq -r --arg title "$window" '.[] | select(.title == $title) | .address')
-[ -n "$address" ] && hyprctl dispatch focuswindow address:"$address"
 

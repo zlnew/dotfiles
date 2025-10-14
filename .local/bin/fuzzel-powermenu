@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-ACTION=$(printf "Cancel\nPoweroff\nReboot\nSuspend\nHibernate" | \
-fuzzel --dmenu -p "⚡ Power:" --lines=5 --width=30)
+ACTION=$(printf "Poweroff\nReboot\nSuspend\nHibernate" | \
+fuzzel --dmenu --prompt "Power > " --lines=4 --width=30)
 
 case "$ACTION" in
   "Poweroff") systemctl poweroff ;;
