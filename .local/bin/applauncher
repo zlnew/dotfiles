@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+ACTION=$(fuzzel --prompt "Launch > " --lines=10 --width=40 | awk '{print $1}')
+
+# stop if nothing selected
+[ -z "$ACTION" ] && exit 0
+
+# jalankan aplikasi
+gtk-launch "$ACTION" 2>/dev/null || "$ACTION" &
+

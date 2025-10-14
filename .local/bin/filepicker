@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+DIR="${1:-$HOME}"
+
+FILE=$(find "$DIR" -maxdepth 3 -type f -o -type d | grep -v "/\." | fuzzel --dmenu -p "Open file:" --lines 20 --width 100)
+
+[ -z "$FILE" ] && exit 0
+
+if [ -d "$FILE" ]; then
+  xdg-open "$FILE"
+else
+  xdg-open "$FILE"
+fi
+

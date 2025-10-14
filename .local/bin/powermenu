@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# Simple confirmation menu using rofi
 ACTION=$(printf "Cancel\nPoweroff\nReboot\nSuspend\nHibernate" | \
-rofi -dmenu -p "Power" -no-fixed-num-lines)
+fuzzel --dmenu -p "⚡ Power:" --lines=5 --width=30)
 
 case "$ACTION" in
   "Poweroff") systemctl poweroff ;;

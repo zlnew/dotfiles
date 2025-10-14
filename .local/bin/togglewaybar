@@ -4,3 +4,4 @@ if pgrep -x "waybar" > /dev/null; then
 else
     waybar &
 fi
+
