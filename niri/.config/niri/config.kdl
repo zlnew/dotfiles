@@ -58,8 +58,8 @@ binds {
     // ─── Applications ───
     MOD+T                               hotkey-overlay-title="Open Terminal: alacritty" { spawn-sh "alacritty"; }
     MOD+W                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+B                               hotkey-overlay-title="Toggle Waybar" { spawn-sh "togglewaybar"; }
-    MOD+O                               hotkey-overlay-title="Restart Waybar" { spawn-sh "restartwaybar"; }
+    MOD+B                               hotkey-overlay-title="Toggle Waybar" { spawn-sh "waybar-toggle"; }
+    MOD+O                               hotkey-overlay-title="Restart Waybar" { spawn-sh "waybar-restart"; }
 
     // ─── Audio Controls ───
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }

@@ -2,7 +2,6 @@
 
 echo "🧹 Cleaning old Neovim data..."
 
-# Check if Neovim is running
 if pgrep nvim > /dev/null; then
     echo "Warning: Neovim processes are currently running. Please close all Neovim instances before cleaning."
     read -p "Do you still want to proceed? (y/N): " confirm

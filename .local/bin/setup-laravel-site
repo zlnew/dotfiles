@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Simple Laravel + nginx + phpenv setup
 
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <domain> <project_path>"

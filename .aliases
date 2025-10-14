@@ -36,8 +36,8 @@ alias vendrojsall='fjs; ljs; tjs'
 # Git
 alias gp='git push'
 alias gl='git pull'
-alias gcm='git-commit-message.sh'
-alias gws='git-work-summary.sh'
+alias gcm='git-commit-message'
+alias gws='git-work-summary'
 alias gas='git add .; vendrojs; tjs; gcm'
 alias clip_diff='git diff --staged | wl-copy'
 
