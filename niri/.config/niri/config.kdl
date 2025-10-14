@@ -18,8 +18,8 @@ input {
     }
 
     warp-mouse-to-focus mode="center-xy"
-    focus-follows-mouse // Automatically focus windows under the mouse pointer
-    workspace-auto-back-and-forth // Enable workspace back & forth switching
+    focus-follows-mouse
+    workspace-auto-back-and-forth
 }
 
 // ────────────── Output Configuration ──────────────
@@ -43,14 +43,23 @@ output "eDP-1" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
 
 binds {
-    MOD+SHIFT+ESCAPE                     { show-hotkey-overlay; }
+    // ─── Supports ───
+    MOD+SHIFT+ESCAPE                    { show-hotkey-overlay; }
+    MOD+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    // ─── DMENU ───
+    MOD+SPACE                           hotkey-overlay-title="Open App Launcher" { spawn-sh "fuzzel-applauncher"; }
+    MOD+C                               hotkey-overlay-title="Open Clipboard List" { spawn-sh "fuzzel-clipboard"; }
+    MOD+E                               hotkey-overlay-title="Open File Picker" { spawn-sh "fuzzel-filepicker"; }
+    MOD+N                               hotkey-overlay-title="Open Notification List" { spawn-sh "fuzzel-notifications"; }
+    MOD+DELETE                          hotkey-overlay-title="Open Power Menu" { spawn-sh "fuzzel-powermenu"; }
+    MOD+TAB                             hotkey-overlay-title="Open Window Switcher" { spawn-sh "fuzzel-windows"; }
 
     // ─── Applications ───
     MOD+T                               hotkey-overlay-title="Open Terminal: alacritty" { spawn-sh "alacritty"; }
-    MOD+SPACE                           hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "rofi -show drun"; }
-    MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+ALT+L                           hotkey-overlay-title="Lock Screen: swaylock" { spawn-sh "swaylock"; }
-    MOD+E                               hotkey-overlay-title="File Manager: ROFI" { spawn-sh "rofi -show filebrowser"; }
+    MOD+W                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
+    MOD+B                               hotkey-overlay-title="Toggle Waybar" { spawn-sh "togglewaybar"; }
+    MOD+O                               hotkey-overlay-title="Restart Waybar" { spawn-sh "restartwaybar"; }
 
     // ─── Audio Controls ───
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
@@ -68,27 +77,22 @@ binds {
 
     // ─── Window Movement and Focus ───
     MOD+Q                               { close-window; }
-
     MOD+LEFT                            { focus-column-left; }
     MOD+H                               { focus-column-left; }
     MOD+RIGHT                           { focus-column-right; }
     MOD+L                               { focus-column-right; }
-
     MOD+CTRL+LEFT                       { move-column-left; }
     MOD+CTRL+H                          { move-column-left; }
     MOD+CTRL+RIGHT                      { move-column-right; }
     MOD+CTRL+L                          { move-column-right; }
-
     MOD+HOME                            { focus-column-first; }
     MOD+END                             { focus-column-last; }
     MOD+CTRL+HOME                       { move-column-to-first; }
     MOD+CTRL+END                        { move-column-to-last; }
-
     MOD+SHIFT+LEFT                      { focus-monitor-left; }
     MOD+SHIFT+RIGHT                     { focus-monitor-right; }
     MOD+SHIFT+UP                        { focus-monitor-up; }
     MOD+SHIFT+DOWN                      { focus-monitor-down; }
-
     MOD+SHIFT+CTRL+LEFT                 { move-column-to-monitor-left; }
     MOD+SHIFT+CTRL+RIGHT                { move-column-to-monitor-right; }
     MOD+SHIFT+CTRL+UP                   { move-column-to-monitor-up; }
@@ -99,17 +103,14 @@ binds {
     MOD+WHEELSCROLLUP                   cooldown-ms=150 { focus-workspace-up; }
     MOD+CTRL+WHEELSCROLLDOWN            cooldown-ms=150 { move-column-to-workspace-down; }
     MOD+CTRL+WHEELSCROLLUP              cooldown-ms=150 { move-column-to-workspace-up; }
-
     MOD+WHEELSCROLLRIGHT                { focus-column-right; }
     MOD+WHEELSCROLLLEFT                 { focus-column-left; }
     MOD+CTRL+WHEELSCROLLRIGHT           { move-column-right; }
     MOD+CTRL+WHEELSCROLLLEFT            { move-column-left; }
-
     MOD+SHIFT+WHEELSCROLLDOWN           { focus-column-right; }
     MOD+SHIFT+WHEELSCROLLUP             { focus-column-left; }
     MOD+CTRL+SHIFT+WHEELSCROLLDOWN      { move-column-right; }
     MOD+CTRL+SHIFT+WHEELSCROLLUP        { move-column-left; }
-
     MOD+1                               { focus-workspace 1; }
     MOD+2                               { focus-workspace 2; }
     MOD+3                               { focus-workspace 3; }
@@ -119,7 +120,6 @@ binds {
     MOD+7                               { focus-workspace 7; }
     MOD+8                               { focus-workspace 8; }
     MOD+9                               { focus-workspace 9; }
-
     MOD+CTRL+1                          { move-column-to-workspace 1; }
     MOD+CTRL+2                          { move-column-to-workspace 2; }
     MOD+CTRL+3                          { move-column-to-workspace 3; }
@@ -129,8 +129,6 @@ binds {
     MOD+CTRL+7                          { move-column-to-workspace 7; }
     MOD+CTRL+8                          { move-column-to-workspace 8; }
     MOD+CTRL+9                          { move-column-to-workspace 9; }
-
-    MOD+TAB                             { focus-workspace-previous; }
     MOD+UP                              { focus-workspace-up; }
     MOD+K                               { focus-workspace-up ;}
     MOD+DOWN                            { focus-workspace-down; }
@@ -143,7 +141,7 @@ binds {
     // ─── Layout Controls ───
     MOD+RETURN                          { maximize-column; }
     MOD+CTRL+F                          { expand-column-to-available-width; }
-    MOD+C                               { center-column; }
+    MOD+SHIFT+C                         { center-column; }
     MOD+CTRL+C                          { center-visible-columns; }
     MOD+MINUS                           { set-column-width "-10%"; }
     MOD+EQUAL                           { set-column-width "+10%"; }
@@ -153,33 +151,27 @@ binds {
     // ─── Modes ───
     MOD+V                               { toggle-window-floating; }
     MOD+F                               { fullscreen-window; }
-    MOD+W                               { toggle-column-tabbed-display; }
+    MOD+SHIFT+O                         repeat=false { toggle-overview; }
 
     // ─── Screenshots ───
     CTRL+SHIFT+1                        { screenshot; }
     CTRL+SHIFT+2                        { screenshot-screen; }
     CTRL+SHIFT+3                        { screenshot-window; }
 
-    // ─── Emergency Escape Key ───
-    MOD+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-    // ─── Waybar ───
-    MOD+SHIFT+O                         { spawn-sh "~/.config/niri/scripts/waybar-restart.sh"; }
-
     // ─── Exit / Power ───
-    MOD+DELETE                          { spawn-sh "~/.config/niri/scripts/power-menu.sh"; }
     CTRL+ALT+DELETE                     { quit; }
-    MOD+SHIFT+P                         { power-off-monitors; }
-    MOD+O                               repeat=false { toggle-overview; }
 }
 
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
-    spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
     spawn-sh-at-startup "swww-daemon"
     spawn-sh-at-startup "sleep 1 && swww img ~/.local/share/wallpapers/xavier-cuenca-w4-3.jpg"
-    spawn-sh-at-startup "waybar"
+    spawn-sh-at-startup "waybar &"
+    spawn-sh-at-startup "fcitx5 -d &"
+    spawn-sh-at-startup "mako &"
+    spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
+    spawn-sh-at-startup "wl-paste --watch cliphist store"
 
     prefer-no-csd
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
