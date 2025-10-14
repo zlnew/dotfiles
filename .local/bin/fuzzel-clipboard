@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+history=$(cliphist list | fuzzel --dmenu -p "Clipboard:")
+
+[ -z "$history" ] && exit 0
+
+echo "$history" | cliphist decode | wl-copy
+

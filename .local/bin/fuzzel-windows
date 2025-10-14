@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+apps=$(hyprctl clients -j | jq -r '.[] | "\(.workspace.name) | \(.title)"' | sed '/^ | $/d')
+
+[ -z "$apps" ] && exit 0
+
+choice=$(echo "$apps" | fuzzel --dmenu -p "Windows:")
+
+[ -z "$choice" ] && exit 0
+
+workspace=$(echo "$choice" | cut -d'|' -f1 | xargs)
+window=$(echo "$choice" | cut -d'|' -f2- | xargs)
+
+if [ -n "$workspace" ]; then
+  hyprctl dispatch workspace "$workspace"
+fi
+
+address=$(hyprctl clients -j | jq -r --arg title "$window" '.[] | select(.title == $title) | .address')
+[ -n "$address" ] && hyprctl dispatch focuswindow address:"$address"
+

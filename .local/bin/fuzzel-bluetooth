@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+devices=$(bluetoothctl devices | awk '{$1=""; print substr($0,2)}')
+
+[ -z "$devices" ] && exit 0
+
+choice=$(echo "$devices" | fuzzel --dmenu -p "Bluetooth:")
+
+[ -z "$choice" ] && exit 0
+
+mac=$(bluetoothctl devices | grep "$choice" | awk '{print $2}')
+
+connected=$(bluetoothctl info "$mac" | grep "Connected: yes")
+
+if [ -n "$connected" ]; then
+  bluetoothctl disconnect "$mac" >/dev/null
+  notify-send "🔵 Bluetooth" "Disconnected from $choice"
+else
+  bluetoothctl connect "$mac" >/dev/null
+  notify-send "🟢 Bluetooth" "Connected to $choice"
+fi
+

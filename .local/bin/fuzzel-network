@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+wifi_list=$(nmcli -t -f SSID,SIGNAL dev wifi list | awk -F: '{printf "%s (%s%%)\n", $1, $2}' | sort -r -k2)
+
+[ -z "$wifi_list" ] && exit 0
+
+choice=$(echo "$wifi_list" | fuzzel --dmenu -p "WiFi:")
+
+[ -z "$choice" ] && exit 0
+
+ssid=$(echo "$choice" | awk -F '(' '{print $1}' | xargs)
+
+nmcli dev wifi connect "$ssid"
+
