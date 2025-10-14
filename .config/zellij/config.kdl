@@ -284,10 +284,8 @@ plugins {
     }
 
     zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-        format_left       "{mode}"
-        format_center     ""
-        format_right      "{tabs}"
-        format_space      " "
+        format_left        "{tabs}"
+        format_right       "{mode}"
 
         border_enabled    "false"
         border_char       "─"
@@ -296,12 +294,12 @@ plugins {
 
         hide_frame_for_single_pane        "true"
         format_hide_on_overlength         "true"
-        format_precedence                 "rlc"
+        format_precedence                 "lrc"
 
-        mode_normal       "#[bg=#3c3836,bold] {name}"
-        mode_tmux         "#[bg=#d8a657,bold] TMUX "
+        mode_normal       "#[fg=#928374,bold,italic] ZL {name} "
+        mode_tmux         "#[fg=#928374] TMUX "
 
-        tab_normal        "#[fg=#928374] {name} "
+        tab_normal        "#[fg=#928374] {index} "
         tab_active        "#[fg=#d4be98,bg=#3c3836,bold,italic] {name} "
 
         datetime          "#[fg=#d4be98] {format}"
