@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+brave --app=https://logbookdivisiit.nagaserver.my.id/ --new-window --disable-session-crashed-bubble

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=DNC Logbook
+Exec=webapp-dnclogbook
+Type=Application
+StartupNotify=false
+Terminal=false
+Categories=;Report;Daily;Log;
