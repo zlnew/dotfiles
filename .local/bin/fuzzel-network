@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-wifi_list=$(nmcli -t -f SSID,SIGNAL dev wifi list | awk -F: '{printf "%s (%s%%)\n", $1, $2}' | sort -r -k2)
+current_ssid=$(nmcli -t -f ACTIVE,SSID dev wifi | awk -F: '$1=="yes"{print $2}')
+
+wifi_list=$(nmcli -t -f SSID,SIGNAL dev wifi list | awk -F: '{printf "%s (%s%%)\n", $1, $2}' | sort -t '(' -k2 -nr)
+
+if [ -n "$current_ssid" ]; then
+  wifi_list=$(echo "$wifi_list" | awk -v ssid="$current_ssid" '
+    $0 ~ "^"ssid" " {print "✅ " $0; next}
+    {print "   " $0}
+  ')
+fi
 
 [ -z "$wifi_list" ] && exit 0
 
@@ -8,7 +17,12 @@ choice=$(echo "$wifi_list" | fuzzel --dmenu --prompt "WiFi > ")
 
 [ -z "$choice" ] && exit 0
 
-ssid=$(echo "$choice" | awk -F '(' '{print $1}' | xargs)
+ssid=$(echo "$choice" | sed -E 's/^✅ *//' | sed -E 's/^ *//' | sed -E 's/ *\([^)]*\)//' | sed 's/[[:space:]]*$//')
 
-nmcli dev wifi connect "$ssid"
+[ -z "$ssid" ] && exit 0
 
+if nmcli dev wifi connect "$ssid" --ask; then
+  notify-send "Wi-FI" "Connected to $ssid"
+else
+  notify-send "Wi-Fi" "Failed to connect to $ssid"
+fi
