@@ -9,29 +9,25 @@ default-timeout=10000
 
 font=sans 10
 anchor=top-right
-margin=10
-padding=10
+margin=8
+padding=8
 width=300
-height=500
+height=300
 border-size=1
-border-radius=6
-
-background-color=#1d2021cc
-text-color=#d4be98
-border-color=#d8a657cc
+border-radius=8
 
 [urgency=low]
-background-color=#32302fcc
+background-color=#32302f
 text-color=#ddc7a1
-border-color=#7daea3cc
+border-color=#7daea3
 
 [urgency=normal]
-background-color=#1d2021cc
+background-color=#1d2021
 text-color=#d4be98
-border-color=#d8a657cc
+border-color=#89b482
 
 [urgency=critical]
-background-color=#ea6962cc
+background-color=#ea6962
 text-color=#f9f5d7
-border-color=#ea6962cc
+border-color=#ea6962
 
