@@ -169,7 +169,7 @@ keybinds clear-defaults=true {
         bind "Alt Shift p" { ToggleGroupMarking; }
         bind "Ctrl q" { Quit; }
 
-        bind "Ctrl y" {
+        bind "Ctrl Shift P" {
             LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
                 floating true
                 ignore_case true
