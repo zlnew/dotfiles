@@ -2,7 +2,7 @@
   "layer": "top",
   "margin-top": 8,
   "margin-left": 8,
-  "margin-bottom": 4,
+  "margin-bottom": 0,
   "margin-right": 8,
   "spacing": 4,
 
@@ -11,16 +11,13 @@
   ],
 
   "modules-left": [
-    "niri/workspaces",
-    "niri/window",
-
-    "hyprland/workspaces",
-    "hyprland/window"
+    "clock",
+    "mpris"
   ],
 
   "modules-center": [
-    "mpris",
-    "clock"
+    "niri/workspaces",
+    "hyprland/workspaces",
   ],
 
   "modules-right": [
