@@ -57,4 +57,14 @@
 - plasma-pa
 - kscreen
 
+## How to disable boot splast plymouth on CachyOS
+
+1. Users of sdboot-manage may edit `/etc/sdboot-manage.conf` on the LINUX_OPTIONS= line.
+   Add = `plymouth.enable=0 disablehooks=plymouth`
+   Remove = `splash`
+   Afterwards to regenrate entries with the options:
+   `sudo sdboot-manage gen`
+2. Edit /etc/mkinitcpio.conf and remove plymouth from HOOKS.
+   Afterwards to rebuild initram run: `sudo mkinitcpio -P`
+
 ---
