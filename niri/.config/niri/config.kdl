@@ -190,10 +190,14 @@ binds {
             proportion 0.66667
         }
 
-        focus-ring {
-            off
+        border {
+            width 3
             active-color "#89b482" // aqua
             inactive-color "#3c3836" // bg2
+        }
+
+        focus-ring {
+          off
         }
 
         shadow {}
