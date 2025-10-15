@@ -1,0 +1,120 @@
+{
+  // Niri Modules
+  "niri/workspaces": {
+    "on-click": "activate"
+  },
+  "niri/window": {
+    "format": "{title}",
+    "max-length": 50,
+    "separate-outputs": true
+  },
+
+  // Hyprland Modules
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "all-outputs": true,
+    "sort-by-number": true,
+    "active-only": false
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 50,
+    "separate-outputs": true
+  },
+
+  // General Modules
+  "clock": {
+    "format": "{:%H:%M, %e %b}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "today-format": "<b>{}</b>"
+  },
+
+  "mpris": {
+    "format": "{title} — {artist}",
+    "format-paused": "[Paused] {title} — {artist}",
+    "tooltip": true,
+    "title-len": 30,
+    "artist-len": 20
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
+  "network": {
+    "format": "〢 Online",
+    "format-disconnected": "⚠ Offline",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
+    "on-click-right": "wl-copy $(ip address show up scope global | grep inet6 | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c6-)",
+    "tooltip-format": " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n",
+    "tooltip-format-wifi": " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}",
+    "interval": 10
+  },
+
+  "custom/sp1": {
+    "format": " | ",
+    "tooltip": false
+  },
+
+  "cpu": {
+    "interval": 1,
+    "format": "CPU: {usage}%"
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": "{used:0.2f} GB"
+  },
+
+  "temperature": {
+    "interval": 4,
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C",
+    "max-length": 7,
+    "on-click": "xsensors"
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-alt": "{percent}% {icon}",
+    "format-alt-click": "click-right",
+    "format-icons": ["", ""],
+    "on-scroll-down": "brightnessctl s 5%-",
+    "on-scroll-up": "brightnessctl s +5%"
+  },
+
+  "wireplumber": {
+    "on-click": "pavucontrol",
+    "on-click-right": "amixer sset Master toggle 1>/dev/null",
+    "format": "<span foreground='#fab387'>{icon}</span>  {volume}%",
+    "format-muted": " ",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": [" ", " ", " "]
+    }
+  },
+
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-alt": "{icon}  {time}",
+    "format-icons": [" ", " ", " ", " ", " "]
+  }
+}

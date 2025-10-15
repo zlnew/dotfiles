@@ -1,0 +1,39 @@
+{
+  "layer": "top",
+  "margin-top": 8,
+  "margin-left": 8,
+  "margin-bottom": 4,
+  "margin-right": 8,
+  "spacing": 4,
+
+  "include": [
+    "~/.config/waybar/modules.json"
+  ],
+
+  "modules-left": [
+    "niri/workspaces",
+    "niri/window",
+
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+
+  "modules-center": [
+    "mpris",
+    "clock"
+  ],
+
+  "modules-right": [
+    "tray",
+    "network",
+    "custom/sp1",
+    "cpu",
+    "memory",
+    "temperature",
+    "custom/sp1",
+    "backlight",
+    "wireplumber",
+    "battery"
+  ]
+}
+
