@@ -11,11 +11,18 @@
 
   // Hyprland Modules
   "hyprland/workspaces": {
-    "format": "{name}",
     "all-outputs": true,
     "sort-by-number": true,
-    "active-only": false
+    "show-special": true,
+    "format": "{icon}",
+    "format-icons": {
+      "default": "•",
+      "active": "•",
+      "special": "◆"
+    },
+    "on-click": "activate"
   },
+
   "hyprland/window": {
     "format": "{title}",
     "max-length": 50,
@@ -24,7 +31,7 @@
 
   // General Modules
   "clock": {
-    "format": "{:%H:%M, %e %b}",
+    "format": "{:%e %b | %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "today-format": "<b>{}</b>"
   },
@@ -54,24 +61,24 @@
   },
 
   "custom/sp1": {
-    "format": " | ",
+    "format": "|",
     "tooltip": false
   },
 
   "cpu": {
-    "interval": 1,
+    "interval": 5,
     "format": "CPU: {usage}%"
   },
 
   "memory": {
-    "interval": 30,
+    "interval": 5,
     "format": "{used:0.2f} GB"
   },
 
   "temperature": {
-    "interval": 4,
+    "interval": 5,
     "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
+    "critical-threshold": 85,
     "format": "{temperatureC}°C",
     "max-length": 7,
     "on-click": "xsensors"
