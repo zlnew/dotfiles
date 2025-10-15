@@ -196,17 +196,9 @@ binds {
             inactive-color "#3c3836" // bg2
         }
 
-        shadow {
-            softness 30
-            spread 5
-            offset x=0 y=5
-            color "#0007"
-        }
+        shadow {}
 
-        struts {
-            left 8
-            right 8
-        }
+        struts {}
     }
 
 // ────────────── Animation Settings ──────────────
@@ -253,7 +245,7 @@ binds {
     }
 
     window-rule {
-        geometry-corner-radius 16
+        geometry-corner-radius 8
         clip-to-geometry true
     }
 
