@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pkill -x swayidle || true
+
+# ─────────────────────────────────────────────
+# Mode selector
+# ─────────────────────────────────────────────
+TEST_MODE=false
+
+if [[ "${1:-}" == "--test" ]]; then
+    TEST_MODE=true
+fi
+
+if $TEST_MODE; then
+    echo "⚙️  Running in TEST MODE (fast timeouts)"
+    LOCK_TIME=10
+    WARN_TIME=19
+    SUSPEND_TIME=29
+else
+    LOCK_TIME=900     # 15 min
+    WARN_TIME=1790    # 29m 50s
+    SUSPEND_TIME=1800 # 30 min
+fi
+
+# ─────────────────────────────────────────────
+# Fade and lock function
+# ─────────────────────────────────────────────
+fade_and_lock() {
+    if command -v brightnessctl &>/dev/null; then
+        for i in {100..40..-10}; do
+            brightnessctl set "${i}%" -q || true
+            sleep 0.05
+        done
+    fi
+
+    swaylock-fancy -p -g &
+    disown
+
+    if command -v brightnessctl &>/dev/null; then
+        brightnessctl set 100% -q || true
+    fi
+}
+
+
+FADE_SCRIPT=$(mktemp /tmp/fade_and_lock.XXXXXX)
+declare -f fade_and_lock > "$FADE_SCRIPT"
+echo "fade_and_lock" >> "$FADE_SCRIPT"
+chmod +x "$FADE_SCRIPT"
+
+# ─────────────────────────────────────────────
+# Run swayidle
+# ─────────────────────────────────────────────
+swayidle -w \
+    timeout "$LOCK_TIME" "$FADE_SCRIPT" \
+    timeout "$WARN_TIME" 'notify-send "💤 Suspending in 10s..."' \
+    timeout "$SUSPEND_TIME" 'systemctl suspend'
+
