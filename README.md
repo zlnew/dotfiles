@@ -1,110 +1,54 @@
 # Dotfiles
 
-My personal dotfiles with multi-os setup. This repository contains my personal configurations for various tools, aiming for a consistent and efficient development environment across multiple machines.
+Personal dotfiles for keeping my Hyprland, Niri, and KDE installs in sync while staying window-manager agnostic by default. Shared configs live under `.config/`, while compositor-specific tweaks are isolated so they never leak across machines.
 
-## Features
+## Highlights
+- Multi-environment aware: Hyprland and Niri overrides extend a common `.config` baseline, with legacy KDE bits parked under `kubuntu/`.
+- Guided bootstrap: `./bin/setup.sh` handles backups, symlink creation, and optional per-environment overlays. Partial mode lets you re-run just the pieces you need.
+- Gruvbox-friendly theming across terminals, Waybar, and GTK, with shared assets in `.local/`.
+- Neovim powered by `lazy.nvim`, plus supporting CLI tooling surfaced through Fish, zellij, and terminal emulator configs.
+- `./bin/update.sh` wraps the conventional `chore(dotfiles)` commit message so routine syncs stay consistent.
 
-*   **Multi-os support:** The setup script can apply different configurations for different os (`hyprland`, `kubuntu`, and `niri`).
-*   **Interactive setup:** The setup script allows for a full or partial installation, giving you control over what gets configured.
-*   **Comprehensive tool configuration:** Includes settings for shells, editors, terminals, window managers, and more.
-*   **Gruvbox theming:** Most of the tools are themed with the popular Gruvbox color scheme.
-*   **Neovim with Lazy.nvim:** The Neovim configuration is managed using `lazy.nvim` for easy plugin management.
-
-## Structure
-
-The dotfiles are organized by tool under the `.config` directory. Device-specific configurations are located in the `hyprland`, `kubuntu`, and `niri` directories. The `bin` directory contains setup and update scripts.
-
+## Repository Layout
 ```
 .
-├── .config/                # Shared tool configurations
-│   ├── alacritty/
-│   ├── fish/
-│   ├── kitty/
-│   ├── nvim/
-│   └── ...
-├── hyprland/                # Hyprland specific configurations
-│   └── .config/
-│       ├── hypr/
-│       └── ...
-├── kubuntu/                # Kubuntu specific configurations
-│   └── .config/
-│       ├── kwinrc
-│       └── ...
-├── niri/                   # Niri specific configurations
-│   └── .config/
-│       ├── niri/
-│       └── ...
-├── bin/                    # Scripts
-│   ├── setup.sh
-│   └── update.sh
-└── ...
+├── .config/              # Shared, WM-agnostic configs (fish, nvim, waybar, etc.)
+├── .local/               # Wallpapers, themes, and helper binaries
+├── bin/                  # setup.sh, update.sh, and other helper scripts
+├── hyprland/.config/     # Hyprland overlays (hypr/*.conf, scripts, theme tweaks)
+├── niri/.config/         # Niri config.kdl and matching GTK overrides
+├── niri/.profile         # Session defaults shared by Wayland setups
+├── kubuntu/              # KDE/Plasma specific keepsakes
+├── fresh-install-guide.md  # Long-form notes for rebuilding a machine
+└── screenshots/          # Reference captures used in the README
 ```
 
-## Installation
+Follow the repo guidelines when editing—Hyprland changes belong in `hyprland/config/*.conf`, Niri adjustments in `niri/config.kdl`, and shared tweaks under `.config/`.
 
-1.  Clone the repository:
+## Getting Started
+1. Clone the repo:
+   ```bash
+   git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
+   ```
+2. Run the setup assistant and pick between full or partial install:
+   ```bash
+   cd ~/dotfiles
+   ./bin/setup.sh
+   ```
+   The script creates symlinks, backs up conflicting files to `~/.dotfiles_backup/`, and optionally applies Hyprland or Niri overlays. When validating one area, choose “Partial setup” and enable only the pieces you want to refresh.
 
-    ```bash
-    git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
-    ```
+## Keeping Things Updated
+- After local tweaks, re-run `./bin/setup.sh` (partial mode is ideal) to ensure the target files are linked and backups are stored.
+- Use `./bin/update.sh` to stage, commit, and push the current state with the standard `chore(dotfiles)` message.
+- Longer setup walkthroughs and package notes live in `fresh-install-guide.md`.
 
-2.  Run the setup script:
-
-    ```bash
-    cd ~/dotfiles
-    ./bin/setup.sh
-    ```
-
-The script will guide you through the setup process, allowing you to choose between a full or partial installation.
-
-To update the dotfiles, you can run the `update.sh` script:
-
-```bash
-./bin/update.sh
-```
-
-## Prerequisites
-
-To make your dotfiles fully functional, you would need to install most, if not all, of the software listed below, depending on which os you are setting up. The `mason.nvim` configuration will handle the installation of many of the Neovim-related tools automatically.
-
-### Core Tools
-
-*   **`git`**: For version control.
-*   **`bash`**: The setup script is written in Bash.
-*   **`fish`**: The primary shell being configured.
-*   **`curl` or `wget`**: Often used for downloading installers or other files.
-*   **`make`**: Required for building some tools.
-
-### Development Environment
-
-*   **`nvm`**: Node Version Manager.
-*   **`node.js` and `npm`**: For JavaScript/TypeScript development.
-*   **`bun`**: JavaScript runtime and toolkit.
-*   **`php`**: For PHP development.
-*   **`composer`**: PHP package manager.
-
-### Text Editor (Neovim)
-
-*   **`nvim`**: The Neovim editor.
-*   **Language Servers:** `intelephense`, `vtsls`, `vue-language-server`, `tailwindcss-language-server`.
-*   **Linters and Formatters:** `pint`, `eslint_d`, `prettierd`, `stylua`, `shfmt`.
-
-### Desktop and Window Management
-
-*   **For CachyOS:** `hyprland`, `hyprctl`, `niri`, `waybar`, `wofi`, `mako`, `swaylock`, `wl-copy`.
-*   **For Kubuntu:** KDE Plasma Desktop.
-
-### Other Tools
-
-*   **`alacritty`**, **`kitty`**, and **`foot`**: Terminal emulators.
-*   **`zellij`**: A terminal multiplexer.
-*   **`delta`**: A diff viewer for Git.
-*   **`zoxide`**: A "smarter `cd` command".
-*   **`lazygit`**: A terminal UI for Git.
-*   **`yazi`**: A terminal file manager.
+## Validation Checklist
+- Run `./bin/setup.sh` inside a throwaway directory to confirm symlinks resolve cleanly.
+- For Hyprland edits, reload with `hyprctl reload`.
+- For Niri changes, validate first with `niri --validate ~/.config/niri/config.kdl`, then apply via `niri msg reload-config`.
+- For Fish updates, sanity-check startup with `env XDG_CONFIG_HOME=/tmp/test-config fish --init-command 'exit'`.
 
 ## Screenshots
-
-![Screenshot 1](screenshots/2025-10-01T17:28:51,372724276+07:00.png)
-![Screenshot 2](screenshots/2025-10-01T17:27:50,967586453+07:00.png)
-![Screenshot 3](screenshots/2025-10-01T17:27:16,214358722+07:00.png)
+- ![Hyprland workspace](screenshots/2025-10-01T17:28:51,372724276+07:00.png)
+- ![Niri overview](screenshots/2025-10-01T17:27:50,967586453+07:00.png)
+- ![Neovim setup](screenshots/2025-10-01T17:27:16,214358722+07:00.png)

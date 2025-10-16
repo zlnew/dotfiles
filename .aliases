@@ -8,8 +8,14 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cl='clear'
 
+# Applications
+alias browser='firefox-developer-edition || firefox || brave'
+alias terminal='alacritty'
+
 # Editors
 alias v='nvim'
+alias vim='nvim'
+alias nano='nvim'
 alias bash_edit='nvim ~/.bashrc'
 alias fish_edit='nvim ~/.config/fish/config.fish'
 alias zl_edit='nvim ~/.config/zellij/config.kdl'
