@@ -285,6 +285,7 @@ plugins {
 
     zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         format_left        "{tabs}"
+        format_center      "#[fg=#7daea3,bold]{session}"
         format_right       "{mode}"
 
         border_enabled    "false"
@@ -296,7 +297,7 @@ plugins {
         format_hide_on_overlength         "true"
         format_precedence                 "lrc"
 
-        mode_normal       "#[fg=#928374,bold,italic] ZL {name} "
+        mode_normal       "#[fg=#928374] {name} "
         mode_tmux         "#[fg=#928374] TMUX "
 
         tab_normal        "#[fg=#928374] {index} "
