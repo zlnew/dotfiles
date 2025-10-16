@@ -1,0 +1,13 @@
+[Unit]
+Description=Set the battery charge limit at boot for %i
+ConditionPathExists=/home/%i/.local/bin/batterylimitctl
+ConditionPathExistsGlob=/sys/class/power_supply/BAT*
+After=multi-user.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/home/%i/.local/bin/batterylimitctl set 80
+
+[Install]
+WantedBy=multi-user.target
