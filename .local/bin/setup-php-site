@@ -1,0 +1,208 @@
+#!/usr/bin/env bash
+# setup-php-site <domain> <public_path>
+# Example: setup-php-site laravel.localhost ~/www/laravel-app/public
+
+set -euo pipefail
+
+sudo mkdir -p /etc/nginx/sites-available
+sudo mkdir -p /etc/nginx/sites-enabled
+
+DOMAIN="${1:-}"
+PROJECT_PATH="${2:-}"
+
+# ---- Validation ----
+if [[ -z "$DOMAIN" || -z "$PROJECT_PATH" ]]; then
+    echo "❌ Usage: setup-php-site <domain> <project_path>"
+    echo "   Example: setup-php-site laravel.localhost ~/www/laravel-app/public"
+    exit 1
+fi
+
+# Ensure project path ends with /public
+if [[ "$PROJECT_PATH" != */public ]]; then
+    echo "❌ The project path must point directly to the public directory."
+#!/usr/bin/env bash
+# setup-php-site <domain> <public_path>
+# Example: setup-php-site laravel.localhost ~/www/laravel-app/public
+
+set -euo pipefail
+
+DOMAIN="${1:-}"
+PROJECT_PATH="${2:-}"
+
+# ---- Validation ----
+if [[ -z "$DOMAIN" || -z "$PROJECT_PATH" ]]; then
+    echo "❌ Usage: setup-php-site <domain> <project_path>"
+    echo "   Example: setup-php-site laravel.localhost ~/www/laravel-app/public"
+    exit 1
+fi
+
+# Ensure project path ends with /public
+if [[ "$PROJECT_PATH" != */public ]]; then
+    echo "❌ The project path must point directly to the public directory."
+    echo "   Example: ~/www/laravel-app/public"
+    exit 1
+fi
+
+if [[ ! -d "$PROJECT_PATH" ]]; then
+    echo "❌ Directory not found: $PROJECT_PATH"
+    exit 1
+fi
+
+# ---- Environment ----
+USER_NAME=$(whoami)
+PHP_VERSION=$(php -v | head -n1 | awk '{print $2}' | cut -d'.' -f1,2)
+FPM_SOCK="$HOME/.phpenv/php-fpm.sock"
+NGINX_CONF="/etc/nginx/sites-available/$DOMAIN.conf"
+NGINX_LINK="/etc/nginx/sites-enabled/$DOMAIN.conf"
+
+# ---- Checks ----
+if [[ ! -S "$FPM_SOCK" ]]; then
+    echo "⚠️  PHP-FPM socket not found at $FPM_SOCK"
+    echo "   Start it with: systemctl --user start php-fpm@$PHP_VERSION"
+    exit 1
+fi
+
+if [[ $EUID -ne 0 ]]; then
+    echo "⚠️  Run as root (sudo) to modify nginx configs"
+    exit 1
+fi
+
+# ---- Create Nginx Config ----
+cat > "$NGINX_CONF" <<EOF
+server {
+    listen 80;
+    server_name $DOMAIN;
+    root $PROJECT_PATH;
+
+    index index.php index.html;
+    access_log /var/log/nginx/${DOMAIN}_access.log;
+    error_log /var/log/nginx/${DOMAIN}_error.log;
+
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
+
+    location ~ \.php\$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT \$realpath_root;
+        fastcgi_pass unix:$FPM_SOCK;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+EOF
+
+# ---- Enable site ----
+ln -sf "$NGINX_CONF" "$NGINX_LINK"
+
+# ---- Add to /etc/hosts ----
+if ! grep -q "$DOMAIN" /etc/hosts; then
+    echo "127.0.0.1 $DOMAIN" >> /etc/hosts
+    echo "🧩 Added $DOMAIN to /etc/hosts"
+fi
+
+# ---- Reload Nginx ----
+nginx -t && systemctl reload nginx
+
+echo "✅ Site $DOMAIN has been set up!"
+echo "📂 Root: $PROJECT_PATH"
+echo "🌐 URL:  http://$DOMAIN"
+
+    echo "   Example: ~/www/laravel-app/public"
+    exit 1
+fi
+
+if [[ ! -d "$PROJECT_PATH" ]]; then
+    echo "❌ Directory not found: $PROJECT_PATH"
+    exit 1
+fi
+
+# ---- Environment ----
+USER_NAME=$(whoami)
+PHP_VERSION=$(php -v | head -n1 | awk '{print $2}' | cut -d'.' -f1,2)
+NGINX_CONF="/etc/nginx/sites-available/$DOMAIN.conf"
+NGINX_LINK="/etc/nginx/sites-enabled/$DOMAIN.conf"
+
+# ---- Detect PHP-FPM listener ----
+# Try known socket paths first
+SOCKET_PATHS=(
+  "$HOME/.phpenv/php-fpm.sock"
+  "$HOME/.phpenv/versions/$PHP_VERSION/var/run/php-fpm.sock"
+  "/run/php/php${PHP_VERSION}-fpm.sock"
+  "/var/run/php/php${PHP_VERSION}-fpm.sock"
+)
+
+FPM_PASS=""
+for sock in "${SOCKET_PATHS[@]}"; do
+  if [[ -S "$sock" ]]; then
+    FPM_PASS="unix:$sock"
+    break
+  fi
+done
+
+# Fallback to TCP if no socket found
+if [[ -z "$FPM_PASS" ]]; then
+  # Try to detect TCP listener
+  if ss -ltn | grep -q ":9000"; then
+    FPM_PASS="127.0.0.1:9000"
+  else
+    echo "⚠️  No PHP-FPM socket or TCP listener found."
+    echo "   Make sure PHP-FPM is running (systemctl --user start php-fpm@$PHP_VERSION)"
+    exit 1
+  fi
+fi
+
+# ---- Require root ----
+if [[ $EUID -ne 0 ]]; then
+    echo "⚠️  Run as root (sudo) to modify nginx configs"
+    exit 1
+fi
+
+# ---- Create Nginx Config ----
+cat > "$NGINX_CONF" <<EOF
+server {
+    listen 80;
+    server_name $DOMAIN;
+    root $PROJECT_PATH;
+
+    index index.php index.html;
+    access_log /var/log/nginx/${DOMAIN}_access.log;
+    error_log /var/log/nginx/${DOMAIN}_error.log;
+
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
+
+    location ~ \.php\$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT \$realpath_root;
+        fastcgi_pass ${FPM_PASS};
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+EOF
+
+# ---- Enable site ----
+ln -sf "$NGINX_CONF" "$NGINX_LINK"
+
+# ---- Add to /etc/hosts ----
+if ! grep -q "$DOMAIN" /etc/hosts; then
+    echo "127.0.0.1 $DOMAIN" >> /etc/hosts
+    echo "🧩 Added $DOMAIN to /etc/hosts"
+fi
+
+# ---- Reload Nginx ----
+nginx -t && systemctl reload nginx
+
+echo "✅ Site $DOMAIN has been set up!"
+echo "📂 Root: $PROJECT_PATH"
+echo "🔌 PHP-FPM via: $FPM_PASS"
+echo "🌐 URL:  http://$DOMAIN"
+
