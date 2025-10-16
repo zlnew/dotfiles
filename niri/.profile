@@ -1,4 +1,4 @@
-export BROWSER=firefox
+export BROWSER=firefox-developer-edition
 export TERM=alacritty
 
 # ---- GTK THEME ----
@@ -11,5 +11,4 @@ export XCURSOR_THEME="capitaine-cursors"
 # ---- QT THEME ----
 export QT_QPA_PLATFORM="wayland"
 export QT_QPA_PLATFORMTHEME=gtk3
-export QT_QPA_PLATFORMTHEME_QT6=gtk3
 export QT_STYLE_OVERRIDE=gtk3

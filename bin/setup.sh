@@ -111,7 +111,7 @@ setup_device_specific() {
     for dir in hyprland/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
-    link "$(pwd)/niri/.profile" "$HOME/.profile"
+    link "$(pwd)/hyprland/.profile" "$HOME/.profile"
     reload_hyprland
     ;;
   2)
