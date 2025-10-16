@@ -285,7 +285,7 @@ plugins {
 
     zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         format_left        "{tabs}"
-        format_center      "#[fg=#7daea3,bold]{session}"
+        format_center      "#[fg=#7daea3,bold]{session}{datetime}"
         format_right       "{mode}"
 
         border_enabled    "false"
@@ -297,13 +297,17 @@ plugins {
         format_hide_on_overlength         "true"
         format_precedence                 "lrc"
 
-        mode_normal       "#[fg=#928374] {name} "
+        mode_normal       "#[fg=#928374] normal "
+        mode_rezize       "#[fg=#ea6962] resize "
+        mode_pane         "#[fg=#d4be98] pane "
+        mode_tab          "#[fg=#7daea3] tab "
+        mode_scroll       "#[fg=#89b482] scroll "
         mode_tmux         "#[fg=#928374] TMUX "
 
         tab_normal        "#[fg=#928374] {index} "
         tab_active        "#[fg=#d4be98,bg=#3c3836,bold,italic] {name} "
 
-        datetime          "#[fg=#d4be98] {format}"
+        datetime          "#[fg=#928374] {format}"
         datetime_format   "%H:%M:%S"
         datetime_timezone "Asia/Jakarta"
     }
