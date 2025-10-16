@@ -1,14 +1,37 @@
-export BROWSER=firefox-developer-edition
-export TERM=alacritty
+if [ -z "${DOTFILES_ROOT:-}" ]; then
+  resolve_dotfiles_root() {
+    target=$1
 
-# ---- GTK THEME ----
-export GTK_COLOR_SCHEME="prefer-dark"
-export GTK_THEME="Gruvbox-Material-Dark"
-export GTK_THEME_VARIANT=dark
-export GTK_ICON_THEME="Gruvbox-Material-Dark"
-export XCURSOR_THEME="capitaine-cursors"
+    if command -v readlink >/dev/null 2>&1; then
+      link=$target
+      while [ -L "$link" ]; do
+        dir=$(dirname "$link")
+        link=$(readlink "$link") || break
+        case $link in
+        /*) ;;
+        *) link="$dir/$link" ;;
+        esac
+      done
+      target=$link
+    fi
 
-# ---- QT THEME ----
-export QT_QPA_PLATFORM="wayland"
-export QT_QPA_PLATFORMTHEME=gtk3
-export QT_STYLE_OVERRIDE=gtk3
+    (
+      CDPATH= cd -- "$(dirname "$target")/.." && pwd
+    )
+  }
+
+  if [ -f "${DOTFILES_PROFILE_SOURCE:-$HOME/.profile}" ]; then
+    DOTFILES_ROOT=$(resolve_dotfiles_root "${DOTFILES_PROFILE_SOURCE:-$HOME/.profile}")
+  elif [ -d "$PWD/.git" ]; then
+    DOTFILES_ROOT=$PWD
+  else
+    DOTFILES_ROOT="$HOME/dotfiles"
+  fi
+
+  unset -f resolve_dotfiles_root
+fi
+
+. "$DOTFILES_ROOT/profiles/wayland/common.sh"
+
+HYPRLAND_PROFILE="$DOTFILES_ROOT/profiles/wayland/hyprland.sh"
+[ -r "$HYPRLAND_PROFILE" ] && . "$HYPRLAND_PROFILE"

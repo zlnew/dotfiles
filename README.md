@@ -17,13 +17,14 @@ Personal dotfiles for keeping my Hyprland, Niri, and KDE installs in sync while 
 ├── bin/                  # setup.sh, update.sh, and other helper scripts
 ├── hyprland/.config/     # Hyprland overlays (hypr/*.conf, scripts, theme tweaks)
 ├── niri/.config/         # Niri config.kdl and matching GTK overrides
-├── niri/.profile         # Session defaults shared by Wayland setups
+├── niri/.profile         # Thin wrapper sourcing the shared Wayland profile
+├── profiles/wayland/     # Shared login profile fragments
 ├── kubuntu/              # KDE/Plasma specific keepsakes
 ├── fresh-install-guide.md  # Long-form notes for rebuilding a machine
 └── screenshots/          # Reference captures used in the README
 ```
 
-Follow the repo guidelines when editing—Hyprland changes belong in `hyprland/config/*.conf`, Niri adjustments in `niri/config.kdl`, and shared tweaks under `.config/`.
+Follow the repo guidelines when editing—Hyprland changes belong in `hyprland/config/*.conf`, Niri adjustments in `niri/config.kdl`, shared tweaks under `.config/`, and Wayland session env vars inside `profiles/wayland/`.
 
 ## Getting Started
 1. Clone the repo:
