@@ -14,13 +14,11 @@ layout {
         pane split_direction="vertical" {
           pane size="70%" {
               cwd "~/www/duanaga/core-api"
-              command "fish"
-              args "-c" "nvim"
+              command "nvim"
           }
           pane size="30%" {
             cwd "~/www/duanaga/core-api"
-            command "fish"
-            args "-c codex"
+            command "codex"
           }
         }
     }
@@ -30,13 +28,11 @@ layout {
         pane split_direction="vertical" {
           pane size="70%" {
               cwd "~/www/duanaga/dragon-bridge"
-              command "fish"
-              args "-c" "nvim"
+              command "nvim"
           }
           pane size="30%" {
             cwd "~/www/duanaga/dragon-bridge"
-            command "fish"
-            args "-c codex"
+            command "codex"
           }
         }
     }
@@ -45,8 +41,7 @@ layout {
     tab name="customer-portal" {
         pane {
             cwd "~/www/duanaga/portal_customer"
-            command "fish"
-            args "-c" "nvim"
+            command "nvim"
         }
     }
 
@@ -54,8 +49,8 @@ layout {
     tab name="pgcli" {
         pane {
             cwd "~/www/duanaga/core-api"
-            command "fish"
-            args "-c" "pgcli -u postgres -d dnc"
+            command "pgcli"
+            args "-u" "postgres" "-d" "dnc"
         }
     }
 
@@ -64,17 +59,17 @@ layout {
         pane split_direction="horizontal" {
           pane {
               cwd "~/www/duanaga/core-api"
-              command "fish"
-              args "-c" "php artisan horizon"
+              command "php"
+              args "artisan" "horizon"
           }
           pane {
             cwd "~/www/duanaga/dragon-bridge"
-            command "fish"
-            args "-c" "npm run dev"
+            command "npm"
+            args "run" "dev"
           }
           pane {
             cwd "~/www/duanaga/portal_customer"
-            command "fish"
+            command "$SHELL"
             args "-c" "sleep 2 && npm run dev"
           }
         }
