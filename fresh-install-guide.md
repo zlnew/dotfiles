@@ -67,4 +67,7 @@
 2. Edit /etc/mkinitcpio.conf and remove plymouth from HOOKS.
    Afterwards to rebuild initram run: `sudo mkinitcpio -P`
 
+
+## PHPENV Build
+PHP_BUILD_CONFIGURE_OPTS="--with-pgsql --with-pdo-pgsql --with-pear" phpenv install 8.2.29
 ---
