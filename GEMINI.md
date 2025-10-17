@@ -12,7 +12,7 @@ The primary technologies and tools configured in this repository are:
 *   **Multiplexer:** Zellij
 *   **Version Control:** Git (with Delta for diffs)
 *   **Window Manager (for CachyOS):** Hyprland, Niri
-*   **Desktop Environment (for Kubuntu):** KDE Plasma
+*   **Desktop Environment:** KDE Plasma
 *   **Development:** `nvm`, `node`, `npm`, `bun`, `php`, `composer`
 *   **Other Tools:** `zoxide`, `lazygit`, `yazi`
 
@@ -37,7 +37,7 @@ There is also an `bin/update.sh` script, which is likely used to pull the latest
 
 ## Development Conventions
 
-*   **Configuration Structure:** Configurations are organized by tool under the `.config` directory. Device-specific configurations are in the `hyprland`, `kubuntu`, and `niri` directories.
+*   **Configuration Structure:** Configurations are organized by tool under the `.config` directory. Device-specific configurations are in the `hyprland`, `plasma`, and `niri` directories.
 *   **Shell Scripting:** The setup script is written in Bash and uses a helper function `link()` to create symlinks.
 *   **Neovim Configuration:** Neovim is configured using Lua, with plugins managed by `lazy.nvim`. The main configuration is in `.config/nvim/lua/config/lazy.lua`.
 *   **Git Commits:** There is a `.gitmessage.txt` file, which suggests a standardized format for commit messages.

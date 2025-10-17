@@ -3,7 +3,7 @@
 Personal dotfiles for keeping my Hyprland, Niri, and KDE installs in sync while staying window-manager agnostic by default. Shared configs live under `.config/`, while compositor-specific tweaks are isolated so they never leak across machines.
 
 ## Highlights
-- Multi-environment aware: Hyprland and Niri overrides extend a common `.config` baseline, with legacy KDE bits parked under `kubuntu/`.
+- Multi-environment aware: Hyprland, Niri, and Plasma overlays extend a common `.config` baseline so each environment stays cleanly separated.
 - Guided bootstrap: `./bin/setup.sh` handles backups, symlink creation, and optional per-environment overlays. Partial mode lets you re-run just the pieces you need.
 - Gruvbox-friendly theming across terminals, Waybar, and GTK, with shared assets in `.local/`.
 - Neovim powered by `lazy.nvim`, plus supporting CLI tooling surfaced through Fish, zellij, and terminal emulator configs.
@@ -17,9 +17,8 @@ Personal dotfiles for keeping my Hyprland, Niri, and KDE installs in sync while 
 ├── bin/                  # setup.sh, update.sh, and other helper scripts
 ├── hyprland/.config/     # Hyprland overlays (hypr/*.conf, scripts, theme tweaks)
 ├── niri/.config/         # Niri config.kdl and matching GTK overrides
-├── niri/.profile         # Thin wrapper sourcing the shared Wayland profile
+├── plasma/.config/       # Plasma overrides layered on top of the shared configs
 ├── profiles/wayland/     # Shared login profile fragments
-├── kubuntu/              # KDE/Plasma specific keepsakes
 ├── fresh-install-guide.md  # Long-form notes for rebuilding a machine
 └── screenshots/          # Reference captures used in the README
 ```
@@ -36,7 +35,7 @@ Follow the repo guidelines when editing—Hyprland changes belong in `hyprland/c
    cd ~/dotfiles
    ./bin/setup.sh
    ```
-   The script creates symlinks, backs up conflicting files to `~/.dotfiles_backup/`, and optionally applies Hyprland or Niri overlays. When validating one area, choose “Partial setup” and enable only the pieces you want to refresh.
+   The script creates symlinks, backs up conflicting files to `~/.dotfiles_backup/`, and optionally applies Hyprland, Niri, or Plasma overlays. When validating one area, choose “Partial setup” and enable only the pieces you want to refresh.
 
 ## Keeping Things Updated
 - After local tweaks, re-run `./bin/setup.sh` (partial mode is ideal) to ensure the target files are linked and backups are stored.
@@ -47,6 +46,7 @@ Follow the repo guidelines when editing—Hyprland changes belong in `hyprland/c
 - Run `./bin/setup.sh` inside a throwaway directory to confirm symlinks resolve cleanly.
 - For Hyprland edits, reload with `hyprctl reload`.
 - For Niri changes, validate first with `niri --validate ~/.config/niri/config.kdl`, then apply via `niri msg reload-config`.
+- For Plasma tweaks, restart `plasmashell` or log out and back in to apply UI changes.
 - For Fish updates, sanity-check startup with `env XDG_CONFIG_HOME=/tmp/test-config fish --init-command 'exit'`.
 
 ## Screenshots

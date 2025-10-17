@@ -40,15 +40,6 @@ link() {
 }
 
 # === FUNCTIONS ===
-
-setup_global_bin() {
-  echo "📦 Setting up global bin..."
-  mkdir -p "$HOME/.local/bin"
-  for file in .local/bin/*; do
-    link "$(pwd)/$file" "$HOME/.local/bin/$(basename "$file")"
-  done
-}
-
 setup_global_configs() {
   echo "🔗 Linking common configurations..."
   for dir in .config/*; do
@@ -64,6 +55,22 @@ setup_git_configs() {
   link "$(pwd)/.gitmessage.txt" "$HOME/.gitmessage.txt"
 }
 
+setup_local_bin() {
+  echo "📦 Setting up global bin..."
+  mkdir -p "$HOME/.local/bin"
+  for file in .local/bin/*; do
+    link "$(pwd)/$file" "$HOME/.local/bin/$(basename "$file")"
+  done
+}
+
+setup_local_share() {
+  echo "🖼️ Setting up local share..."
+  mkdir -p "$HOME/.local/share"
+  for dir in .local/share/*; do
+    link "$(pwd)/$dir" "$HOME/.local/share/$(basename "$dir")"
+  done
+}
+
 setup_aliases() {
   echo "🔗 Linking .aliases..."
   link "$(pwd)/.aliases" "$HOME/.aliases"
@@ -74,36 +81,18 @@ setup_bashrc() {
   link "$(pwd)/.bashrc" "$HOME/.bashrc"
 }
 
-setup_local_share() {
-  echo "🖼️ Setting up local share..."
-
-  mkdir -p "$HOME/.local/share/wallpapers"
-  for file in .local/share/wallpapers/*; do
-    link "$(pwd)/$file" "$HOME/.local/share/wallpapers/$(basename "$file")"
-  done
-
-  mkdir -p "$HOME/.local/share/applications"
-  for file in .local/share/applications/*; do
-    link "$(pwd)/$file" "$HOME/.local/share/applications/$(basename "$file")"
-  done
-
-  mkdir -p "$HOME/.local/share/themes"
-  for file in .local/share/themes/*; do
-    link "$(pwd)/$file" "$HOME/.local/share/themes/$(basename "$file")"
-  done
-
-  mkdir -p "$HOME/.local/share/icons"
-  for file in .local/share/icons/*; do
-    link "$(pwd)/$file" "$HOME/.local/share/icons/$(basename "$file")"
-  done
+setup_zshrc() {
+  echo "🔗 Linking .zshrc..."
+  link "$(pwd)/.zshrc" "$HOME/.zshrc"
 }
 
 setup_device_specific() {
   echo "💻 Setting up device-specific configs..."
   echo "1) Hyprland"
   echo "2) Niri"
-  echo "3) None"
-  read -rp "Choose a device-specific configuration [1-3]: " device_choice
+  echo "3) Plasma"
+  echo "4) None"
+  read -rp "Choose a device-specific configuration [1-4]: " device_choice
 
   case $device_choice in
   1)
@@ -122,6 +111,12 @@ setup_device_specific() {
     link "$(pwd)/niri/.profile" "$HOME/.profile"
     ;;
   3)
+    echo "Setting up for Plasma..."
+    for dir in plasma/.config/*; do
+      link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
+    done
+    ;;
+  4)
     echo "Skipping device-specific configs."
     ;;
   *)
@@ -146,33 +141,37 @@ read -rp "Choose an option [1-2]: " choice
 
 case $choice in
 1)
-  setup_global_bin
   setup_global_configs
   setup_git_configs
-  setup_aliases
-  setup_bashrc
+  setup_local_bin
   setup_local_share
+  setup_aliases
+  setup_zshrc
+  setup_bashrc
   setup_device_specific
   ;;
 2)
   echo "Partial setup selected. Choose what to apply:"
-  read -rp "Setup global bin? [y/N]: " bin_choice
-  [[ $bin_choice =~ ^[Yy]$ ]] && setup_global_bin
-
-  read -rp "Setup common configurations? [y/N]: " configs_choice
+  read -rp "Setup global configurations? [y/N]: " configs_choice
   [[ $configs_choice =~ ^[Yy]$ ]] && setup_global_configs
 
   read -rp "Setup git configs? [y/N]: " git_configs_choice
   [[ $git_configs_choice =~ ^[Yy]$ ]] && setup_git_configs
 
-  read -rp "Setup aliases? [y/N]: " aliases_choice
-  [[ $aliases_choice =~ ^[Yy]$ ]] && setup_aliases
-
-  read -rp "Setup .bashrc? [y/N]: " bashrc_choice
-  [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
+  read -rp "Setup local bin? [y/N]: " local_bin_choice
+  [[ $local_bin_choice =~ ^[Yy]$ ]] && setup_local_bin
 
   read -rp "Setup local share? [y/N]: " local_share_choice
   [[ $local_share_choice =~ ^[Yy]$ ]] && setup_local_share
+
+  read -rp "Setup aliases? [y/N]: " aliases_choice
+  [[ $aliases_choice =~ ^[Yy]$ ]] && setup_aliases
+
+  read -rp "Setup .zshrc? [y/N]: " zshrc_choice
+  [[ $zshrc_choice =~ ^[Yy]$ ]] && setup_zshrc
+
+  read -rp "Setup .bashrc? [y/N]: " bashrc_choice
+  [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
 
   read -rp "Setup device-specific configs? [y/N]: " device_choice
   [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific
