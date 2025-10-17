@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# ─────────────────────────────────────────────
+#  Hyprland Share Picker (Fuzzel Edition)
+#  by your biggest hater 💀
+# ─────────────────────────────────────────────
+
+set -euo pipefail
+
+# Check dependencies
+for cmd in jq fuzzel hyprctl; do
+  command -v "$cmd" >/dev/null 2>&1 || {
+    echo "Missing required command: $cmd" >&2
+    exit 1
+  }
+done
+
+# ─────────────────────────────────────────────
+# Step 1: Choose mode (Screen / Window)
+# ─────────────────────────────────────────────
+mode=$(printf "🖥️ Screen\n🪟 Window" | fuzzel --dmenu -p "Share mode:" --lines 2)
+[ -z "$mode" ] && exit 1
+
+# ─────────────────────────────────────────────
+# Step 2A: Pick Screen (Monitor)
+# ─────────────────────────────────────────────
+if [[ "$mode" == "🖥️ Screen" ]]; then
+  choice=$(hyprctl monitors -j | jq -r '.[] | .name + "  (" + (.description // "No desc") + ")"' | fuzzel --dmenu -p "Select screen:" --lines 2)
+  [ -z "$choice" ] && exit 1
+  monitor=$(echo "$choice" | awk '{print $1}')
+  echo "[SELECTION]/screen:$monitor"
+  exit 0
+fi
+
+# ─────────────────────────────────────────────
+# Step 2B: Pick Window
+# ─────────────────────────────────────────────
+if [[ "$mode" == "🪟 Window" ]]; then
+  windows=$(hyprctl clients -j | jq -r '.[] | select(.mapped==true) | (.class + " — " + .title)' | sort)
+  [ -z "$windows" ] && exit 1
+
+  choice=$(echo "$windows" | fuzzel --dmenu -p "Select window:")
+  [ -z "$choice" ] && exit 1
+
+  # Dapatin address window terpilih
+  addr=$(hyprctl clients -j | jq -r --arg choice "$choice" '.[] | select(.mapped==true and ((.class + " — " + .title) == $choice)) | .address')
+  [ -z "$addr" ] && exit 1
+
+  echo "[SELECTION]/window:$addr"
+  exit 0
+fi
+
