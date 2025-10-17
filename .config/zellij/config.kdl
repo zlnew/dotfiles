@@ -288,11 +288,6 @@ plugins {
         format_center      "#[fg=#7daea3,bold]{session}{datetime}"
         format_right       "{mode}"
 
-        border_enabled    "false"
-        border_char       "─"
-        border_format     "#[fg=#3c3836]{char}"
-        border_position   "top"
-
         hide_frame_for_single_pane        "true"
         format_hide_on_overlength         "true"
         format_precedence                 "lrc"
@@ -377,7 +372,7 @@ theme "everforest-dark"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames true
+pane_frames false
 
 ui {
   pane_frames {

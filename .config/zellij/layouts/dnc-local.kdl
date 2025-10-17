@@ -11,19 +11,33 @@ layout {
 
     // ────────────── Tab 1: core-api ──────────────
     tab name="core-api" {
-        pane {
+        pane split_direction="vertical" {
+          pane size="70%" {
+              cwd "~/www/duanaga/core-api"
+              command "fish"
+              args "-c" "nvim"
+          }
+          pane size="30%" {
             cwd "~/www/duanaga/core-api"
             command "fish"
-            args "-c" "nvim"
+            args "-c codex"
+          }
         }
     }
 
     // ────────────── Tab 2: dragon-bridge ──────────────
     tab name="dragon-bridge" {
-        pane {
+        pane split_direction="vertical" {
+          pane size="70%" {
+              cwd "~/www/duanaga/dragon-bridge"
+              command "fish"
+              args "-c" "nvim"
+          }
+          pane size="30%" {
             cwd "~/www/duanaga/dragon-bridge"
             command "fish"
-            args "-c" "nvim"
+            args "-c codex"
+          }
         }
     }
 
@@ -47,23 +61,21 @@ layout {
 
     // ────────────── Tab 5: Background Jobs ──────────────
     tab name="background-jobs" {
-        pane split_direction="vertical" {
+        pane split_direction="horizontal" {
           pane {
               cwd "~/www/duanaga/core-api"
               command "fish"
               args "-c" "php artisan horizon"
           }
-          pane split_direction="horizontal" {
-            pane {
-              cwd "~/www/duanaga/dragon-bridge"
-              command "fish"
-              args "-c" "npm run dev"
-            }
-            pane {
-              cwd "~/www/duanaga/portal_customer"
-              command "fish"
-              args "-c" "sleep 2 && npm run dev"
-            }
+          pane {
+            cwd "~/www/duanaga/dragon-bridge"
+            command "fish"
+            args "-c" "npm run dev"
+          }
+          pane {
+            cwd "~/www/duanaga/portal_customer"
+            command "fish"
+            args "-c" "sleep 2 && npm run dev"
           }
         }
     }
