@@ -141,14 +141,14 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][2][Applets][7][Applets][18][Configuration]
-PreloadWeight=44
+PreloadWeight=36
 
 [Containments][2][Applets][7][Applets][19]
 immutability=1
 plugin=org.kde.plasma.brightness
 
 [Containments][2][Applets][7][Applets][19][Configuration]
-PreloadWeight=44
+PreloadWeight=36
 
 [Containments][2][Applets][7][Applets][22]
 immutability=1
@@ -159,7 +159,7 @@ immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][2][Applets][7][Applets][23][Configuration]
-PreloadWeight=42
+PreloadWeight=34
 
 [Containments][2][Applets][7][Applets][8]
 immutability=1
@@ -182,4 +182,3 @@ AppletOrder=3;4;20;5;21;6;7;15;16
 [ScreenMapping]
 itemsOnDisabledScreens=
 screenMapping=
-
