@@ -16,8 +16,6 @@
     "show-special": true,
     "format": "{icon}",
     "format-icons": {
-      "default": "•",
-      "active": "•",
       "special": "◆"
     },
     "on-click": "activate"
