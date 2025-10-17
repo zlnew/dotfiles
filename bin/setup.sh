@@ -100,7 +100,6 @@ setup_device_specific() {
     for dir in hyprland/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
-    link "$(pwd)/hyprland/.profile" "$HOME/.profile"
     reload_hyprland
     ;;
   2)
@@ -108,7 +107,6 @@ setup_device_specific() {
     for dir in niri/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
-    link "$(pwd)/niri/.profile" "$HOME/.profile"
     ;;
   3)
     echo "Setting up for Plasma..."
