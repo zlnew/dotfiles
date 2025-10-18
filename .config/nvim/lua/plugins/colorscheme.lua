@@ -41,6 +41,15 @@ local active_theme = read_theme()
 
 return {
   {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = function()
+        local theme = require("plugins.colorscheme").active_theme   -- or re-run your reader
+        vim.cmd.colorscheme(theme == "tokyonight" and "tokyonight-night" or "gruvbox-material")
+      end,
+    },
+  },
+  {
     "sainnhe/gruvbox-material",
     priority = 1000,
     cond = active_theme == "gruvbox",
