@@ -40,6 +40,7 @@ end
 local active_theme = read_theme()
 
 return {
+  active_theme = active_theme,
   {
     "LazyVim/LazyVim",
     opts = {
