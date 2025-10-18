@@ -327,23 +327,7 @@ simplified_ui true
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "dotfiles-gruvbox"
-
-themes {
-    theme "dotfiles-gruvbox" {
-        fg "#d4be98"
-        bg "#1d2021"
-        black "#3c3836"
-        white "#ddc7a1"
-        red "#ea6962"
-        green "#a9b665"
-        yellow "#d8a657"
-        blue "#7daea3"
-        magenta "#d3869b"
-        cyan "#89b482"
-        orange "#e78a4e"
-    }
-}
+theme "gruvbox"
  
 // Choose the base input mode of zellij.
 // Default: normal
