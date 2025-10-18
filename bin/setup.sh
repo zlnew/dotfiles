@@ -158,6 +158,15 @@ reload_hyprland() {
   fi
 }
 
+refresh_session() {
+  if [[ -x "$REPO_ROOT/bin/refresh-session.sh" ]]; then
+    echo "🔄 Refreshing desktop session..."
+    "$REPO_ROOT/bin/refresh-session.sh" || echo "⚠️ Failed to refresh desktop session"
+  else
+    echo "ℹ️ refresh-session script not found. Skipping desktop refresh."
+  fi
+}
+
 # === MENU ===
 
 echo "🔧 Dotfiles Setup"
@@ -211,5 +220,7 @@ case $choice in
   exit 1
   ;;
 esac
+
+refresh_session
 
 echo "✅ Dotfiles applied"

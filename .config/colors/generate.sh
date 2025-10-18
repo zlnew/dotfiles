@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+if command -v readlink >/dev/null 2>&1; then
+  SCRIPT_PATH="$(readlink -f "$SCRIPT_PATH" 2>/dev/null || printf '%s' "$SCRIPT_PATH")"
+fi
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+REFRESH_SCRIPT="${REPO_ROOT}/bin/refresh-session.sh"
+
 THEME="${1:-gruvbox}"
 COLORS_DIR=".config/colors"
 YML="${COLORS_DIR}/${THEME}.yml"
@@ -238,3 +246,10 @@ echo "  - $MAKO_OUTPUT (Mako)"
 echo "  - $ZELLIJ_OUTPUT (Zellij)"
 echo "  - $NIRI_OUTPUT (Niri)"
 echo "  → Activated via current-* palette files."
+
+if [[ -x "$REFRESH_SCRIPT" ]]; then
+  echo "🔄 Refreshing desktop session..."
+  "$REFRESH_SCRIPT" || echo "⚠️ Failed to refresh desktop session"
+else
+  echo "ℹ️ refresh-session script not found. Skipping desktop refresh."
+fi
