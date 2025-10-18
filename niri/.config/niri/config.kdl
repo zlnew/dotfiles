@@ -182,7 +182,7 @@ binds {
 
     layout {
         gaps 8
-        center-focused-column "never"
+        center-focused-column "on-overflow"
         always-center-single-column
 
         preset-column-widths {

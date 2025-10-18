@@ -138,10 +138,10 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Alt left" { MoveFocusOrTab "left"; }
-        bind "Alt down" { MoveFocus "down"; }
-        bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
+        bind "Shift left" { MoveFocusOrTab "left"; }
+        bind "Shift down" { MoveFocus "down"; }
+        bind "Shift up" { MoveFocus "up"; }
+        bind "Shift right" { MoveFocusOrTab "right"; }
         bind "Alt 1" { GoToTab 1; }
         bind "Alt 2" { GoToTab 2; }
         bind "Alt 3" { GoToTab 3; }
