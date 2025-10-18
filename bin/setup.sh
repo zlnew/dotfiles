@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
 # Backup Helper
 backup() {
   local dest=$1
@@ -69,6 +72,31 @@ setup_local_share() {
   for dir in .local/share/*; do
     link "$(pwd)/$dir" "$HOME/.local/share/$(basename "$dir")"
   done
+}
+
+choose_colorscheme() {
+  echo "🎨 Select colorscheme:"
+  echo "1) Gruvbox Material (dark)"
+  echo "2) TokyoNight (night)"
+  local colorscheme_choice
+  read -rp "Choose a colorscheme [1-2]: " colorscheme_choice
+
+  local theme
+  case $colorscheme_choice in
+  1 | "")
+    theme="gruvbox"
+    ;;
+  2)
+    theme="tokyonight"
+    ;;
+  *)
+    echo "⚠️ Invalid choice. Defaulting to Gruvbox Material."
+    theme="gruvbox"
+    ;;
+  esac
+
+  echo "🎨 Applying $theme colorscheme..."
+  "$REPO_ROOT/.config/colors/generate.sh" "$theme"
 }
 
 setup_aliases() {
@@ -143,6 +171,7 @@ case $choice in
   setup_git_configs
   setup_local_bin
   setup_local_share
+  choose_colorscheme
   setup_aliases
   setup_zshrc
   setup_bashrc
@@ -161,6 +190,9 @@ case $choice in
 
   read -rp "Setup local share? [y/N]: " local_share_choice
   [[ $local_share_choice =~ ^[Yy]$ ]] && setup_local_share
+
+  read -rp "Apply colorscheme? [y/N]: " colorscheme_choice
+  [[ $colorscheme_choice =~ ^[Yy]$ ]] && choose_colorscheme
 
   read -rp "Setup aliases? [y/N]: " aliases_choice
   [[ $aliases_choice =~ ^[Yy]$ ]] && setup_aliases

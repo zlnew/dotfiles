@@ -1,0 +1,32 @@
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃                    Mako Notifications Theme                  ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+max-visible=10
+layer=top
+max-icon-size=48
+default-timeout=10000
+
+font=sans 10
+anchor=top-right
+margin=16
+padding=8
+width=300
+height=300
+border-size=2
+border-radius=8
+
+[urgency=low]
+background-color={{bg1}}
+text-color={{fg1}}
+border-color={{blue}}
+
+[urgency=normal]
+background-color={{bg}}
+text-color={{fg}}
+border-color={{aqua}}
+
+[urgency=critical]
+background-color={{red}}
+text-color={{fg1}}
+border-color={{red}}

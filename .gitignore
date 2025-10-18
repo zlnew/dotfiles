@@ -1,1 +1,3 @@
 .config/systemd/user/default.target.wants/
+.config/colors/current-*
+.config/colors/theme
