@@ -27,15 +27,23 @@ local function enforce_transparent_background()
     "NormalNC",
     "NormalFloat",
     "FloatBorder",
+    "FloatTitle",
     "SignColumn",
     "TermNormal",
     "TermNormalNC",
   }
 
   for _, group in ipairs(groups) do
-    vim.api.nvim_set_hl(0, group, { bg = "none" })
+    vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
   end
 end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("dotfiles_transparent_background", { clear = true }),
+  callback = function()
+    enforce_transparent_background()
+  end,
+})
 
 local active_theme = read_theme()
 
