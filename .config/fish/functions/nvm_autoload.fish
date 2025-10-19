@@ -1,4 +1,4 @@
-function load_nvm --on-variable PWD --description "Auto switch Node versions"
+function nvm_autoload --on-variable PWD --description "Auto switch Node versions"
     if not type -q nvm
         return # nvm not available
     end

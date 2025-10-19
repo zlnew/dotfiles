@@ -3,15 +3,10 @@
 .config/colors/theme
 
 .config/fish/fish_variables
-.config/fish/conf.d/_*.fish
-.config/fish/conf.d/pure.fish
-.config/fish/conf.d/nvm.fish
-.config/fish/functions/_*.fish
-.config/fish/functions/nvm.fish
-.config/fish/functions/fisher.fish
-.config/fish/functions/fish_greeting.fish
-.config/fish/functions/fish_mode_prompt.fish
-.config/fish/functions/fish_prompt.fish
-.config/fish/functions/fish_title.fish
-.config/fish/completions/fisher.fish
-.config/fish/completions/nvm.fish
+.config/fish/completions/*
+.config/fish/conf.d/*
+.config/fish/functions/*
+.config/fish/themes/*
+!.config/fish/completions/bun.fish
+!.config/fish/conf.d/colors.fish
+!.config/fish/functions/nvm_autoload.fish
