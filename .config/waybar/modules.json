@@ -63,6 +63,13 @@
     "tooltip": false
   },
 
+  "custom/idle_inhibitor": {
+    "return-type": "json",
+    "exec": "~/.local/bin/idle-inhibitor json",
+    "on-click": "~/.local/bin/idle-inhibitor toggle",
+    "interval": 5
+  },
+
   "cpu": {
     "interval": 5,
     "format": "CPU: {usage}%"

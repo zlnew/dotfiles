@@ -68,6 +68,7 @@ window#waybar.hidden {
 #custom-power,
 #custom-storage,
 #custom-spotify,
+#custom-idle_inhibitor,
 #custom-weather,
 #custom-screenshot_t,
 #custom-hyprPicker,
@@ -116,6 +117,14 @@ window#waybar.hidden {
   color: @purple;
 }
 #bluetooth.disconnected {
+  color: @red;
+}
+
+#custom-idle_inhibitor.inhibited {
+  color: @yellow;
+}
+
+#custom-idle_inhibitor.warning {
   color: @red;
 }
 

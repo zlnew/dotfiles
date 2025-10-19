@@ -11,6 +11,7 @@
   ],
 
   "modules-left": [
+    "custom/idle_inhibitor",
     "clock",
     "mpris"
   ],
@@ -33,4 +34,3 @@
     "battery"
   ]
 }
-
