@@ -1,9 +1,11 @@
 {
   // Niri Modules
   "niri/workspaces": {
+    "exec-if": "pgrep -x niri >/dev/null 2>&1",
     "on-click": "activate"
   },
   "niri/window": {
+    "exec-if": "pgrep -x niri >/dev/null 2>&1",
     "format": "{title}",
     "max-length": 50,
     "separate-outputs": true
@@ -11,6 +13,7 @@
 
   // Hyprland Modules
   "hyprland/workspaces": {
+    "exec-if": "pgrep -x Hyprland >/dev/null 2>&1",
     "all-outputs": true,
     "sort-by-number": true,
     "show-special": true,
@@ -22,6 +25,7 @@
   },
 
   "hyprland/window": {
+    "exec-if": "pgrep -x Hyprland >/dev/null 2>&1",
     "format": "{title}",
     "max-length": 50,
     "separate-outputs": true
@@ -35,11 +39,28 @@
   },
 
   "mpris": {
-    "format": "{title} — {artist}",
-    "format-paused": "[Paused] {title} — {artist}",
+    "format": "{status_icon}",
+    "format-playing": "{status_icon}",
+    "format-paused": "{status_icon}",
+    "format-stopped": "",
+    "tooltip-format": "{title}\n{artist}\n{album}",
+    "title-len": 28,
+    "artist-len": 18,
+    "max-length": 28,
+    "player-icons": {
+      "default": " ",
+      "spotify": " ",
+      "mpd": " "
+    },
+    "status-icons": {
+      "playing": "",
+      "paused": "",
+      "stopped": ""
+    },
     "tooltip": true,
-    "title-len": 30,
-    "artist-len": 20
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
   },
 
   "tray": {
@@ -94,7 +115,7 @@
     "format": "{icon} {percent}%",
     "format-alt": "{percent}% {icon}",
     "format-alt-click": "click-right",
-    "format-icons": ["", ""],
+    "format-icons": [""],
     "on-scroll-down": "brightnessctl s 5%-",
     "on-scroll-up": "brightnessctl s +5%"
   },

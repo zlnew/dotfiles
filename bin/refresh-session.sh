@@ -87,7 +87,7 @@ reload_compositor() {
   if command -v hyprctl >/dev/null 2>&1; then
     hyprctl reload >/dev/null 2>&1 || log "warning: hyprctl reload failed"
   elif command -v niri >/dev/null 2>&1; then
-    niri msg reload-config >/dev/null 2>&1 || log "warning: niri reload-config failed"
+    niri msg action load-config-file >/dev/null 2>&1 || log "warning: niri reload-config failed"
   fi
 }
 
