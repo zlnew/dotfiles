@@ -11,6 +11,8 @@ text/html=firefox.desktop;firefox-developer-edition.desktop;
 x-scheme-handler/chrome=firefox-developer-edition.desktop;firefox.desktop;
 x-scheme-handler/http=firefox-developer-edition.desktop;firefox.desktop;
 x-scheme-handler/https=firefox-developer-edition.desktop;firefox.desktop;
+inode/directory=Thunar.desktop;
+application/x-directory=Thunar.desktop;
 
 [Default Applications]
 application/json=nvim.desktop;
@@ -33,3 +35,5 @@ x-scheme-handler/chrome=firefox-developer-edition.desktop
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/http=firefox-developer-edition.desktop
 x-scheme-handler/https=firefox-developer-edition.desktop
+inode/directory=Thunar.desktop
+application/x-directory=Thunar.desktop
