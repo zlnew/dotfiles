@@ -47,8 +47,6 @@ section() {
   printf '\n===== %s =====\n' "$label"
 }
 
-# === FUNCTIONS ===
-
 # --- setup_global_configs ----------------------------------------------------
 setup_global_configs() {
   section "Global configs"
