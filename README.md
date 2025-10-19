@@ -1,53 +1,57 @@
 # Dotfiles
 
-Personal dotfiles for keeping my Hyprland, Niri, and KDE installs in sync while staying window-manager agnostic by default. Shared configs live under `.config/`, while compositor-specific tweaks are isolated so they never leak across machines.
+Wayland-first dotfiles that keep Hyprland, Niri, and a minimal Plasma setup aligned while sharing a single, WM-agnostic core. Everything defaults to the shared `.config` baseline and layers compositor-specific tweaks only when you opt into them.
 
-## Highlights
-- Multi-environment aware: Hyprland, Niri, and Plasma overlays extend a common `.config` baseline so each environment stays cleanly separated.
-- Guided bootstrap: `./bin/setup.sh` handles backups, symlink creation, and optional per-environment overlays. Partial mode lets you re-run just the pieces you need.
-- Gruvbox-friendly theming across terminals, Waybar, and GTK, with shared assets in `.local/`.
-- Neovim powered by `lazy.nvim`, plus supporting CLI tooling surfaced through Fish, zellij, and terminal emulator configs.
-- `./bin/update.sh` wraps the conventional `chore(dotfiles)` commit message so routine syncs stay consistent.
+## Supported Environments
+- **Shared core**: Fish shell, Neovim (`lazy.nvim`), zellij, Waybar, mako, alacritty, systemd user services, wallpapers, and helper scripts.
+- **Hyprland**: Layered config split across `hypr/config/*.conf`, wallpaper hooks, and XDG portal tweaks under `hyprland/.config/`.
+- **Niri**: Opinionated KDL config with overlay-aware keybinding hints under `niri/.config/`.
+- **Plasma (minimal)**: Keybindings, theme overrides, and panel layout under `plasma/.config/`.
 
-## Repository Layout
+## Directory Map
 ```
 .
-├── .config/              # Shared, WM-agnostic configs (fish, nvim, waybar, etc.)
-├── .local/               # Wallpapers, themes, and helper binaries
-├── bin/                  # setup.sh, update.sh, and other helper scripts
-├── hyprland/.config/     # Hyprland overlays (hypr/*.conf, scripts, theme tweaks)
-├── niri/.config/         # Niri config.kdl and matching GTK overrides
-├── plasma/.config/       # Plasma overrides layered on top of the shared configs
-├── profiles/wayland/     # Shared login profile fragments
-├── fresh-install-guide.md  # Long-form notes for rebuilding a machine
-└── screenshots/          # Reference captures used in the README
+├── .config/            # WM-agnostic configs (alacritty, fish, nvim, waybar, etc.)
+├── .local/             # Wallpapers, icons, helper binaries
+├── bin/                # setup.sh, refresh-session.sh, update.sh
+├── etc/                # keyd layouts, systemd units, misc /etc snippets
+├── hyprland/.config/   # Hyprland-specific configs and scripts
+├── niri/.config/       # Niri config.kdl plus GTK/Kvantum overrides
+├── plasma/.config/     # Plasma overrides layered on top of the shared configs
+├── screenshots/        # Reference captures used in docs
+└── fresh-install-guide.md  # Long-form rebuild notes
 ```
 
-Follow the repo guidelines when editing—Hyprland changes belong in `hyprland/config/*.conf`, Niri adjustments in `niri/config.kdl`, shared tweaks under `.config/`, and Wayland session env vars inside `profiles/wayland/`.
+## Bootstrap Workflow
+1. **Clone**: `git clone git@github.com:zlnew/dotfiles.git ~/dotfiles && cd ~/dotfiles`
+2. **Run the installer**: `./bin/setup.sh`
+   - Full mode links everything, backs up conflicts to `~/.dotfiles_backup/`, and asks which compositor overlay to apply.
+   - Partial mode lets you re-run only the sections you want (shared configs, git dotfiles, local bin/share, shell RCs, overlays).
+3. **Pick a colorscheme** when prompted; the generator at `.config/colors/generate.sh` renders Waybar CSS, alacritty TOML, and Hyprland palette files for Gruvbox Material or TokyoNight.
+4. **Optional overlays**: Choose Hyprland, Niri, or Plasma to symlink compositor-specific configs on top of the shared baseline. The Hyprland option attempts an automatic `hyprctl reload` if available.
+5. **Refresh the session**: `bin/refresh-session.sh` restarts Waybar, mako, wallpapers, and reloads the active compositor to pick up theme changes.
 
-## Getting Started
-1. Clone the repo:
-   ```bash
-   git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
-   ```
-2. Run the setup assistant and pick between full or partial install:
-   ```bash
-   cd ~/dotfiles
-   ./bin/setup.sh
-   ```
-   The script creates symlinks, backs up conflicting files to `~/.dotfiles_backup/`, and optionally applies Hyprland, Niri, or Plasma overlays. When validating one area, choose “Partial setup” and enable only the pieces you want to refresh.
+## Everyday Commands
+- `./bin/setup.sh` — relink configs after edits; partial mode is ideal for quick validation.
+- `./bin/refresh-session.sh` — restart status bars, notifications, and wallpapers after changing themes.
+- `./bin/update.sh` — stage, commit, and push with the conventional `chore(dotfiles): update configs (YYYY-MM-DD HH:MM)` message.
+- `./.config/colors/generate.sh <theme>` — regenerate color assets without running the full installer.
 
-## Keeping Things Updated
-- After local tweaks, re-run `./bin/setup.sh` (partial mode is ideal) to ensure the target files are linked and backups are stored.
-- Use `./bin/update.sh` to stage, commit, and push the current state with the standard `chore(dotfiles)` message.
-- Longer setup walkthroughs and package notes live in `fresh-install-guide.md`.
+## Editing Guidelines
+- Shared tweaks live under `.config/` and `.local/`; compositor-specific logic belongs in `hyprland/.config/hypr/config/*.conf` or `niri/.config/niri/config.kdl`.
+- Helper scripts should be POSIX-friendly Bash (`set -e`), live under `bin/` or the compositor-specific `scripts/` directories, and use snake_case names.
+- Keep configs portable: prefer environment checks over machine-specific paths, and store sensitive data under `$HOME/.local`.
 
 ## Validation Checklist
-- Run `./bin/setup.sh` inside a throwaway directory to confirm symlinks resolve cleanly.
-- For Hyprland edits, reload with `hyprctl reload`.
-- For Niri changes, validate first with `niri --validate ~/.config/niri/config.kdl`, then apply via `niri msg reload-config`.
-- For Plasma tweaks, restart `plasmashell` or log out and back in to apply UI changes.
-- For Fish updates, sanity-check startup with `env XDG_CONFIG_HOME=/tmp/test-config fish --init-command 'exit'`.
+- `./bin/setup.sh` in a temporary directory to ensure symlinks resolve cleanly.
+- `hyprctl reload` after Hyprland edits (the setup script runs this automatically when possible).
+- `niri --validate ~/.config/niri/config.kdl` followed by `niri msg reload-config` for Niri changes.
+- `env XDG_CONFIG_HOME=/tmp/test-config fish --init-command 'exit'` to catch fish startup errors.
+- Restart `plasmashell` (or log out/in) to apply Plasma overrides.
+
+## More Documentation
+- `fresh-install-guide.md` — full package list and bootstrap notes for a new workstation.
+- `AGENTS.md` — concise rules of the road for tooling and automation.
 
 ## Screenshots
 - ![Hyprland workspace](screenshots/2025-10-01T17:28:51,372724276+07:00.png)

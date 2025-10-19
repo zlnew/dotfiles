@@ -1,19 +1,41 @@
-# Repository Guidelines
+# Agent Handbook
 
-## Project Structure & Module Organization
-Shared configs live under `.config/` (fish, waybar, nvim) and must stay window-manager agnostic. Hyprland-specific overrides sit in `hyprland/.config/`, while Niri keeps its own under `niri/.config/`. Limit Hyprland tweaks to `hypr/config/*.conf` (e.g., `hypr/config/monitor.conf`) and Niri changes to `niri/config.kdl`. Place helper scripts in `bin/` or `hyprland/.config/hypr/scripts/` to keep per-environment tooling isolated.
+## Mission Brief
+- Keep the shared `.config` baseline compositor-agnostic; apply WM-specific tweaks only within their overlays.
+- Honour the repository conventions laid out by the maintainer—this file is the single source of truth for automation.
 
-## Build, Test, and Development Commands
-Run `./bin/setup.sh` to bootstrap or refresh symlinks; choose “Partial setup” when validating a single area. Use `./bin/update.sh` to stage, commit, and push routine configuration updates. Reload Hyprland changes with `hyprctl reload`. Apply Niri changes via `niri msg reload-config`, or fall back to `niri --validate ~/.config/niri/config.kdl` before restarting.
+## Key Locations
+- `.config/` — shared configs for fish, alacritty, nvim, waybar, mako, zellij, systemd user units, etc.
+- `.local/` — wallpapers, icons, helper binaries; scripts here must stay portable.
+- `hyprland/.config/` — Hyprland-specific configs (`hypr/config/*.conf`, scripts, GTK overrides).
+- `niri/.config/` — Niri KDL config and matching GTK/Kvantum overrides.
+- `plasma/.config/` — minimal Plasma overrides layered on top of the shared baseline.
+- `etc/` — keyd layouts, battery limit config, and systemd units intended for `/etc`.
 
-## Coding Style & Naming Conventions
-Indent JSON/JSONC and CSS with two spaces as exemplified in `.config/waybar/config`. Use four-space blocks in KDL and Hypr `.conf` files, keeping MOD key names uppercase and preserving ASCII section banners. Write shell scripts in POSIX-friendly Bash with `set -e`, snake_case function names, and descriptive file names like `waybar-toggle` or `monitor-hook.sh`. Keep machine-specific secrets out of the repo and reference them via environment files.
+## Editing Guardrails
+- Shared tweaks belong under `.config/` or `.local/`; Hyprland work stays in `hyprland/.config/hypr/`, and Niri work in `niri/.config/niri/config.kdl`.
+- Hypr config blocks and KDL files use four-space indentation; JSON/JSONC and CSS (Waybar) use two spaces.
+- Shell scripts must be POSIX-friendly Bash with `set -e`, snake_case helper names, and descriptive filenames.
+- Preserve ASCII section banners and uppercase MOD names in keybinding files; update related helper scripts when bindings change.
+- No machine-specific absolute paths or secrets—reference environment files and `$HOME/.local` instead.
 
-## Testing Guidelines
-After edits, rerun `./bin/setup.sh` inside a temporary directory to ensure symlinks resolve cleanly. Validate Hyprland syntax with `hyprctl reload`, and confirm Niri configuration health using `niri --validate ~/.config/niri/config.kdl` before issuing `niri msg reload-config`. For fish changes, run `env XDG_CONFIG_HOME=/tmp/test-config fish --init-command 'exit'` to catch startup errors.
+## Core Commands
+- `./bin/setup.sh` — bootstrap or re-link configs; partial mode allows targeted refreshes.
+- `./bin/refresh-session.sh` — restart Waybar, mako, wallpapers, and reload the compositor after theme or config updates.
+- `./bin/update.sh` — stage, commit, and push with the standard message `chore(dotfiles): update configs (YYYY-MM-DD HH:MM)`.
+- `./.config/colors/generate.sh <theme>` — regenerate color assets (Gruvbox or TokyoNight) without running the full installer.
 
-## Commit & Pull Request Guidelines
-Follow the conventional commit pattern `chore(dotfiles): update configs (YYYY-MM-DD HH:MM)` to match history. PRs should call out the target environment (Hyprland, Niri, or shared), list any required packages, and include before/after screenshots when visuals change. Reference related issues or TODOs, and confirm that setup, reload, and validation commands were executed.
+## Validation Checklist
+- Run `./bin/setup.sh` inside a temporary directory to confirm symlinks resolve cleanly.
+- `hyprctl reload` after Hyprland changes (the setup script will attempt this automatically).
+- `niri --validate ~/.config/niri/config.kdl` followed by `niri msg reload-config` for Niri updates.
+- `env XDG_CONFIG_HOME=/tmp/test-config fish --init-command 'exit'` to catch fish startup issues.
+- Restart `plasmashell` (or log out and back in) when adjusting Plasma overrides.
 
-## Security & Configuration Tips
-Store sensitive tokens under `$HOME/.local` and source them through `environment.conf` rather than committing secrets. When modifying Hyprland or Niri bindings, update both the inline comments and any related helper scripts so keybinding overlays stay accurate. Keep configs portable by avoiding machine-specific paths unless they are gated by environment checks.
+## Commits & Reviews
+- Commits use the conventional format `chore(dotfiles): update configs (YYYY-MM-DD HH:MM)` unless the maintainer requests otherwise.
+- Document required packages, targeted environments, and validation steps in PR descriptions; include before/after screenshots when visuals change.
+
+## Security Notes
+- Keep tokens and machine-local data out of the repo; store under `$HOME/.local` and source via `environment.conf`.
+- When adjusting keybindings, update comments and helper scripts (e.g., Waybar overlays, hotkey menus) to keep user-facing hints accurate.
