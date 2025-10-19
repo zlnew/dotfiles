@@ -31,8 +31,8 @@ sudo pacman -S --needed \
 ```bash
 sudo pacman -S --needed \
   hyprland niri waybar mako fuzzel alacritty swaybg swww wl-clipboard \
-  brightnessctl playerctl pipewire wireplumber pavucontrol blueberry \
-  grim slurp wl-screenrec imagemagick qt5ct qt6ct kvantum
+  brightnessctl playerctl pipewire wireplumber pavucontrol \
+  grim slurp wl-screenrec imagemagick qt5ct qt6ct
 ```
 - Install xdg portals: `sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk`.
 - Optional screen locker: `sudo pacman -S swaylock-effects`.
