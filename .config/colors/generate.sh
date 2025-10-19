@@ -14,7 +14,7 @@ COLORS_DIR=".config/colors"
 YML="${COLORS_DIR}/${THEME}.yml"
 
 if [[ ! -f "$YML" ]]; then
-  echo "❌ Unknown theme: $THEME"
+  echo "Unknown theme: $THEME"
   exit 1
 fi
 
@@ -44,7 +44,7 @@ get() {
   local value
   value=$(grep -E "^[[:space:]]{2}${key}:" "$YML" | head -n1 | cut -d':' -f2- | tr -d ' "')
   if [[ -z "$value" ]]; then
-    echo "❌ Missing color key '$key' in $YML" >&2
+    echo "Missing color key '$key' in $YML" >&2
     exit 1
   fi
   printf "%s" "$value"
@@ -101,7 +101,7 @@ render_template() {
   done
 
   if [[ "$content" == *"{{"* ]]; then
-    echo "❌ Unresolved placeholders remain in $template" >&2
+    echo "Unresolved placeholders remain in $template" >&2
     exit 1
   fi
 
@@ -284,7 +284,7 @@ printf "%s\n" "$THEME" >"${COLORS_DIR}/theme"
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃                      Generation Log                         ┃
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-echo "✅ Generated theme '$THEME':"
+echo "Generated theme '$THEME':"
 echo "  - $WAYBAR (Waybar)"
 echo "  - $ALACRITTY (Alacritty)"
 echo "  - $HYPR (Hyprland)"
@@ -300,7 +300,7 @@ if command -v fish >/dev/null 2>&1; then
 fi
 
 if [[ -x "$REFRESH_SCRIPT" ]]; then
-  echo "🔄 Refreshing desktop session..."
+  echo "Refreshing desktop session..."
   "$REFRESH_SCRIPT" || echo "⚠️ Failed to refresh desktop session"
 else
   echo "ℹ️ refresh-session script not found. Skipping desktop refresh."
