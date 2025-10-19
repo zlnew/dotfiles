@@ -5,4 +5,4 @@ git add .
 git commit -m "chore(dotfiles): update configs ($(date +'%Y-%m-%d %H:%M'))"
 git push
 
-echo "✅ Dotfiles updated & pushed"
+echo "Dotfiles updated & pushed"

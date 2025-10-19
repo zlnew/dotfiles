@@ -1,4 +1,12 @@
 .config/systemd/user/default.target.wants/
 .config/colors/current-*
 .config/colors/theme
+
 .config/fish/fish_variables
+.config/fish/completions/*
+.config/fish/conf.d/*
+.config/fish/functions/*
+.config/fish/themes/*
+!.config/fish/completions/bun.fish
+!.config/fish/conf.d/colors.fish
+!.config/fish/functions/nvm_autoload.fish

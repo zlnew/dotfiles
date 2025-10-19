@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+RUNTIME_DIR="${XDG_RUNTIME_DIR:-}"
+STATE_DIR="/tmp"
+
+if [[ -n "$RUNTIME_DIR" ]]; then
+    if tmpfile="$(mktemp -p "$RUNTIME_DIR" idle-inhibitor.XXXX 2>/dev/null)"; then
+        STATE_DIR="$RUNTIME_DIR"
+        rm -f "$tmpfile"
+    fi
+fi
+
+STATE_FILE="${STATE_DIR}/idlehandler.state"
+ACTION="${1:-status}"
+
+notify_user() {
+    if [[ "${IDLE_INHIBITOR_NO_NOTIFY:-0}" == "1" ]]; then
+        return
+    fi
+
+    if command -v notify-send >/dev/null 2>&1; then
+        local summary="$1"
+        local body="${2:-}"
+        notify-send "$summary" "$body" >/dev/null 2>&1 || true
+    fi
+}
+
+idle_pid() {
+    pgrep -x swayidle || true
+}
+
+remove_state_file() {
+    rm -f "$STATE_FILE"
+}
+
+current_state() {
+    local pid
+    pid="$(idle_pid)"
+    if [[ -n "$pid" ]]; then
+        remove_state_file
+        echo "running"
+        return
+    fi
+
+    if [[ -f "$STATE_FILE" ]]; then
+        echo "paused"
+        return
+    fi
+
+    echo "stopped"
+}
+
+pause_idle() {
+    if [[ -f "$STATE_FILE" ]]; then
+        echo "paused"
+        return 0
+    fi
+
+    if pkill -x swayidle >/dev/null 2>&1; then
+        :
+    fi
+    printf 'paused\n' >"$STATE_FILE"
+    notify_user "Idle inhibitor" "Sleep and lock timers paused."
+    echo "paused"
+}
+
+resume_idle() {
+    local pid
+    pid="$(idle_pid)"
+    if [[ -n "$pid" ]]; then
+        remove_state_file
+        echo "running"
+        return 0
+    fi
+
+    if [[ -x "$HOME/.local/bin/idlehandler" ]]; then
+        (nohup "$HOME/.local/bin/idlehandler" >/dev/null 2>&1 &) || true
+        sleep 0.2
+    fi
+
+    remove_state_file
+    notify_user "Idle inhibitor" "Sleep and lock timers resumed."
+    echo "running"
+}
+
+toggle_idle() {
+    local state
+    state="$(current_state)"
+
+    case "$state" in
+        paused)
+            resume_idle
+            ;;
+        running)
+            pause_idle
+            ;;
+        *)
+            resume_idle
+            ;;
+    esac
+}
+
+print_json() {
+    local state text tooltip class alt
+    state="$(current_state)"
+
+    case "$state" in
+        paused)
+            text="Awake"
+            tooltip="Idle timers paused; the system will stay awake."
+            class="inhibited"
+            alt="paused"
+            ;;
+        running)
+            text="Idle"
+            tooltip="Idle timers active; lock and suspend will trigger."
+            class="active"
+            alt="running"
+            ;;
+        *)
+            text="Idle?"
+            tooltip="Idle handler is not running."
+            class="warning"
+            alt="stopped"
+            ;;
+    esac
+
+    printf '{"text":"%s","tooltip":"%s","class":"%s","alt":"%s"}\n' "$text" "$tooltip" "$class" "$alt"
+}
+
+case "$ACTION" in
+    status)
+        current_state
+        ;;
+    json)
+        print_json
+        ;;
+    toggle)
+        toggle_idle
+        ;;
+    pause)
+        pause_idle
+        ;;
+    resume)
+        resume_idle
+        ;;
+    *)
+        printf 'Usage: %s {status|json|toggle|pause|resume}\n' "$0" >&2
+        exit 1
+        ;;
+esac

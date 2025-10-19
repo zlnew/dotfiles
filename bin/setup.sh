@@ -4,7 +4,7 @@ set -e
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-# Backup Helper
+# --- backup ------------------------------------------------------------------
 backup() {
   local dest=$1
   local backup_dir="$HOME/.dotfiles_backup"
@@ -12,74 +12,101 @@ backup() {
   mkdir -p "$backup_dir"
 
   if [[ -e "$dest" && ! -L "$dest" ]]; then
-    echo "📦 Backing up existing: $dest to $backup_dir"
+    echo "backing up: $dest -> $backup_dir"
     mv "$dest" "$backup_dir/"
   fi
 }
 
-# Symlink Overwrite Helper
+# --- link --------------------------------------------------------------------
 link() {
   local src=$1
   local dest=$2
 
-  # Check if the destination exists and is not already a symlink to the source
   if [[ -e "$dest" && ! -L "$dest" ]]; then
     backup "$dest"
   elif [[ -L "$dest" && "$(readlink "$dest")" != "$src" ]]; then
-    echo "⚠️  Removing existing symlink (not ours): $dest"
+    echo "cleanup: $dest"
     rm -rf "$dest"
   elif [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
-    echo "✅ Already linked: $dest -> $src"
-    return 0 # Already correctly linked, nothing to do
+    echo "keeping: $dest"
+    return 0
   fi
 
   if [[ -e "$dest" || -L "$dest" ]]; then
-    echo "⚠️  Removing existing file or directory: $dest"
+    echo "override: $dest"
     rm -rf "$dest"
   fi
 
-  echo "🔗 Linking $src -> $dest"
+  echo "linking: $src"
   ln -s "$src" "$dest"
 }
 
-# === FUNCTIONS ===
+# --- section -----------------------------------------------------------------
+section() {
+  local label=$1
+  printf '\n===== %s =====\n' "$label"
+}
+
+# --- setup_global_configs ----------------------------------------------------
 setup_global_configs() {
-  echo "🔗 Linking common configurations..."
+  section "Global configs"
   for dir in .config/*; do
     link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
   done
 }
 
+# --- setup_git_configs --------------------------------------------------------
 setup_git_configs() {
-  echo "🔗 Linking .gitconfig..."
+  section "Git configs"
   link "$(pwd)/.gitconfig" "$HOME/.gitconfig"
-
-  echo "🔗 Linking .gitmessage.txt..."
   link "$(pwd)/.gitmessage.txt" "$HOME/.gitmessage.txt"
 }
 
+# --- setup_local_bin ----------------------------------------------------------
 setup_local_bin() {
-  echo "📦 Setting up global bin..."
+  section "~/.local/bin"
+  # echo "🚀 Linking helper binaries into \$HOME/.local/bin..."
   mkdir -p "$HOME/.local/bin"
   for file in .local/bin/*; do
     link "$(pwd)/$file" "$HOME/.local/bin/$(basename "$file")"
   done
 }
 
+# --- setup_local_share --------------------------------------------------------
 setup_local_share() {
-  echo "🖼️ Setting up local share..."
+  section "~/.local/share"
+  # echo "🖼️ Linking shared assets into \$HOME/.local/share..."
   mkdir -p "$HOME/.local/share"
   for dir in .local/share/*; do
     link "$(pwd)/$dir" "$HOME/.local/share/$(basename "$dir")"
   done
 }
 
+# --- setup_aliases ------------------------------------------------------------
+setup_aliases() {
+  section "Shell aliases"
+  link "$(pwd)/.aliases" "$HOME/.aliases"
+}
+
+# --- setup_bashrc -------------------------------------------------------------
+setup_bashrc() {
+  section ".bashrc"
+  link "$(pwd)/.bashrc" "$HOME/.bashrc"
+}
+
+# --- setup_zshrc --------------------------------------------------------------
+setup_zshrc() {
+  section ".zshrc"
+  link "$(pwd)/.zshrc" "$HOME/.zshrc"
+}
+
+# --- choose_colorscheme -------------------------------------------------------
 choose_colorscheme() {
-  echo "🎨 Select colorscheme:"
-  echo "1) Gruvbox Material (dark)"
-  echo "2) TokyoNight (night)"
+  section "Theme assets"
+  echo " 1) Gruvbox Material (dark)"
+  echo " 2) TokyoNight (night)"
   local colorscheme_choice
-  read -rp "Choose a colorscheme [1-2]: " colorscheme_choice
+  read -rp "Select colorscheme [1-2, default 1]: " colorscheme_choice
 
   local theme
   case $colorscheme_choice in
@@ -90,77 +117,63 @@ choose_colorscheme() {
     theme="tokyonight"
     ;;
   *)
-    echo "⚠️ Invalid choice. Defaulting to Gruvbox Material."
+    echo "Invalid choice. Falling back to Gruvbox Material."
     theme="gruvbox"
     ;;
   esac
 
-  echo "🎨 Applying $theme colorscheme..."
+  echo "Generating $theme assets..."
   "$REPO_ROOT/.config/colors/generate.sh" "$theme"
 }
 
-setup_aliases() {
-  echo "🔗 Linking .aliases..."
-  link "$(pwd)/.aliases" "$HOME/.aliases"
-}
-
-setup_bashrc() {
-  echo "🔗 Linking .bashrc..."
-  link "$(pwd)/.bashrc" "$HOME/.bashrc"
-}
-
-setup_zshrc() {
-  echo "🔗 Linking .zshrc..."
-  link "$(pwd)/.zshrc" "$HOME/.zshrc"
-}
-
+# --- setup_device_specific ----------------------------------------------------
 setup_device_specific() {
-  echo "💻 Setting up device-specific configs..."
-  echo "1) Hyprland"
-  echo "2) Niri"
-  echo "3) Plasma"
-  echo "4) None"
-  read -rp "Choose a device-specific configuration [1-4]: " device_choice
+  section "Desktop overlays"
+  echo " 1) Hyprland (Wayland tiling)"
+  echo " 2) Niri (Wayland tiling)"
+  echo " 3) Plasma (KDE)"
+  echo " 4) None (skip overlays)"
+  read -rp "Select overlay [1-4, type 4 to skip]: " device_choice
 
   case $device_choice in
   1)
-    echo "Setting up for Hyprland..."
     for dir in hyprland/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
     reload_hyprland
     ;;
   2)
-    echo "Setting up for Niri..."
     for dir in niri/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
     ;;
   3)
-    echo "Setting up for Plasma..."
     for dir in plasma/.config/*; do
       link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
     done
     ;;
   4)
-    echo "Skipping device-specific configs."
+    echo "ℹ️ Skipping device-specific overlays."
     ;;
   *)
-    echo "⚠️ Invalid choice. Skipping device-specific configs."
+    echo "Invalid selection. Skipping device-specific overlays."
     ;;
   esac
 }
 
+# --- reload_hyprland ----------------------------------------------------------
 reload_hyprland() {
   if command -v hyprctl >/dev/null 2>&1; then
-    echo "🔄 Reloading Hyprland..."
+    section "Hyprland reload"
     hyprctl reload || echo "⚠️ Failed to reload Hyprland"
   fi
 }
 
+# --- refresh_session ----------------------------------------------------------
 refresh_session() {
+  section "Session refresh"
   if [[ -x "$REPO_ROOT/bin/refresh-session.sh" ]]; then
-    echo "🔄 Refreshing desktop session..."
+    echo "Refreshing Wayland session helpers..."
     "$REPO_ROOT/bin/refresh-session.sh" || echo "⚠️ Failed to refresh desktop session"
   else
     echo "ℹ️ refresh-session script not found. Skipping desktop refresh."
@@ -169,10 +182,10 @@ refresh_session() {
 
 # === MENU ===
 
-echo "🔧 Dotfiles Setup"
-echo "1) Full setup"
-echo "2) Partial setup"
-read -rp "Choose an option [1-2]: " choice
+echo "Dotfiles Setup Wizard"
+echo " 1) Full setup"
+echo " 2) Partial setup"
+read -rp "Select mode [1-2]: " choice
 
 case $choice in
 1)
@@ -180,10 +193,10 @@ case $choice in
   setup_git_configs
   setup_local_bin
   setup_local_share
-  choose_colorscheme
   setup_aliases
   setup_zshrc
   setup_bashrc
+  choose_colorscheme
   setup_device_specific
   ;;
 2)
@@ -191,36 +204,36 @@ case $choice in
   read -rp "Setup global configurations? [y/N]: " configs_choice
   [[ $configs_choice =~ ^[Yy]$ ]] && setup_global_configs
 
-  read -rp "Setup git configs? [y/N]: " git_configs_choice
+  read -rp "Link git configs (.gitconfig, .gitmessage)? [y/N]: " git_configs_choice
   [[ $git_configs_choice =~ ^[Yy]$ ]] && setup_git_configs
 
-  read -rp "Setup local bin? [y/N]: " local_bin_choice
+  read -rp "Link helper binaries into ~/.local/bin? [y/N]: " local_bin_choice
   [[ $local_bin_choice =~ ^[Yy]$ ]] && setup_local_bin
 
-  read -rp "Setup local share? [y/N]: " local_share_choice
+  read -rp "Link shared assets into ~/.local/share? [y/N]: " local_share_choice
   [[ $local_share_choice =~ ^[Yy]$ ]] && setup_local_share
 
-  read -rp "Apply colorscheme? [y/N]: " colorscheme_choice
-  [[ $colorscheme_choice =~ ^[Yy]$ ]] && choose_colorscheme
-
-  read -rp "Setup aliases? [y/N]: " aliases_choice
+  read -rp "Link shell aliases? [y/N]: " aliases_choice
   [[ $aliases_choice =~ ^[Yy]$ ]] && setup_aliases
 
-  read -rp "Setup .zshrc? [y/N]: " zshrc_choice
+  read -rp "Link .zshrc? [y/N]: " zshrc_choice
   [[ $zshrc_choice =~ ^[Yy]$ ]] && setup_zshrc
 
-  read -rp "Setup .bashrc? [y/N]: " bashrc_choice
+  read -rp "Link .bashrc? [y/N]: " bashrc_choice
   [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
 
-  read -rp "Setup device-specific configs? [y/N]: " device_choice
+  read -rp "Regenerate themed assets? [y/N]: " colorscheme_choice
+  [[ $colorscheme_choice =~ ^[Yy]$ ]] && choose_colorscheme
+
+  read -rp "Apply device overlay (Hyprland/Niri/Plasma)? [y/N]: " device_choice
   [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific
   ;;
 *)
-  echo "❌ Invalid choice. Exiting."
+  echo "Invalid choice. Exiting."
   exit 1
   ;;
 esac
 
 refresh_session
 
-echo "✅ Dotfiles applied"
+echo "Dotfiles setup complete"

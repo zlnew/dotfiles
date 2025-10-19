@@ -1,11 +1,3 @@
-# This is terribly complicated
-# It's because:
-# 1. bun run has to have dynamic completions
-# 2. there are global options
-# 3. bun {install add remove} gets special options
-# 4. I don't know how to write fish completions well
-# Contributions very welcome!!
-
 function __fish__get_bun_bins
 	string split ' ' (bun getcompletes b)
 end

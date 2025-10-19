@@ -11,13 +11,16 @@
   ],
 
   "modules-left": [
+    "custom/idle_inhibitor",
     "clock",
-    "mpris"
+    "niri/window",
+    "hyprland/window"
   ],
 
   "modules-center": [
+    "mpris",
     "niri/workspaces",
-    "hyprland/workspaces",
+    "hyprland/workspaces"
   ],
 
   "modules-right": [
@@ -33,4 +36,3 @@
     "battery"
   ]
 }
-
