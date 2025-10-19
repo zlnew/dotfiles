@@ -15,11 +15,15 @@ location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
+[Containments][1][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
 [Containments][1][General]
 positions={"1920x1080":[]}
 
 [Containments][1][Wallpaper][org.kde.image][General]
-Image=/home/zlnew/www/dotfiles/.local/share/wallpapers/xavier-cuenca-w4-3.jpg
+Image=/home/zlnew/.local/share/wallpapers/xavier-cuenca-w4-3.jpg
 SlidePaths=/home/zlnew/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [Containments][2]

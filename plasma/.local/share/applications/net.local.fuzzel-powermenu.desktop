@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Fuzzel Power Menu
+Exec=fuzzel-powermenu
+Icon=system-shutdown
+Categories=Utility;
