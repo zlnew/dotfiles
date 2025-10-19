@@ -123,7 +123,7 @@
   "wireplumber": {
     "on-click": "pavucontrol",
     "on-click-right": "amixer sset Master toggle 1>/dev/null",
-    "format": "<span foreground='#fab387'>{icon}</span>  {volume}%",
+    "format": "{icon} {volume}%",
     "format-muted": " ",
     "format-source": "",
     "format-source-muted": "",
