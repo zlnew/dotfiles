@@ -11,3 +11,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.275},{"width":0.5},{"w
 
 [Xwayland]
 Scale=1
+
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
