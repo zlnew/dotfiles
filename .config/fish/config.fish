@@ -11,7 +11,6 @@ end
 if status is-interactive
     if type -q nvm
         nvm_autoload
-        # set --universal nvm_default_version 22
     end
 end
 

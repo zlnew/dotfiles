@@ -89,6 +89,7 @@ sudo pacman -S --needed composer php-pear nginx redis postgresql pgcli
   ```bash
   curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
   nvm install --lts
+  set --universal nvm_default_version [version]
   ```
 - Install Bun:
   ```bash
