@@ -26,6 +26,6 @@ refresher:
     fetchInterval: 120
 update:
     method: background
-confirmOnQuit: true
+confirmOnQuit: false
 promptToReturnFromSubprocess: false
 notARepository: quit
