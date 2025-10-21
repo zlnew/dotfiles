@@ -25,7 +25,7 @@ Opinionated checklist for rebuilding a CachyOS/Arch workstation that matches the
 ```bash
 sudo pacman -S --needed \
   base-devel git curl wget unzip fish zellij zoxide eza bat ripgrep fd fastfetch \
-  fzf python-pip starship lazygit neovim tree-sitter ripgrep-all
+  fzf python-pip starship lazygit neovim tree-sitter ripgrep-all git-delta
 ```
 
 - Switch the login shell when you are ready: `chsh -s /usr/bin/fish`.
@@ -36,17 +36,18 @@ sudo pacman -S --needed \
 sudo pacman -S --needed \
   hyprland niri waybar mako fuzzel alacritty swaybg swww wl-clipboard \
   brightnessctl playerctl pipewire wireplumber pavucontrol \
-  grim slurp wl-screenrec imagemagick qt5ct qt6ct git-delta
+  grim slurp wl-screenrec imagemagick qt5ct qt6ct
 ```
 
-- Install xdg portals: `sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk`.
+- Install xdg portals: `sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-desktop-portal-gnome`.
+- Install x server: `xwayland-satellite`
 - Optional screen locker: `sudo pacman -S swaylock-effects`.
 
 ### Hardware & System Utilities
 
 ```bash
 sudo pacman -S --needed keyd tlp lm_sensors acpi acpid powertop upower \
-  bluez bluez-utils networkmanager nm-connection-editor
+  bluez bluez-utils networkmanager nm-connection-editor network-manager-applet
 ```
 
 - Enable services:

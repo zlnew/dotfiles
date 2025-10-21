@@ -50,6 +50,10 @@ window#waybar.hidden {
   color: @fg;
 }
 
+#tray {
+  opacity: 0.8;
+}
+
 /* Common modules styling */
 #mpris,
 #clock,
