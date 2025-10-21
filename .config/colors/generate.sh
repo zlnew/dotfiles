@@ -7,7 +7,6 @@ if command -v readlink >/dev/null 2>&1; then
 fi
 SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-REFRESH_SCRIPT="${REPO_ROOT}/bin/refresh-session.sh"
 
 THEME="${1:-gruvbox}"
 COLORS_DIR=".config/colors"
@@ -136,7 +135,7 @@ cat >"$ALACRITTY" <<EOF
   background = '$(hex bg)'
   foreground = '$(hex fg)'
 [colors.normal]
-  black =   '$(hex gray)'
+  black =   '$(hex bg)'
   red =     '$(hex red)'
   green =   '$(hex green)'
   yellow =  '$(hex yellow)'
@@ -145,7 +144,7 @@ cat >"$ALACRITTY" <<EOF
   cyan =    '$(hex aqua)'
   white =   '$(hex fg1)'
 [colors.bright]
-  black =   '$(hex grey)'
+  black =   '$(hex bg1)'
   red =     '$(hex red)'
   green =   '$(hex green)'
   yellow =  '$(hex yellow)'
@@ -153,6 +152,12 @@ cat >"$ALACRITTY" <<EOF
   magenta = '$(hex purple)'
   cyan =    '$(hex aqua)'
   white =   '$(hex fg)'
+[colors.cursor]
+  text =    '$(hex bg)'
+  cursor =  '$(hex fg1)'
+[colors.selection]
+  text =        '$(hex bg)'
+  background =  '$(hex gray)'
 EOF
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -298,11 +303,4 @@ echo "  → Activated via current-* palette files."
 
 if command -v fish >/dev/null 2>&1; then
   fish -c "source ${HOME}/.config/colors/current-fish.fish" >/dev/null 2>&1 || true
-fi
-
-if [[ -x "$REFRESH_SCRIPT" ]]; then
-  echo "Refreshing desktop session..."
-  "$REFRESH_SCRIPT" || echo "⚠️ Failed to refresh desktop session"
-else
-  echo "ℹ️ refresh-session script not found. Skipping desktop refresh."
 fi
