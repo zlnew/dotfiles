@@ -84,9 +84,9 @@ restart_mako() {
 }
 
 reload_compositor() {
-  if command -v hyprctl >/dev/null 2>&1; then
+  if pgrep -x hyprland >/dev/null 2>&1; then
     hyprctl reload >/dev/null 2>&1 || log "warning: hyprctl reload failed"
-  elif command -v niri >/dev/null 2>&1; then
+  elif pgrep -x niri >/dev/null 2>&1; then
     niri msg action load-config-file >/dev/null 2>&1 || log "warning: niri reload-config failed"
   fi
 }

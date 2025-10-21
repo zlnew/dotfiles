@@ -172,6 +172,7 @@ binds {
     spawn-sh-at-startup "mako &"
     spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
     spawn-sh-at-startup "wl-paste --watch cliphist store"
+    spawn-sh-at-startup "nm-applet --indicator"
     spawn-sh-at-startup "idlehandler"
 
     prefer-no-csd
