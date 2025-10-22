@@ -11,9 +11,9 @@
 }
 
 #waybar {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: @bg;
   color: @fg;
-  border-radius: 8px;
+  border-radius: 0;
   margin: 0;
 }
 
@@ -26,7 +26,7 @@ window#waybar.hidden {
   padding: 0 10px 0 10px;
   margin: 0 4px 0 4px;
   color: @fg;
-  opacity: 0.3;
+  opacity: 0.5;
   background-color: transparent;
 }
 
@@ -146,10 +146,9 @@ window#waybar.hidden {
   }
 }
 
-/* Remove extra margins for first/last modules */
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
+.modules-left {
+  padding-left: 8px;
 }
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
+.modules-right {
+  padding-right: 8px
 }

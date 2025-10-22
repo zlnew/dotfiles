@@ -219,9 +219,9 @@ render_template "$ZELLIJ_TEMPLATE" "$ZELLIJ_OUTPUT"
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 reset_tokens
 case "$THEME" in
-  tokyonight) TOKENS[wallpaper_path]="~/.local/share/wallpapers/blue-matter-pawel-czerwinski.jpg" ;;
-  gruvbox) TOKENS[wallpaper_path]="~/.local/share/wallpapers/xavier-cuenca-w4-3.jpg" ;;
-  *) TOKENS[wallpaper_path]="~/.local/share/wallpapers/xavier-cuenca-w4-3.jpg" ;;
+  tokyonight) TOKENS[wallpaper_path]="~/.local/share/wallpapers/apocalypse.jpg" ;;
+  gruvbox) TOKENS[wallpaper_path]="~/.local/share/wallpapers/waves.png" ;;
+  *) TOKENS[wallpaper_path]="~/.local/share/wallpapers/waves.png" ;;
 esac
 NIRI_TEMPLATE="niri/.config/niri/config.template.kdl"
 NIRI_OUTPUT="${COLORS_DIR}/${THEME}-niri.kdl"

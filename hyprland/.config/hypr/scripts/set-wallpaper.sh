@@ -3,7 +3,7 @@ set -euo pipefail
 
 wallpaper_dir="${HOME}/.local/share/wallpapers"
 theme_file="${HOME}/.config/colors/theme"
-default_wallpaper="xavier-cuenca-w4-3.jpg"
+default_wallpaper="waves.png"
 
 choose_wallpaper() {
     local selected="$default_wallpaper"
@@ -11,8 +11,8 @@ choose_wallpaper() {
     if [[ -f "$theme_file" ]]; then
         read -r theme <"$theme_file"
         case "$theme" in
-            tokyonight) selected="blue-matter-pawel-czerwinski.jpg" ;;
-            gruvbox) selected="xavier-cuenca-w4-3.jpg" ;;
+            tokyonight) selected="apocalypse.jpg" ;;
+            gruvbox) selected="waves.png" ;;
             *) selected="$default_wallpaper" ;;
         esac
     fi
