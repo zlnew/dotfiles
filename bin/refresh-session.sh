@@ -10,7 +10,7 @@ log() {
 }
 
 choose_wallpaper() {
-  local fallback="xavier-cuenca-w4-3.jpg"
+  local fallback="waves.png"
 
   if [[ ! -f "$theme_file" ]]; then
     printf '%s\n' "$fallback"
@@ -20,7 +20,7 @@ choose_wallpaper() {
   local theme
   read -r theme <"$theme_file"
   case "$theme" in
-    tokyonight) printf '%s\n' "blue-matter-pawel-czerwinski.jpg" ;;
+    tokyonight) printf '%s\n' "apocalypse.jpg" ;;
     gruvbox|"") printf '%s\n' "$fallback" ;;
     *) printf '%s\n' "$fallback" ;;
   esac
