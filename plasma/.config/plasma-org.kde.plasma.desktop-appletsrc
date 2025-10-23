@@ -23,7 +23,7 @@ DialogWidth=720
 positions={"1920x1080":[]}
 
 [Containments][1][Wallpaper][org.kde.image][General]
-Image=/usr/share/wallpapers/cachyos-wallpapers/north.png
+Image=/home/zlnew/.local/share/wallpapers/big-tree.png
 SlidePaths=/home/zlnew/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [Containments][2]
@@ -40,7 +40,7 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][15][Configuration]
-PreloadWeight=80
+PreloadWeight=85
 popupHeight=450
 popupWidth=560
 
