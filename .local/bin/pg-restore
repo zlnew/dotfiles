@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# restore-db.sh
+# Simple PostgreSQL restore script
+
+set -e
+
+if [ "$#" -ne 3 ]; then
+  echo "Usage: $0 <username> <dbname> <file>"
+  echo "Example: $0 postgres mydb backup.dump"
+  exit 1
+fi
+
+USERNAME="$1"
+DBNAME="$2"
+FILE="$3"
+
+echo "🌀 Restoring '$DBNAME' as '$USERNAME' from '$FILE'..."
+pg_restore --username="$USERNAME" --dbname="$DBNAME" --no-owner --verbose "$FILE"
+echo "✅ Done."
+
