@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-brave --app=https://www.notion.so/ --new-window --disable-session-crashed-bubble
+$WEBAPP --app=https://www.notion.so/ --new-window --disable-session-crashed-bubble

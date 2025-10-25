@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-brave --app=https://chatgpt.com/g/g-1RdmhTAHg-git-commit-message-pro/ --new-window --disable-session-crashed-bubble
+$WEBAPP --app=https://chatgpt.com/g/g-1RdmhTAHg-git-commit-message-pro/ --new-window --disable-session-crashed-bubble

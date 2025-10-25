@@ -74,17 +74,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-. "$HOME/.cargo/env"
 
 # =========================
 # Prompt Enhancements
 # =========================
-eval "$(starship init bash)"
 eval "$(zoxide init bash)"
-
-# =========================
-# Auto-start Zellij
-# =========================
-if [[ -z "$ZELLIJ" && -x "$(command -v zellij)" ]]; then
-  exec zellij --layout "$HOME/.config/zellij/config.kdl"
-fi
