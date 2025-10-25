@@ -131,9 +131,8 @@ setup_device_specific() {
   section "Desktop overlays"
   echo " 1) Hyprland (Wayland tiling)"
   echo " 2) Niri (Wayland tiling)"
-  echo " 3) Plasma (KDE)"
-  echo " 4) None (skip overlays)"
-  read -rp "Select overlay [1-4, type 4 to skip]: " device_choice
+  echo " 3) None (skip overlays)"
+  read -rp "Select overlay [1-3, type 3 to skip]: " device_choice
 
   case $device_choice in
   1)
@@ -148,11 +147,6 @@ setup_device_specific() {
     done
     ;;
   3)
-    for dir in plasma/.config/*; do
-      link "$(pwd)/$dir" "$HOME/.config/$(basename "$dir")"
-    done
-    ;;
-  4)
     echo "ℹ️ Skipping device-specific overlays."
     ;;
   *)
@@ -225,7 +219,7 @@ case $choice in
   read -rp "Regenerate themed assets? [y/N]: " colorscheme_choice
   [[ $colorscheme_choice =~ ^[Yy]$ ]] && choose_colorscheme
 
-  read -rp "Apply device overlay (Hyprland/Niri/Plasma)? [y/N]: " device_choice
+  read -rp "Apply device overlay (Hyprland/Niri)? [y/N]: " device_choice
   [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific
   ;;
 *)

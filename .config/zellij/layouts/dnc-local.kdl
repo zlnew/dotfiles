@@ -47,11 +47,18 @@ layout {
 
     // ────────────── Tab 4: PostgreSQL CLI ──────────────
     tab name="pgcli" {
+      pane split_direction="vertical" {
         pane {
             cwd "~/www/duanaga/core-api"
             command "pgcli"
             args "-u" "postgres" "-d" "dnc"
         }
+        pane {
+            cwd "~/www/duanaga/core-api"
+            command "pgcli"
+            args "-u" "postgres" "-d" "dnc"
+        }
+      }
     }
 
     // ────────────── Tab 5: Background Jobs ──────────────

@@ -46,11 +46,23 @@ return {
 
       local intelephense_ls_config = {}
 
+      local phpactor_ls_config = {
+        cmd = { "phpactor", "language-server" },
+        filetypes = { "php" },
+        root_dir = function(fname)
+          return require("lspconfig").util.root_pattern("composer.json", ".git")(fname)
+        end,
+        init_options = {
+          ["language_server_phpstan.enabled"] = false, -- optional tweak
+        },
+      }
+
       opts.servers = opts.servers or {}
       opts.servers.vtsls = vim.tbl_deep_extend("force", opts.servers.vtsls or {}, vts_ls_config)
       opts.servers.volar = vim.tbl_deep_extend("force", opts.servers.volar or {}, vue_ls_config)
       opts.servers.tailwindcss = vim.tbl_deep_extend("force", opts.servers.tailwindcss or {}, tailwindcss_ls_config)
       opts.servers.intelephense = vim.tbl_deep_extend("force", opts.servers.intelephense or {}, intelephense_ls_config)
+      opts.servers.phpactor = vim.tbl_deep_extend("force", opts.servers.phpactor or {}, phpactor_ls_config)
     end,
   },
 }

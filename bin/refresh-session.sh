@@ -3,7 +3,6 @@ set -euo pipefail
 
 theme_file="${HOME}/.config/colors/theme"
 wallpaper_dir="${HOME}/.local/share/wallpapers"
-hypr_wallpaper_script="${HOME}/.config/hypr/scripts/set-wallpaper.sh"
 
 log() {
   printf '[refresh-session] %s\n' "$1"
@@ -40,11 +39,6 @@ launch_swww() {
 }
 
 reload_wallpaper() {
-  if [[ -x "$hypr_wallpaper_script" ]]; then
-    "$hypr_wallpaper_script" || log "warning: Hyprland wallpaper script exited with errors"
-    return
-  fi
-
   local wallpaper path
   wallpaper=$(choose_wallpaper)
   path="${wallpaper_dir}/${wallpaper}"
@@ -84,7 +78,7 @@ restart_mako() {
 }
 
 reload_compositor() {
-  if pgrep -x hyprland >/dev/null 2>&1; then
+  if pgrep -x Hyprland >/dev/null 2>&1; then
     hyprctl reload >/dev/null 2>&1 || log "warning: hyprctl reload failed"
   elif pgrep -x niri >/dev/null 2>&1; then
     niri msg action load-config-file >/dev/null 2>&1 || log "warning: niri reload-config failed"

@@ -19,8 +19,6 @@ Wayland-first dotfiles that keep Hyprland, Niri, and a minimal Plasma setup alig
 ├── etc/                # keyd layouts, systemd units, misc /etc snippets
 ├── hyprland/.config/   # Hyprland-specific configs and scripts
 ├── niri/.config/       # Niri config.kdl plus GTK/Kvantum overrides
-├── plasma/.config/     # Plasma overrides layered on top of the shared configs
-├── screenshots/        # Reference captures used in docs
 └── fresh-install-guide.md  # Long-form rebuild notes
 ```
 
@@ -59,9 +57,3 @@ Wayland-first dotfiles that keep Hyprland, Niri, and a minimal Plasma setup alig
 
 - `fresh-install-guide.md` — full package list and bootstrap notes for a new workstation.
 - `AGENTS.md` — concise rules of the road for tooling and automation.
-
-## Screenshots
-
-- ![Hyprland workspace](screenshots/2025-10-01T17:28:51,372724276+07:00.png)
-- ![Niri overview](screenshots/2025-10-01T17:27:50,967586453+07:00.png)
-- ![Neovim setup](screenshots/2025-10-01T17:27:16,214358722+07:00.png)

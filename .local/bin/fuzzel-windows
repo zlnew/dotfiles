@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-if pgrep -x hyprland >/dev/null 2>&1; then
+if pgrep -x Hyprland >/dev/null 2>&1; then
   WM="hyprland"
 elif pgrep -x niri >/dev/null 2>&1; then
   WM="niri"
