@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -e
+
+THEME_FILE="$HOME/.config/colors/theme"
+WALLPAPER_DIR="$HOME/.local/share/wallpapers"
+
+if [[ -f "$THEME_FILE" ]]; then
+    THEME=$(cat "$THEME_FILE" | tr -d '[:space:]')
+else
+    THEME="gruvbox"
+fi
+
+case "$THEME" in
+    gruvbox)
+        WALLPAPER_PATH="$WALLPAPER_DIR/waves.png"
+        ;;
+    tokyonight)
+        WALLPAPER_PATH="$WALLPAPER_DIR/apocalypse.jpg"
+        ;;
+    *)
+        WALLPAPER_PATH="$WALLPAPER_DIR/waves.png"
+        ;;
+esac
+
+if ! pgrep -x "swww-daemon" >/dev/null; then
+    swww-daemon &
+    sleep 1
+fi
+
+swww img "$WALLPAPER_PATH" --transition-type any
+
