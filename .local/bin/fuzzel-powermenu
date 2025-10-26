@@ -1,13 +1,32 @@
 #!/usr/bin/env bash
 
-ACTION=$(printf "Poweroff\nReboot\nSuspend\nHibernate" | \
-fuzzel --dmenu --prompt "Power > " --lines=4 --width=30)
+ACTION=$(printf "Logout\nPoweroff\nReboot\nSuspend\nHibernate" | \
+fuzzel --dmenu --prompt "Power > " --lines=5 --width=30)
 
 case "$ACTION" in
-  "Poweroff") systemctl poweroff ;;
-  "Reboot") systemctl reboot ;;
-  "Suspend") systemctl suspend ;;
-  "Hibernate") systemctl hibernate ;;
-  *) exit 0 ;;
+  "Logout")
+    if pgrep -x Hyprland >/dev/null 2>&1; then
+      systemctl --user stop hyprland
+    elif pgrep -x niri >/dev/null 2>&1; then
+      systemctl --user stop niri
+    else
+      notify-send "Logout failed" "Unknown compositor session."
+    fi
+    ;;
+  "Poweroff")
+    systemctl poweroff
+    ;;
+  "Reboot")
+    systemctl reboot
+    ;;
+  "Suspend")
+    systemctl suspend
+    ;;
+  "Hibernate")
+    systemctl hibernate
+    ;;
+  *)
+    exit 0
+    ;;
 esac
 
