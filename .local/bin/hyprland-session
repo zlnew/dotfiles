@@ -1,0 +1,66 @@
+#!/bin/sh
+# hyprland-session - minimal systemd-aware launcher for Hyprland
+
+# If being run as a user service, exec directly
+if [ -n "${MANAGERPID:-}" ] && [ "${SYSTEMD_EXEC_PID:-}" = "$$" ]; then
+    case "$(ps -p "$MANAGERPID" -o cmd=)" in
+    *systemd*--user*)
+        exec Hyprland
+        ;;
+    esac
+fi
+
+# Re-exec as a login shell if not already
+if [ -n "$SHELL" ] &&
+   grep -q "$SHELL" /etc/shells &&
+   ! (echo "$SHELL" | grep -q "false") &&
+   ! (echo "$SHELL" | grep -q "nologin"); then
+  if [ "$1" != '-l' ]; then
+    exec bash -c "exec -l '$SHELL' -c '$0 -l $*'"
+  else
+    shift
+  fi
+fi
+
+# Detect user service manager (systemd/dinit)
+if hash systemctl >/dev/null 2>&1; then
+    # Check if a session already exists
+    if systemctl --user -q is-active hyprland.service; then
+        echo 'A Hyprland session is already running.'
+        exit 1
+    fi
+
+    # Reset failed units to avoid stale state
+    systemctl --user reset-failed
+
+    # Import login environment
+    systemctl --user import-environment
+
+    # Sync dbus environment (critical for polkit, portals, etc.)
+    if hash dbus-update-activation-environment 2>/dev/null; then
+        dbus-update-activation-environment --all
+    fi
+
+    # Start hyprland.service and wait for it to end
+    systemctl --user --wait start hyprland.service
+
+    # After exit, mark session as closed
+    systemctl --user start --job-mode=replace-irreversibly hyprland-shutdown.target
+
+    # Clean up exported vars
+    systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE
+
+elif hash dinitctl >/dev/null 2>&1; then
+    if ! pgrep -u "$(id -u)" dinit >/dev/null 2>&1; then
+        echo "dinit user daemon is not running."
+        exit 1
+    fi
+    if dinitctl --user is-started hyprland >/dev/null 2>&1; then
+        echo 'A Hyprland session is already running.'
+        exit 1
+    fi
+    dinitctl --user start hyprland
+else
+    echo "No systemd or dinit detected, please run 'Hyprland' directly."
+fi
+
