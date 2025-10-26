@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Hyprland (Session)
+Comment=An intelligent dynamic tiling Wayland compositor
+Exec=hyprland-session
+Type=Application
+DesktopNames=Hyprland
+Keywords=tiling;wayland;compositor;
+

@@ -1,5 +1,5 @@
 [Unit]
-Description=Hyprland Wayland Compositor
+Description=An intelligent dynamic tiling Wayland compositor
 BindsTo=graphical-session.target
 Before=graphical-session.target
 Wants=graphical-session-pre.target
