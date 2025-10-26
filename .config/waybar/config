@@ -13,13 +13,10 @@
     "~/.config/waybar/modules.json"
   ],
 
-  "modules-center": [
-    "niri/workspaces",
-    "hyprland/workspaces"
-  ],
-
   "modules-right": [
-    "tray",
+    "hyprland/workspaces",
+    "niri/workspaces",
+    "custom/sp1",
     "temperature",
     "custom/sp1",
     "backlight",
@@ -27,6 +24,7 @@
     "battery",
     "custom/sp1",
     "clock",
-    "custom/idle_inhibitor"
+    "tray",
+    "custom/idle_inhibitor",
   ]
 }

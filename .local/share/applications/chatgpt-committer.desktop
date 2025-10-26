@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=ChatGPT Committer
 Exec=webapp-chatgpt-committer
+Icon=chatgpt-committer
 Type=Application
 StartupNotify=false
 Terminal=false

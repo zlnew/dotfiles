@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Notion
 Exec=webapp-notion
+Icon=notion
 Type=Application
 StartupNotify=false
 Terminal=false

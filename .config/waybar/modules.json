@@ -88,7 +88,8 @@
     "return-type": "json",
     "exec": "~/.local/bin/idle-inhibitor json",
     "on-click": "~/.local/bin/idle-inhibitor toggle",
-    "interval": 5
+    "interval": 5,
+    "format": "{text}"
   },
 
   "cpu": {

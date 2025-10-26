@@ -103,31 +103,35 @@ toggle_idle() {
 }
 
 print_json() {
-    local state text tooltip class alt
+    local state text tooltip class alt icon
     state="$(current_state)"
 
     case "$state" in
         paused)
-            text="Awake"
-            tooltip="Idle timers paused; the system will stay awake."
+            icon=""
+            text="PULSE"
+            tooltip="Idle timers paused; system remains conscious and alert."
             class="inhibited"
             alt="paused"
             ;;
         running)
-            text="Idle"
-            tooltip="Idle timers active; lock and suspend will trigger."
+            icon=""
+            text="VOID"
+            tooltip="Idle timers active; system will descend into sleep soon."
             class="active"
             alt="running"
             ;;
         *)
-            text="Idle?"
-            tooltip="Idle handler is not running."
+            icon=""
+            text="LIMBO"
+            tooltip="Idle handler absent; system drifts between wake and sleep."
             class="warning"
             alt="stopped"
             ;;
     esac
 
-    printf '{"text":"%s","tooltip":"%s","class":"%s","alt":"%s"}\n' "$text" "$tooltip" "$class" "$alt"
+    printf '{"text":"%s","tooltip":"%s","class":"%s","alt":"%s","icon":"%s"}\n' \
+        "$text" "$tooltip" "$class" "$alt" "$icon"
 }
 
 case "$ACTION" in

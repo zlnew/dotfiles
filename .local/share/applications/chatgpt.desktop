@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=ChatGPT
 Exec=webapp-chatgpt
+Icon=chatgpt
 Type=Application
 StartupNotify=false
 Terminal=false
 Categories=;Chat;AI;Autocompletion;
-

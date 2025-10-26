@@ -1,4 +1,4 @@
-@import url("/home/zlnew/.config/colors/current-waybar.css");
+@import url("../colors/current-waybar.css");
 
 * {
   font-family: "sans";
@@ -24,7 +24,7 @@ window#waybar.hidden {
 #workspaces button {
   min-width: 0;
   padding: 0 10px 0 10px;
-  margin: 4px 4px 0 4px;
+  margin: 4px 0 0 4px;
   color: @fg;
   background-color: transparent;
 }
@@ -37,7 +37,10 @@ window#waybar.hidden {
 }
 
 #workspaces button:hover {
-  background: transparent;
+  background-color: @aqua;
+  border-radius: 4px;
+  color: @bg;
+  opacity: 0.9;
 }
 
 #workspaces button.urgent {
@@ -147,17 +150,8 @@ window#waybar.hidden {
   }
 }
 
-.modules-center {
-  background: rgba(0, 0, 0, 1);
-  border-width: 1px 1px 0 1px;
-  border-style: solid;
-  border-color: @aqua;
-  border-radius: 8px 8px 0 0;
-}
-
 .modules-right {
   background: rgba(0, 0, 0, 1);
-  padding-left: 8px;
   border-width: 1px 0 0 1px;
   border-style: solid;
   border-color: @aqua;

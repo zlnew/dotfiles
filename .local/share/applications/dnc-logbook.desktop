@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=DNC Logbook
 Exec=webapp-dnclogbook
+Icon=dnc-logbook
 Type=Application
 StartupNotify=false
 Terminal=false
