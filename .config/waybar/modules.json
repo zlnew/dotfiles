@@ -33,7 +33,7 @@
 
   // General Modules
   "clock": {
-    "format": "{:%e %b | %H:%M}",
+    "format": "{:%e %b, %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "today-format": "<b>{}</b>"
   },
@@ -64,7 +64,7 @@
   },
 
   "tray": {
-    "icon-size": 16,
+    "icon-size": 12,
     "spacing": 10
   },
 

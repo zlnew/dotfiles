@@ -2,7 +2,7 @@
 
 * {
   font-family: "sans";
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@
 }
 
 #waybar {
-  background-color: @bg;
+  background-color: transparent;
   color: @fg;
   border-radius: 0;
   margin: 0;
@@ -24,14 +24,15 @@ window#waybar.hidden {
 #workspaces button {
   min-width: 0;
   padding: 0 10px 0 10px;
-  margin: 0 4px 0 4px;
+  margin: 4px 4px 0 4px;
   color: @fg;
-  opacity: 0.5;
   background-color: transparent;
 }
 
 #workspaces button.active {
-  color: @green;
+  background-color: @aqua;
+  border-radius: 4px;
+  color: @bg;
   opacity: 1;
 }
 
@@ -146,9 +147,19 @@ window#waybar.hidden {
   }
 }
 
-.modules-left {
-  padding-left: 8px;
+.modules-center {
+  background: rgba(0, 0, 0, 1);
+  border-width: 1px 1px 0 1px;
+  border-style: solid;
+  border-color: @aqua;
+  border-radius: 8px 8px 0 0;
 }
+
 .modules-right {
-  padding-right: 8px
+  background: rgba(0, 0, 0, 1);
+  padding-left: 8px;
+  border-width: 1px 0 0 1px;
+  border-style: solid;
+  border-color: @aqua;
+  border-radius: 8px 0 0 0;
 }

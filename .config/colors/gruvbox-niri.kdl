@@ -181,7 +181,7 @@ binds {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
     layout {
-        gaps 8
+        gaps 0
         center-focused-column "on-overflow"
         always-center-single-column
 
@@ -250,7 +250,7 @@ binds {
     }
 
     window-rule {
-        geometry-corner-radius 8
+        geometry-corner-radius 0
         clip-to-geometry true
     }
 

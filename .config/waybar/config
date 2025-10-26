@@ -1,5 +1,8 @@
 {
   "layer": "top",
+  "position": "bottom",
+  "exclusive": false,
+
   "margin-top": 0,
   "margin-left": 0,
   "margin-bottom": 0,
@@ -10,28 +13,20 @@
     "~/.config/waybar/modules.json"
   ],
 
-  "modules-left": [
-    "custom/idle_inhibitor",
-    "clock",
-    "niri/window",
-    "hyprland/window"
-  ],
-
   "modules-center": [
-    "mpris",
     "niri/workspaces",
     "hyprland/workspaces"
   ],
 
   "modules-right": [
     "tray",
-    "custom/sp1",
-    "cpu",
-    "memory",
     "temperature",
     "custom/sp1",
     "backlight",
     "wireplumber",
-    "battery"
+    "battery",
+    "custom/sp1",
+    "clock",
+    "custom/idle_inhibitor"
   ]
 }
