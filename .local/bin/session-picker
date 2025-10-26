@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+# session-picker - interactive CLI compositor launcher
+#
+# Presents an fzf-backed session selector and execs the chosen compositor helper.
+# Known sessions are discovered automatically by checking for launcher scripts
+# on PATH (hyprland-session, niri-session, etc.).
+
+set -euo pipefail
+
+script_name=${0##*/}
+sessions=()
+
+stderr() {
+  printf '%s\n' "$*" >&2
+}
+
+print_usage() {
+  cat <<EOF
+Usage: ${script_name} [OPTIONS] [SESSION_KEY]
+
+Options:
+  -l, --list    Print discovered sessions and exit
+  -h, --help    Show this help message and exit
+
+If SESSION_KEY is provided, the picker skips interactivity and launches it
+directly. Otherwise an interactive selector is shown (requires fzf).
+EOF
+}
+
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+add_session() {
+  local key=$1
+  local label=$2
+  local command_line=$3
+
+  sessions+=("${key}|${label}|${command_line}")
+}
+
+find_session() {
+  local search_key=$1
+  local entry
+
+  for entry in "${sessions[@]}"; do
+    IFS='|' read -r key label command_line <<<"$entry"
+    if [ "$key" = "$search_key" ]; then
+      printf '%s\n' "$entry"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+list_sessions() {
+  local entry
+  printf '%s\t%s\t%s\n' 'key' 'label' 'command'
+  printf '%s\t%s\t%s\n' '---' '-----' '-------'
+  for entry in "${sessions[@]}"; do
+    IFS='|' read -r key label command_line <<<"$entry"
+    printf '%s\t%s\t%s\n' "$key" "$label" "$command_line"
+  done
+}
+
+discover_sessions() {
+  if command_exists Hyprland && command_exists hyprland-session; then
+    add_session "hyprland" "Hyprland (Wayland)" "hyprland-session"
+  fi
+
+  if command_exists niri && command_exists niri-session; then
+    add_session "niri" "Niri (Wayland)" "niri-session"
+  fi
+}
+
+choose_session() {
+  local entry selection
+  local items=()
+
+  if ! command_exists fzf; then
+    stderr 'fzf is required for session-picker.'
+    return 1
+  fi
+
+  for entry in "${sessions[@]}"; do
+    IFS='|' read -r key label _ <<<"$entry"
+    items+=("${key}|${label}")
+  done
+
+  selection=$(printf '%s\n' "${items[@]}" | fzf --prompt 'Start Session @ ' --delimiter '|' --with-nth 2 --height 6)
+
+  if [ -z "${selection:-}" ]; then
+    return 1
+  fi
+
+  printf '%s\n' "${selection%%|*}"
+}
+
+run_session() {
+  local entry
+  if ! entry=$(find_session "$1"); then
+    stderr "Unknown session key: $1"
+    return 1
+  fi
+
+  IFS='|' read -r _ label command_line <<<"$entry"
+  stderr "Launching ${label}..."
+
+  local command_parts=()
+  IFS=' ' read -r -a command_parts <<<"$command_line"
+  exec "${command_parts[@]}"
+}
+
+main() {
+  discover_sessions
+
+  if [ "${#sessions[@]}" -eq 0 ]; then
+    stderr 'No sessions discovered on PATH.'
+    exit 1
+  fi
+
+  local positional_session=''
+
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -h|--help)
+        print_usage
+        exit 0
+        ;;
+      -l|--list)
+        list_sessions
+        exit 0
+        ;;
+      --)
+        shift
+        break
+        ;;
+      -*)
+        stderr "Unknown option: $1"
+        print_usage
+        exit 2
+        ;;
+      *)
+        positional_session=$1
+        ;;
+    esac
+    shift
+  done
+
+  if [ -n "$positional_session" ]; then
+    run_session "$positional_session"
+    exit 0
+  fi
+
+  local selected_session=''
+  if ! selected_session=$(choose_session); then
+    exit 1
+  fi
+
+  run_session "$selected_session"
+}
+
+main "$@"
