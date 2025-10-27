@@ -8,10 +8,6 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cl='clear'
 
-# Applications
-alias browser='firefox-developer-edition || firefox || brave'
-alias terminal='alacritty'
-
 # Editors
 alias v='nvim'
 alias vim='nvim'
