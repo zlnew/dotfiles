@@ -23,8 +23,8 @@ window#waybar.hidden {
 
 #workspaces button {
   min-width: 0;
-  padding: 0 10px 0 10px;
-  margin: 4px 0 0 4px;
+  padding: 5px 10px 5px 10px;
+  margin: 4px 0 4px 4px;
   color: @fg;
   background-color: transparent;
 }
@@ -40,7 +40,7 @@ window#waybar.hidden {
   background-color: @aqua;
   border-radius: 4px;
   color: @bg;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 #workspaces button.urgent {
@@ -152,8 +152,8 @@ window#waybar.hidden {
 
 .modules-right {
   background: rgba(0, 0, 0, 1);
-  border-width: 1px 0 0 1px;
+  border-width: 1px;
   border-style: solid;
   border-color: @aqua;
-  border-radius: 8px 0 0 0;
+  border-radius: 8px;
 }
