@@ -10,3 +10,8 @@
 !.config/fish/completions/bun.fish
 !.config/fish/conf.d/colors.fish
 !.config/fish/functions/nvm_autoload.fish
+
+.local/share/*
+!.local/share/applications/*
+!.local/share/wallpapers/*
+!.local/share/wayland-sessions/*
