@@ -28,5 +28,5 @@ border-color={{aqua}}
 
 [urgency=critical]
 background-color={{red}}
-text-color={{fg1}}
+text-color={{white}}
 border-color={{red}}

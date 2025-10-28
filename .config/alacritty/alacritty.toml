@@ -52,10 +52,10 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 save_to_clipboard = true
 
 [cursor]
-style = "Underline"
+style = "Block"
 vi_mode_style = "None"
 unfocused_hollow = true
-thickness = 0.15
+thickness = 0.25
 
 [mouse]
 hide_when_typing = true

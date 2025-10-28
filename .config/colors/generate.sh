@@ -32,6 +32,8 @@ declare -a COLOR_KEYS=(
   orange
   grey
   gray
+  black
+  white
 )
 
 declare -Ag COLORS
@@ -124,6 +126,8 @@ cat >"$WAYBAR" <<EOF
 @define-color purple $(hex purple);
 @define-color aqua   $(hex aqua);
 @define-color orange $(hex orange);
+@define-color black  $(hex black);
+@define-color white  $(hex white);
 EOF
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -135,29 +139,23 @@ cat >"$ALACRITTY" <<EOF
   background = '$(hex bg)'
   foreground = '$(hex fg)'
 [colors.normal]
-  black =   '$(hex bg)'
+  black =   '$(hex black)'
   red =     '$(hex red)'
   green =   '$(hex green)'
   yellow =  '$(hex yellow)'
   blue =    '$(hex blue)'
   magenta = '$(hex purple)'
   cyan =    '$(hex aqua)'
-  white =   '$(hex fg1)'
+  white =   '$(hex white)'
 [colors.bright]
-  black =   '$(hex bg1)'
+  black =   '$(hex black)'
   red =     '$(hex red)'
   green =   '$(hex green)'
   yellow =  '$(hex yellow)'
   blue =    '$(hex blue)'
   magenta = '$(hex purple)'
   cyan =    '$(hex aqua)'
-  white =   '$(hex fg)'
-[colors.cursor]
-  text =    '$(hex bg)'
-  cursor =  '$(hex fg1)'
-[colors.selection]
-  text =        '$(hex bg)'
-  background =  '$(hex gray)'
+  white =   '$(hex white)'
 EOF
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -180,7 +178,8 @@ cat >"$HYPR" <<EOF
 \$aqua    = rgba($(hex_alpha aqua))
 \$orange  = rgba($(hex_alpha orange))
 
-\$white   = rgba($(hex_alpha fg))
+\$black   = rgba($(hex_alpha black))
+\$white   = rgba($(hex_alpha white))
 \$grey    = rgba($(hex_alpha grey))
 \$gray    = rgba($(hex_alpha gray))
 EOF

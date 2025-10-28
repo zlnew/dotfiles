@@ -17,7 +17,6 @@ input {
     }
 
     warp-mouse-to-focus mode="center-xy"
-    focus-follows-mouse
     workspace-auto-back-and-forth
 }
 
@@ -182,7 +181,7 @@ binds {
 
     layout {
         gaps 0
-        center-focused-column "on-overflow"
+        center-focused-column "always"
         always-center-single-column
 
         preset-column-widths {
@@ -192,7 +191,7 @@ binds {
         }
 
         border {
-            width 1
+            width 0
             active-color "#89b482" // accent
             inactive-color "#3c3836" // background
         }
