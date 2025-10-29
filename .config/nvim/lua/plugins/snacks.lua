@@ -1,14 +1,14 @@
 return {
   "snacks.nvim",
   opts = {
+    animate = { enabled = false },
+    scroll = { enabled = false },
     picker = {
       notifier = {
         enabled = true,
         level = vim.log.levels.ERROR,
         style = "minimal"
       },
-      scroll = { enabled = false },
-      animate = { enabled = false },
       sources = {
         files = {
           hidden = true,
@@ -42,4 +42,8 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    local snacks = require("snacks")
+    snacks.setup(opts)
+  end,
 }

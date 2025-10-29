@@ -1,6 +1,7 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
+    enabled = false,
     opts = function()
       return {
         refresh = {
@@ -16,7 +17,11 @@ return {
         sections = {
           lualine_a = {},
           lualine_b = {},
-          lualine_c = { "branch", "filename", "diff" },
+          lualine_c = {
+            "branch",
+            { "filename", path = 1 },
+            "diff",
+          },
           lualine_x = {},
           lualine_y = {},
           lualine_z = {},
@@ -24,7 +29,11 @@ return {
         inactive_sections = {
           lualine_a = {},
           lualine_b = {},
-          lualine_c = { "branch", "filename", "diff" },
+          lualine_c = {
+            "branch",
+            { "filename", path = 1 },
+            "diff",
+          },
           lualine_x = {},
           lualine_y = {},
           lualine_z = {},
