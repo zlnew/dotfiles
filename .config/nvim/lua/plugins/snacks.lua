@@ -20,13 +20,16 @@ return {
         grep = {
           hidden = true,
           ignored = false,
+          layout = {
+            fullscreen = true
+          }
         },
         explorer = {
           hidden = true,
           ignored = true,
           auto_close = true,
           layout = {
-            preview = "preview",
+            preview = "main",
             preset = "ivy",
             hidden = { "input" }
           }
