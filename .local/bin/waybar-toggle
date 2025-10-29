@@ -1,6 +1,6 @@
 #!/bin/bash
 if pgrep -x "waybar" > /dev/null; then
-    pkill waybar
+    pkill -SIGUSR1 waybar
 else
     waybar &
 fi

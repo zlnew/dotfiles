@@ -2,6 +2,9 @@
   "layer": "top",
   "position": "bottom",
   "exclusive": false,
+  "mode": "overlay",
+  "passthrough": true,
+  "start_hidden": true,
 
   "margin-top": 0,
   "margin-left": 0,
