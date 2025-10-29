@@ -20,6 +20,11 @@ input {
     workspace-auto-back-and-forth
 }
 
+cursor {
+    hide-when-typing
+    hide-after-inactive-ms 5000
+}
+
 // ────────────── Output Configuration ──────────────
 // You can run `niri msg outputs` to get the correct name for your displays.
 // You will have to remove "/-" and edit it before it takes effect.
@@ -179,16 +184,31 @@ binds {
 // ────────────── Layout Settings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
+    layer-rule {
+        match namespace="^swww-daemon$"
+        place-within-backdrop true
+    }
+
+    overview {
+        zoom 0.50
+        workspace-shadow {
+            off
+        }
+    }
+
     layout {
         gaps 0
         center-focused-column "always"
         always-center-single-column
+        background-color "transparent"
 
         preset-column-widths {
             proportion 0.33333
             proportion 0.5
             proportion 0.66667
         }
+
+        default-column-width { proportion 0.75; }
 
         border {
             width 0
