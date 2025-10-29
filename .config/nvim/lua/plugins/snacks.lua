@@ -3,6 +3,12 @@ return {
   opts = {
     animate = { enabled = false },
     scroll = { enabled = false },
+    bufdelete = { enabled = true },
+    dim = {
+      enabled = true,
+      animate = { enabled = false },
+    },
+    indent = { enabled = true },
     picker = {
       notifier = {
         enabled = true,
@@ -41,9 +47,16 @@ return {
         },
       },
     },
+    quickfile = { enabled = true },
+    statuscolumn = { enabled = true },
+    terminal = { enabled = true },
+    toggle = { enabled = true },
+    words = { enabled = true },
+    zen = { enabled = true },
   },
   config = function(_, opts)
     local snacks = require("snacks")
     snacks.setup(opts)
+    --[[ snacks.dim.enable() ]]
   end,
 }
