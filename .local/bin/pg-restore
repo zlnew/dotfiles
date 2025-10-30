@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# restore-db.sh
-# Simple PostgreSQL restore script
 
 set -e
 
@@ -15,6 +13,6 @@ DBNAME="$2"
 FILE="$3"
 
 echo "🌀 Restoring '$DBNAME' as '$USERNAME' from '$FILE'..."
-pg_restore --username="$USERNAME" --dbname="$DBNAME" --no-owner --verbose "$FILE"
+pg_restore --username="$USERNAME" --dbname="$DBNAME" --no-owner --clean --verbose "$FILE"
 echo "✅ Done."
 
