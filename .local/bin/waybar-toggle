@@ -1,7 +1,38 @@
-#!/bin/bash
-if pgrep -x "waybar" > /dev/null; then
-    pkill -SIGUSR1 waybar
-else
-    waybar &
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+runtime_dir="${XDG_RUNTIME_DIR:-}"
+state_dir="/tmp"
+
+if [[ -n "$runtime_dir" ]]; then
+    if tmpfile="$(mktemp -p "$runtime_dir" waybar-state.XXXX 2>/dev/null)"; then
+        state_dir="$runtime_dir"
+        rm -f "$tmpfile"
+    fi
 fi
 
+state_file="${state_dir}/waybar.visibility"
+
+current_state="hidden"
+if [[ -f "$state_file" ]]; then
+    current_state="$(<"$state_file")"
+fi
+
+if ! pgrep -x waybar >/dev/null 2>&1; then
+    if command -v setsid >/dev/null 2>&1; then
+        setsid -f waybar >/dev/null 2>&1 || true
+    else
+        nohup waybar >/dev/null 2>&1 &
+    fi
+    printf 'hidden\n' >"$state_file"
+    exit 0
+fi
+
+pkill -SIGUSR1 waybar >/dev/null 2>&1 || true
+
+if [[ "$current_state" == "visible" ]]; then
+    printf 'hidden\n' >"$state_file"
+else
+    printf 'visible\n' >"$state_file"
+fi
