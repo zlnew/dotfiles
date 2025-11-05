@@ -64,6 +64,7 @@ binds {
     MOD+SHIFT+E                         hotkey-overlay-title="Open File Manager" { spawn-sh "$FILE_MANAGER"; }
     MOD+B                               hotkey-overlay-title="Toggle Waybar" { spawn-sh "waybar-toggle"; }
     MOD+O                               hotkey-overlay-title="Restart Waybar" { spawn-sh "waybar-restart"; }
+    MOD+I                               hotkey-overlay-title="Toggle Idle Inhibitor" { spawn "~/.local/bin/idle-inhibitor" "toggle"; }
 
     // ─── Audio Controls ───
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "osd-notify volume-up"; }
