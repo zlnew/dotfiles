@@ -1,0 +1,157 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+volume_step="${VOLUME_STEP:-0.05}"
+brightness_step="${BRIGHTNESS_STEP:-5%}"
+audio_sink="${WPCTL_SINK:-@DEFAULT_AUDIO_SINK@}"
+audio_source="${WPCTL_SOURCE:-@DEFAULT_AUDIO_SOURCE@}"
+
+usage() {
+    cat <<'EOF'
+Usage: osd-notify <command>
+
+Commands:
+  volume-up         Increase sink volume.
+  volume-down       Decrease sink volume.
+  volume-mute       Toggle sink mute.
+  mic-mute          Toggle microphone mute.
+  brightness-up     Increase brightness.
+  brightness-down   Decrease brightness.
+EOF
+}
+
+send_notification() {
+    # shellcheck disable=SC2034
+    local tag=$1 summary=$2 body=$3 icon=$4 value=${5:-}
+    local -a args
+    args=(-a "osd-notify" -h "string:x-canonical-private-synchronous:${tag}")
+    if [ -n "$value" ]; then
+        args+=(-h "int:value:${value}")
+    fi
+    if [ -n "$icon" ]; then
+        args+=(-i "$icon")
+    fi
+    if [ -n "${OSD_EXPIRE:-}" ]; then
+        args+=("-t" "$OSD_EXPIRE")
+    fi
+    args+=("$summary" "$body")
+    notify-send "${args[@]}"
+}
+
+get_volume_state() {
+    local status
+    status="$(wpctl get-volume "$audio_sink")"
+    if printf '%s\n' "$status" | grep -q '\[MUTED\]'; then
+        volume_muted=1
+    else
+        volume_muted=0
+    fi
+    volume_percent=$(printf '%s\n' "$status" | awk '{v = int($2 * 100 + 0.5); if (v < 0) v = 0; if (v > 100) v = 100; print v}')
+}
+
+notify_volume() {
+    local icon body
+    get_volume_state
+    if [ "$volume_muted" -eq 1 ]; then
+        body="Muted"
+        icon="audio-volume-muted-symbolic"
+    else
+        body="${volume_percent}%"
+        if [ "$volume_percent" -le 33 ]; then
+            icon="audio-volume-low-symbolic"
+        elif [ "$volume_percent" -le 66 ]; then
+            icon="audio-volume-medium-symbolic"
+        else
+            icon="audio-volume-high-symbolic"
+        fi
+    fi
+    send_notification "volume" "Volume" "$body" "$icon" "$volume_percent"
+}
+
+notify_microphone() {
+    local status percent icon body
+    status="$(wpctl get-volume "$audio_source")"
+    if printf '%s\n' "$status" | grep -q '\[MUTED\]'; then
+        body="Muted"
+        icon="audio-input-microphone-muted-symbolic"
+    else
+        percent=$(printf '%s\n' "$status" | awk '{v = int($2 * 100 + 0.5); if (v < 0) v = 0; if (v > 100) v = 100; print v}')
+        body="${percent}%"
+        icon="audio-input-microphone-symbolic"
+    fi
+    send_notification "microphone" "Microphone" "$body" "$icon" "${percent:-}"
+}
+
+notify_brightness() {
+    local current max percent icon
+    current=$(brightnessctl get)
+    max=$(brightnessctl max)
+    if [ "$max" -eq 0 ]; then
+        percent=0
+    else
+        percent=$(( current * 100 / max ))
+    fi
+    if [ "$percent" -le 33 ]; then
+        icon="display-brightness-low-symbolic"
+    elif [ "$percent" -le 66 ]; then
+        icon="display-brightness-medium-symbolic"
+    else
+        icon="display-brightness-high-symbolic"
+    fi
+    send_notification "brightness" "Brightness" "${percent}%" "$icon" "$percent"
+}
+
+require_command() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        printf 'osd-notify: missing dependency: %s\n' "$1" >&2
+        exit 1
+    fi
+}
+
+if [ "$#" -lt 1 ]; then
+    usage >&2
+    exit 1
+fi
+
+require_command notify-send
+
+case "$1" in
+    volume-up)
+        require_command wpctl
+        wpctl set-volume "$audio_sink" "${volume_step}+" --limit 1.0
+        notify_volume
+        ;;
+    volume-down)
+        require_command wpctl
+        wpctl set-volume "$audio_sink" "${volume_step}-" --limit 1.0
+        notify_volume
+        ;;
+    volume-mute)
+        require_command wpctl
+        wpctl set-mute "$audio_sink" toggle
+        notify_volume
+        ;;
+    mic-mute)
+        require_command wpctl
+        wpctl set-mute "$audio_source" toggle
+        notify_microphone
+        ;;
+    brightness-up)
+        require_command brightnessctl
+        brightnessctl set "+${brightness_step}"
+        notify_brightness
+        ;;
+    brightness-down)
+        require_command brightnessctl
+        brightnessctl set "${brightness_step}-"
+        notify_brightness
+        ;;
+    -h|--help)
+        usage
+        ;;
+    *)
+        printf 'osd-notify: unknown command: %s\n' "$1" >&2
+        usage >&2
+        exit 1
+        ;;
+esac

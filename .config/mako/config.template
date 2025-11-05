@@ -20,13 +20,16 @@ border-radius=8
 background-color={{bg1}}
 text-color={{fg1}}
 border-color={{blue}}
+progress-color={{black}}
 
 [urgency=normal]
 background-color={{bg}}
 text-color={{fg}}
 border-color={{aqua}}
+progress-color={{black}}
 
 [urgency=critical]
 background-color={{red}}
 text-color=#000000
 border-color={{red}}
+progress-color={{black}}
