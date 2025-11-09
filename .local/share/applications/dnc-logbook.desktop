@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=DNC Logbook
+Name=DNC Logbook (Web App)
 Exec=webapp-dnclogbook
 Icon=dnc-logbook
 Type=Application

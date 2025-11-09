@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=ChatGPT Committer
+Name=ChatGPT Committer (Web App)
 Exec=webapp-chatgpt-committer
 Icon=chatgpt-committer
 Type=Application
