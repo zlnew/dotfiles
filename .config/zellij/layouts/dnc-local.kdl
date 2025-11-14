@@ -18,7 +18,7 @@ layout {
           }
           pane size="30%" {
             cwd "~/www/duanaga/core-api"
-            command "codex"
+            command "gemini"
           }
         }
     }
@@ -32,27 +32,21 @@ layout {
           }
           pane size="30%" {
             cwd "~/www/duanaga/dragon-bridge"
-            command "codex"
+            command "gemini"
           }
         }
     }
 
-    // ────────────── Tab 3: customer-portal ──────────────
-    tab name="customer-portal" {
+    // ────────────── Tab 3: Others ──────────────
+    tab name="others" {
         pane {
-            cwd "~/www/duanaga/portal_customer"
-            command "nvim"
+            cwd "~/www/duanaga"
         }
     }
 
     // ────────────── Tab 4: PostgreSQL CLI ──────────────
     tab name="pgcli" {
       pane split_direction="vertical" {
-        pane {
-            cwd "~/www/duanaga/core-api"
-            command "pgcli"
-            args "-u" "postgres" "-d" "dnc"
-        }
         pane {
             cwd "~/www/duanaga/core-api"
             command "pgcli"
@@ -72,12 +66,7 @@ layout {
           pane {
             cwd "~/www/duanaga/dragon-bridge"
             command "npm"
-            args "run" "dev"
-          }
-          pane {
-            cwd "~/www/duanaga/portal_customer"
-            command "$SHELL"
-            args "-c" "sleep 2 && npm run dev"
+            args "run" "dev" "--" "--host=127.0.0.1"
           }
         }
     }
