@@ -1,0 +1,76 @@
+session_name "zlnew"
+attach_to_session true
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+        children
+    }
+
+    // ────────────── Tab 1: dotfiles ──────────────
+    tab name="dotfiles" {
+        pane split_direction="vertical" {
+          pane size="70%" {
+              cwd "~/www/zlnew/dotfiles"
+              command "nvim"
+          }
+          pane size="30%" {
+            cwd "~/www/zlnew/dotfiles"
+            command "gemini"
+          }
+        }
+    }
+
+    // ────────────── Tab 2: portfolio ──────────────
+    tab name="portfolio" {
+        pane split_direction="vertical" {
+          pane size="70%" {
+              cwd "~/www/zlnew/neo-portfolio"
+              command "nvim"
+          }
+          pane size="30%" {
+            cwd "~/www/zlnew/neo-portfolio"
+            command "gemini"
+          }
+        }
+    }
+
+    // ────────────── Tab 3: aprizqyhub.my.id ──────────────
+    tab name="aprizqyhub.my.id" {
+        pane split_direction="vertical" {
+          pane size="70%" {
+              cwd "~/www/zlnew/aprizqyhub.my.id"
+              command "nvim"
+          }
+          pane size="30%" {
+            cwd "~/www/zlnew/aprizqyhub.my.id"
+            command "gemini"
+          }
+        }
+    }
+
+    // ────────────── Tab 4: system-monitor ──────────────
+    tab name="system-monitor" {
+        pane split_direction="vertical" {
+          pane size="70%" {
+              cwd "~/www/zlnew/system-monitor"
+              command "nvim"
+          }
+          pane size="30%" {
+            cwd "~/www/zlnew/system-monitor"
+            command "gemini"
+          }
+        }
+    }
+
+    // ────────────── Tab 5: Others ──────────────
+    tab name="others" {
+        pane {
+            cwd "~/www/zlnew"
+        }
+    }
+}
+
+

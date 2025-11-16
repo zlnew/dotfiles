@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Prepare output folder
-output_dir="$HOME/www/work-summary"
+output_dir="$HOME/www/zlnew/work-summary"
 mkdir -p "$output_dir"
 
 # Get current folder name and date for file naming
