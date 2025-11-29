@@ -11,57 +11,33 @@ layout {
 
     // ────────────── Tab 1: dotfiles ──────────────
     tab name="dotfiles" {
-        pane split_direction="vertical" {
-          pane size="70%" {
-              cwd "~/www/zlnew/dotfiles"
-              command "nvim"
-          }
-          pane size="30%" {
+        pane {
             cwd "~/www/zlnew/dotfiles"
-            command "gemini"
-          }
+            command "nvim"
         }
     }
 
     // ────────────── Tab 2: portfolio ──────────────
     tab name="portfolio" {
-        pane split_direction="vertical" {
-          pane size="70%" {
-              cwd "~/www/zlnew/neo-portfolio"
-              command "nvim"
-          }
-          pane size="30%" {
+        pane {
             cwd "~/www/zlnew/neo-portfolio"
-            command "gemini"
-          }
+            command "nvim"
         }
     }
 
     // ────────────── Tab 3: aprizqyhub.my.id ──────────────
     tab name="aprizqyhub.my.id" {
-        pane split_direction="vertical" {
-          pane size="70%" {
-              cwd "~/www/zlnew/aprizqyhub.my.id"
-              command "nvim"
-          }
-          pane size="30%" {
+        pane {
             cwd "~/www/zlnew/aprizqyhub.my.id"
-            command "gemini"
-          }
+            command "nvim"
         }
     }
 
     // ────────────── Tab 4: system-monitor ──────────────
     tab name="system-monitor" {
-        pane split_direction="vertical" {
-          pane size="70%" {
-              cwd "~/www/zlnew/system-monitor"
-              command "nvim"
-          }
-          pane size="30%" {
+        pane {
             cwd "~/www/zlnew/system-monitor"
-            command "gemini"
-          }
+            command "nvim"
         }
     }
 
@@ -72,5 +48,3 @@ layout {
         }
     }
 }
-
-
