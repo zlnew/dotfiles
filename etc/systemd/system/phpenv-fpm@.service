@@ -1,0 +1,13 @@
+[Unit]
+Description=phpenv PHP-FPM %i
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/srv/phpenv/versions/%i/sbin/php-fpm --nodaemonize --fpm-config /srv/phpenv/versions/%i/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+
+WorkingDirectory=/srv/phpenv/versions/%i
+
+[Install]
+WantedBy=multi-user.target
