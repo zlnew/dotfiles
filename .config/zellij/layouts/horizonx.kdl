@@ -1,0 +1,52 @@
+session_name "horizonx"
+attach_to_session true
+
+layout {
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="zjstatus"
+    }
+    children
+  }
+
+  tab name="horizonx" {
+    pane {
+      cwd "~/www/server/horizonx"
+      command "nvim"
+    }
+  }
+
+  tab name="horizonx-server" {
+    pane {
+      cwd "~/www/server/horizonx-server"
+      command "nvim"
+    }
+  }
+
+  tab name="background-jobs" {
+    pane split_direction="horizontal" {
+      pane {
+        cwd "~/www/server/horizonx"
+        command "npm"
+        args "run" "dev" "--" "--host=127.0.0.1" "--port=5174"
+      }
+      pane {
+        cwd "~/www/server/horizonx-server"
+        command "bin/server"
+      }
+      pane {
+        cwd "~/www/server/horizonx-server"
+        command "sudo"
+        args "bin/agent"
+      }
+    }
+  }
+
+  tab name="pgcli" {
+    pane {
+      cwd "~/www/server/horizonx-server"
+      command "pgcli"
+      args "-u" "postgres" "-d" "horizonx_local"
+    }
+  }
+}

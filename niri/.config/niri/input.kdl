@@ -1,0 +1,21 @@
+input {
+  keyboard {
+    xkb {
+      layout "us"
+    }
+    numlock
+  }
+
+  touchpad {
+    tap
+    natural-scroll
+  }
+
+  warp-mouse-to-focus mode="center-xy"
+  workspace-auto-back-and-forth
+}
+
+cursor {
+  hide-when-typing
+  hide-after-inactive-ms 5000
+}

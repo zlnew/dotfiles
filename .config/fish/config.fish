@@ -22,6 +22,7 @@ set --export PATH $BUN_INSTALL/bin $PATH
 set --export PATH "$PHPENV_ROOT/bin" $PATH
 set --export PATH "$HOME/.config/composer/vendor/bin" $PATH
 set --export PATH "$GO_ROOT/bin" $PATH
+set --export PATH "$HOME/.cargo/bin" $PATH
 
 set -Ux GOPATH (go env GOPATH)
 set -gx PATH $GOPATH/bin $PATH

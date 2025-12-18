@@ -25,6 +25,7 @@ alias zl="zellij --config ~/.config/zellij/config.kdl"
 alias zl_dnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl"
 alias zl_zlnew="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/zlnew.kdl"
 alias zl_server="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/server.kdl"
+alias zl_horizonx="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/horizonx.kdl"
 
 # PHP
 alias reck='vendor/bin/rector'
