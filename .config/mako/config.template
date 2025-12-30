@@ -7,7 +7,7 @@ layer=top
 max-icon-size=48
 default-timeout=10000
 
-font=sans 10
+font=monospace 10
 anchor=bottom-right
 margin=8
 outer-margin=8
