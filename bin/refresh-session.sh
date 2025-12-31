@@ -1,28 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-theme_file="${HOME}/.config/colors/theme"
-wallpaper_dir="${HOME}/.local/share/wallpapers"
+wallpaper_path="${HOME}/.local/share/wallpapers/waves.png"
 
 log() {
   printf '[refresh-session] %s\n' "$1"
-}
-
-choose_wallpaper() {
-  local fallback="waves.png"
-
-  if [[ ! -f "$theme_file" ]]; then
-    printf '%s\n' "$fallback"
-    return
-  fi
-
-  local theme
-  read -r theme <"$theme_file"
-  case "$theme" in
-    tokyonight) printf '%s\n' "apocalypse.jpg" ;;
-    gruvbox|"") printf '%s\n' "$fallback" ;;
-    *) printf '%s\n' "$fallback" ;;
-  esac
 }
 
 launch_swaybg() {
@@ -39,19 +21,15 @@ launch_swww() {
 }
 
 reload_wallpaper() {
-  local wallpaper path
-  wallpaper=$(choose_wallpaper)
-  path="${wallpaper_dir}/${wallpaper}"
-
-  if [[ ! -f "$path" ]]; then
-    log "warning: wallpaper file not found: ${path}"
+  if [[ ! -f "$wallpaper_path" ]]; then
+    log "warning: wallpaper file not found: ${wallpaper_path}"
     return
   fi
 
   if command -v swww >/dev/null 2>&1; then
-    launch_swww "$path"
+    launch_swww "$wallpaper_path"
   elif command -v swaybg >/dev/null 2>&1; then
-    launch_swaybg "$path"
+    launch_swaybg "$wallpaper_path"
   else
     log "warning: no wallpaper command (swww or swaybg) available"
   fi

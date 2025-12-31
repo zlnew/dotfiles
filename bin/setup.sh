@@ -47,6 +47,15 @@ section() {
   printf '\n===== %s =====\n' "$label"
 }
 
+# --- generate colorscheme ----------------------------------------------------
+generate_colorscheme() {
+  section "Generate colorscheme"
+  (
+    cd "$REPO_ROOT/colorgen"
+    ./colorgen
+  )
+}
+
 # --- setup_global_configs ----------------------------------------------------
 setup_global_configs() {
   section "Global configs"
@@ -98,32 +107,6 @@ setup_bashrc() {
 setup_zshrc() {
   section ".zshrc"
   link "$(pwd)/.zshrc" "$HOME/.zshrc"
-}
-
-# --- choose_colorscheme -------------------------------------------------------
-choose_colorscheme() {
-  section "Theme assets"
-  echo " 1) Gruvbox Material (dark)"
-  echo " 2) TokyoNight (night)"
-  local colorscheme_choice
-  read -rp "Select colorscheme [1-2, default 1]: " colorscheme_choice
-
-  local theme
-  case $colorscheme_choice in
-  1 | "")
-    theme="gruvbox"
-    ;;
-  2)
-    theme="tokyonight"
-    ;;
-  *)
-    echo "Invalid choice. Falling back to Gruvbox Material."
-    theme="gruvbox"
-    ;;
-  esac
-
-  echo "Generating $theme assets..."
-  "$REPO_ROOT/.config/colors/generate.sh" "$theme"
 }
 
 # --- setup_device_specific ----------------------------------------------------
@@ -183,6 +166,7 @@ read -rp "Select mode [1-2]: " choice
 
 case $choice in
 1)
+  generate_colorscheme
   setup_global_configs
   setup_git_configs
   setup_local_bin
@@ -190,7 +174,6 @@ case $choice in
   setup_aliases
   setup_zshrc
   setup_bashrc
-  choose_colorscheme
   setup_device_specific
   ;;
 2)
@@ -215,9 +198,6 @@ case $choice in
 
   read -rp "Link .bashrc? [y/N]: " bashrc_choice
   [[ $bashrc_choice =~ ^[Yy]$ ]] && setup_bashrc
-
-  read -rp "Regenerate themed assets? [y/N]: " colorscheme_choice
-  [[ $colorscheme_choice =~ ^[Yy]$ ]] && choose_colorscheme
 
   read -rp "Apply device overlay (Hyprland/Niri)? [y/N]: " device_choice
   [[ $device_choice =~ ^[Yy]$ ]] && setup_device_specific

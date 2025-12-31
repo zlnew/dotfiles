@@ -1,7 +1,58 @@
-# Keep fish + prompt colours in sync with the active dotfiles theme.
-if status is-interactive
-    set -l fish_theme_file "$HOME/.config/colors/current-fish.fish"
-    if test -f "$fish_theme_file"
-        source "$fish_theme_file"
-    end
-end
+# =========================
+# Pure prompt colors
+# =========================
+set -U pure_color_primary '#7daea3'
+set -U pure_color_success '#89b482'
+set -U pure_color_warning '#d8a657'
+set -U pure_color_danger '#ea6962'
+
+set -U pure_color_prompt_on_success '#d4be98'
+set -U pure_color_prompt_on_error '#ea6962'
+
+set -U pure_color_current_directory '#7daea3'
+
+set -U pure_color_git_branch '#e78a4e'
+set -U pure_color_git_dirty '#d8a657'
+set -U pure_color_git_unpulled_commits '#d3869b'
+set -U pure_color_git_unpushed_commits '#d3869b'
+set -U pure_color_git_stash '#89b482'
+
+set -U pure_color_virtualenv '#89b482'
+
+set -U pure_color_dark '#1d2021'
+set -U pure_color_info '#ddc7a1'
+set -U pure_color_mute '#928374'
+set -U pure_color_light '#ddc7a1'
+set -U pure_color_normal '#d4be98'
+
+set -U pure_color_at_sign '#928374'
+set -U pure_color_hostname '#928374'
+set -U pure_color_username_normal '#ddc7a1'
+set -U pure_color_username_root '#ea6962'
+
+
+# =========================
+# Fish syntax highlighting
+# =========================
+set -U fish_color_normal '#d4be98'
+set -U fish_color_command '#7daea3'
+set -U fish_color_param '#e78a4e'
+set -U fish_color_quote '#a9b665'
+set -U fish_color_redirection '#d3869b'
+set -U fish_color_end '#89b482'
+set -U fish_color_error '#ea6962'
+set -U fish_color_operator '#d3869b'
+set -U fish_color_comment '#a89984'
+set -U fish_color_autosuggestion '#928374'
+
+set -U fish_color_selection '--background=#3c3836'
+set -U fish_color_search_match '--background=#32302f'
+
+
+# =========================
+# Fish pager
+# =========================
+set -U fish_pager_color_prefix '#89b482'
+set -U fish_pager_color_progress '#d8a657'
+set -U fish_pager_color_completion '#ddc7a1'
+set -U fish_pager_color_description '#928374'

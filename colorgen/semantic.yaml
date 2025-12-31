@@ -1,0 +1,51 @@
+semantic:
+  background:
+    primary: bg0
+    secondary: bg1
+    elevated: bg2
+
+  foreground:
+    primary: fg0
+    secondary: fg1
+    muted: gray0
+
+  ui:
+    border: gray0
+    cursor: fg0
+    selection: bg2
+
+  syntax:
+    keyword: red
+    string: green
+    number: orange
+    function: blue
+    type: yellow
+    constant: purple
+    comment: gray1
+
+  diagnostic:
+    error: red
+    warning: yellow
+    info: blue
+    hint: aqua
+
+  nvim:
+    background:
+      primary: bg0
+      secondary: bg1
+      tertiary: bg2
+    foreground:
+      primary: fg1
+      secondary: fg0
+    text:
+      muted: gray1
+      faint: gray0
+    state:
+      error: red
+      warning: orange
+      info: blue
+      hint: green
+    accent:
+      primary: purple
+      secondary: aqua
+      tertiary: yellow

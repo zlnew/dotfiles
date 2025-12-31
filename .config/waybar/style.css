@@ -1,7 +1,7 @@
-@import url("../colors/current-waybar.css");
+@import url("colors.css");
 
 * {
-  font-family: "monospace";
+  font-family: monospace;
   font-size: 12px;
   font-weight: 500;
   margin: 0;
@@ -12,53 +12,50 @@
 
 #waybar {
   background-color: transparent;
-  color: @fg;
-  border-radius: 0;
-  margin: 0;
+  color: @fg-primary;
 }
 
 window#waybar.hidden {
   opacity: 0.2;
 }
 
+/* =========================
+   Workspaces
+   ========================= */
+
 #workspaces button {
   min-width: 0;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px;
   margin: 4px 0 4px 4px;
-  color: @fg;
+  color: @fg-primary;
   background-color: transparent;
 }
 
-#workspaces button.active {
-  background-color: @aqua;
-  border-radius: 4px;
-  color: @bg;
-  opacity: 1;
-}
-
+#workspaces button.active,
 #workspaces button:hover {
-  background-color: @aqua;
+  background-color: @fg-primary;
+  color: @bg-primary;
   border-radius: 4px;
-  color: @bg;
-  opacity: 1;
 }
 
 #workspaces button.urgent {
-  color: @red;
-  opacity: 1;
+  color: @accent-red;
 }
+
+/* =========================
+   Window title
+   ========================= */
 
 #window {
   margin-left: 8px;
   font-weight: 800;
-  color: @fg;
+  color: @fg-primary;
 }
 
-#tray {
-  opacity: 0.8;
-}
+/* =========================
+   Common modules
+   ========================= */
 
-/* Common modules styling */
 #mpris,
 #clock,
 #battery,
@@ -81,79 +78,102 @@ window#waybar.hidden {
 #custom-screenshot_t,
 #custom-hyprPicker,
 #custom-launcher {
-  border-radius: 4px;
   padding: 6px;
-  color: @fg;
+  border-radius: 4px;
+  color: @fg-primary;
 }
 
-/* Specific color overrides */
+/* =========================
+   Module accents
+   ========================= */
+
 #cpu {
-  color: @red;
+  color: @accent-red;
 }
+
 #memory {
-  color: @green;
+  color: @accent-green;
 }
+
 #clock {
-  color: @blue;
+  color: @accent-blue;
 }
+
 #pulseaudio {
-  color: @aqua;
+  color: @accent-purple;
 }
+
+#temperature {
+  color: @accent-blue;
+}
+
+#temperature.critical {
+  color: @accent-red;
+}
+
+#bluetooth {
+  color: @accent-purple;
+}
+
+#bluetooth.disconnected {
+  color: @accent-red;
+}
+
+/* =========================
+   Battery states
+   ========================= */
+
 #battery {
-  color: @fg;
+  color: @fg-primary;
 }
 
 #battery.charging,
 #battery.full,
 #battery.plugged {
-  color: @green;
+  color: @accent-green;
 }
 
 #battery.critical:not(.charging) {
-  color: @red;
+  color: @accent-red;
   animation: blink 0.5s linear infinite alternate;
 }
 
-#temperature {
-  color: @blue;
-}
-#temperature.critical {
-  color: @red;
-}
-
-#bluetooth {
-  color: @purple;
-}
-#bluetooth.disconnected {
-  color: @red;
-}
+/* =========================
+   Custom modules
+   ========================= */
 
 #custom-idle_inhibitor.inhibited {
-  color: @yellow;
+  color: @accent-yellow;
 }
 
 #custom-idle_inhibitor.warning {
-  color: @red;
+  color: @accent-red;
 }
 
 #custom-launcher {
-  background-color: @bg1;
-  color: @blue;
-  border-radius: 4px;
+  background-color: @bg-secondary;
+  color: @accent-blue;
   padding: 3px 6px;
+  border-radius: 4px;
 }
+
+/* =========================
+   Right modules container
+   ========================= */
+
+.modules-right {
+  background-color: @bg-primary;
+  border: 1px solid @fg-primary;
+  border-radius: 8px;
+}
+
+/* =========================
+   Animations
+   ========================= */
 
 @keyframes blink {
   to {
     background-color: rgba(60, 56, 54, 0.5);
-    color: @fg1;
+    color: @fg-muted;
   }
-}
-
-.modules-right {
-  background: @bg;
-  border-width: 1px;
-  border-style: solid;
-  border-color: @aqua;
-  border-radius: 8px;
 }

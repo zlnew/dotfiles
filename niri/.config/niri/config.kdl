@@ -1,1 +1,46 @@
-../../../.config/colors/current-niri.kdl
+include "input.kdl"
+include "output.kdl"
+include "keybinds.kdl"
+include "startup.kdl"
+include "animations.kdl"
+include "window-rules.kdl"
+include "environment.kdl"
+
+layer-rule {
+  match namespace="^swww-daemon$"
+  place-within-backdrop true
+}
+
+overview {
+  zoom 0.50
+  workspace-shadow {
+    off
+  }
+}
+
+layout {
+  gaps 0
+  center-focused-column "always"
+  always-center-single-column
+  background-color "transparent"
+
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+  }
+
+  default-column-width { proportion 0.75; }
+
+  border {
+    width 0
+  }
+
+  focus-ring {
+    off
+  }
+
+  shadow {}
+
+  struts {}
+}

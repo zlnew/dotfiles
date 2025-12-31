@@ -1,9 +1,11 @@
-colors:
-  bg: "#1d2021"
+palette:
+  bg0: "#1d2021"
   bg1: "#32302f"
   bg2: "#3c3836"
-  fg: "#d4be98"
+
+  fg0: "#d4be98"
   fg1: "#ddc7a1"
+
   red: "#ea6962"
   green: "#a9b665"
   yellow: "#d8a657"
@@ -11,7 +13,6 @@ colors:
   purple: "#d3869b"
   aqua: "#89b482"
   orange: "#e78a4e"
-  grey: "#a89984"
-  gray: "#928374"
-  black: "#32302f"
-  white: "#d4be98"
+
+  gray0: "#928374"
+  gray1: "#a89984"

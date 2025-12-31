@@ -1,0 +1,58 @@
+{
+  "background": {
+    "elevated": "#3c3836",
+    "primary": "#1d2021",
+    "secondary": "#32302f"
+  },
+  "diagnostic": {
+    "error": "#ea6962",
+    "hint": "#89b482",
+    "info": "#7daea3",
+    "warning": "#d8a657"
+  },
+  "foreground": {
+    "muted": "#928374",
+    "primary": "#d4be98",
+    "secondary": "#ddc7a1"
+  },
+  "nvim": {
+    "accent": {
+      "primary": "#d3869b",
+      "secondary": "#89b482",
+      "tertiary": "#d8a657"
+    },
+    "background": {
+      "primary": "#1d2021",
+      "secondary": "#32302f",
+      "tertiary": "#3c3836"
+    },
+    "foreground": {
+      "primary": "#ddc7a1",
+      "secondary": "#d4be98"
+    },
+    "state": {
+      "error": "#ea6962",
+      "hint": "#a9b665",
+      "info": "#7daea3",
+      "warning": "#e78a4e"
+    },
+    "text": {
+      "faint": "#928374",
+      "muted": "#a89984"
+    }
+  },
+  "syntax": {
+    "comment": "#a89984",
+    "constant": "#d3869b",
+    "function": "#7daea3",
+    "keyword": "#ea6962",
+    "number": "#e78a4e",
+    "string": "#a9b665",
+    "type": "#d8a657"
+  },
+  "ui": {
+    "border": "#928374",
+    "cursor": "#d4be98",
+    "selection": "#3c3836"
+  }
+}
