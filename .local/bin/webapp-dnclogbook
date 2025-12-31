@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-$WEBAPP --app=https://logbookdivisiit.nagaserver.my.id/ --new-window --disable-session-crashed-bubble
