@@ -15,3 +15,5 @@
 !.local/share/applications/*
 !.local/share/wallpapers/*
 !.local/share/wayland-sessions/*
+
+.local/state/*
