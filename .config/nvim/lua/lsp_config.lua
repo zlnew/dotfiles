@@ -132,19 +132,44 @@ end
 function M.setup_keybindings(bufnr)
   local opts = { buffer = bufnr, silent = true }
 
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '[d', function()
+    vim.diagnostic.jump({ count = -1, float = true })
+  end, opts)
+
+  vim.keymap.set('n', ']d', function()
+    vim.diagnostic.jump({ count = 1, float = true })
+  end, opts)
+
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set("n", "gK", function() return vim.lsp.buf.signature_help() end, opts)
-  vim.keymap.set("n", "<C-k>", function() return vim.lsp.buf.signature_help() end, opts)
+
+  vim.keymap.set("n", "K", function()
+    vim.lsp.buf.hover()
+  end, opts)
+
+  vim.keymap.set("n", "gK", function()
+    vim.lsp.buf.signature_help()
+  end, opts)
+
+  vim.keymap.set("n", "<C-k>", function()
+    vim.lsp.buf.signature_help()
+  end, opts)
+
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
-  vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format { async = true } end, opts)
+
+  vim.keymap.set("n", "<leader>cf", function()
+    local ok, conform = pcall(require, "conform")
+    if ok then
+      conform.format({ bufnr = bufnr, lsp_format = "fallback" })
+    else
+      vim.lsp.buf.format({ async = true })
+    end
+  end, opts)
+
   vim.keymap.set('n', '<leader>wA', vim.lsp.buf.add_workspace_folder, opts)
   vim.keymap.set('n', '<leader>wR', vim.lsp.buf.remove_workspace_folder, opts)
   vim.keymap.set('n', '<leader>wL', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
