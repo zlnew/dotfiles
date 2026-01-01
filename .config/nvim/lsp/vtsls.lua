@@ -71,22 +71,7 @@ return {
   init_options = {
     hostInfo = 'neovim',
   },
-  settings = {
-    vtsls = {
-      tsserver = {
-        globalPlugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = "/home/zlnew/.bun/bin/vue-language-server",
-            languages = { "vue" },
-            configNamespace = "typescript",
-          }
-        }
-      }
-    }
-  },
   filetypes = {
-    "vue",
     'javascript',
     'javascriptreact',
     'javascript.jsx',

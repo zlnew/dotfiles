@@ -1,0 +1,15 @@
+---@class ZlColors
+---@field bg_primary       string
+---@field bg_secondary     string
+---@field bg_tertiary      string
+---@field fg_primary       string
+---@field fg_secondary     string
+---@field text_muted       string
+---@field text_faint       string
+---@field error            string
+---@field warning          string
+---@field info             string
+---@field hint             string
+---@field accent_primary   string
+---@field accent_secondary string
+---@field accent_tertiary  string

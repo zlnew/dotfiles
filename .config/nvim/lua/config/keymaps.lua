@@ -78,22 +78,6 @@ map("n", "<leader>th", "<cmd>tabprevious<CR>", { desc = "Prev Tab" })
 map("n", "<leader>t<Right>", "<cmd>tabnext<CR>", { desc = "Next Tab" })
 map("n", "<leader>t<Left>", "<cmd>tabprevious<CR>", { desc = "Prev Tab" })
 
-
--- =========================================================
--- LSP
--- =========================================================
-map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
-map("n", "gr", vim.lsp.buf.references, { desc = "References" })
-map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
-map("n", "gy", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
-map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
-map("n", "K", function() vim.lsp.buf.hover() end, { desc = "Hover" })
-map("n", "gK", function() return vim.lsp.buf.signature_help() end, { desc = "Signature Help" })
-map("n", "<C-k>", function() return vim.lsp.buf.signature_help() end, { desc = "Signature Help" })
-map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-map("n", "<leader>cf", function() vim.lsp.buf.format { async = true } end, { desc = "Format Buffer" })
-
 -- =========================================================
 -- neo-tree
 -- =========================================================

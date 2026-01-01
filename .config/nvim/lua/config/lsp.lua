@@ -1,8 +1,0 @@
-vim.lsp.enable('gopls')
-vim.lsp.enable('intelephense')
-vim.lsp.enable('laravel_ls')
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('phpactor')
-vim.lsp.enable('tailwindcss')
-vim.lsp.enable('vue_ls')
-vim.lsp.enable('vtsls')

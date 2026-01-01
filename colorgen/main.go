@@ -68,9 +68,11 @@ func genNvim(c map[string]any) {
 	a := n["accent"].(map[string]any)
 
 	write(
-		os.ExpandEnv("../.config/nvim/lua/config/colors.lua"),
+		os.ExpandEnv("../.config/nvim/lua/colors/default.lua"),
 		fmt.Sprintf(`
-local colors = {
+---@type ZlColors
+---@return ZlColors
+return {
   bg_primary       = "%s",
   bg_secondary     = "%s",
   bg_tertiary      = "%s",
@@ -90,8 +92,6 @@ local colors = {
   accent_secondary = "%s",
   accent_tertiary  = "%s",
 }
-
-return colors
 `,
 			bg["primary"],
 			bg["secondary"],

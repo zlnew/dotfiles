@@ -1,4 +1,6 @@
-local colors = {
+---@type ZlColors
+---@return ZlColors
+return {
   bg_primary       = "#1d2021",
   bg_secondary     = "#32302f",
   bg_tertiary      = "#3c3836",
@@ -18,5 +20,3 @@ local colors = {
   accent_secondary = "#89b482",
   accent_tertiary  = "#d8a657",
 }
-
-return colors
