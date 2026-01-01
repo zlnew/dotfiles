@@ -480,10 +480,10 @@ function H.apply()
   -- NEO-TREE
   -- =========================================================
   set(0, "NeoTreeNormal", { fg = c.fg_primary, bg = c.bg_primary })
-  set(0, "NeoTreeNormalNC", { fg = c.text_muted, bg = "NONE" })
+  set(0, "NeoTreeNormalNC", { fg = c.text_muted, bg = c.bg_primary })
   set(0, "NeoTreeWinSeparator", { fg = c.bg_secondary })
-  set(0, "NeoTreeFloatBorder", { fg = c.bg_secondary, bg = "NONE" })
-  set(0, "NeoTreeTitleBar", { fg = c.hint, bg = "NONE" })
+  set(0, "NeoTreeFloatBorder", { fg = c.bg_secondary })
+  set(0, "NeoTreeTitleBar", { fg = c.hint })
 end
 
 return H
