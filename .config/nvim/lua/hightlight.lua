@@ -1,10 +1,12 @@
-local function apply()
+local H = {}
+
+function H.apply()
   local function set(group_id, group_name, opts)
     vim.api.nvim_set_hl(group_id, group_name, opts)
   end
 
   -- =========================================================
-  -- PALETTE DEFINITION
+  -- COLORS DEFINITION
   -- =========================================================
   local c = require("config.colors")
 
@@ -26,6 +28,7 @@ local function apply()
   set(0, "Conceal", { fg = c.info })
   set(0, "Directory", { fg = c.info, bold = true })
   set(0, "Title", { fg = c.accent_tertiary, bold = true })
+  set(0, "YankedText", { fg = c.bg_primary, bg = c.hint })
 
   -- =========================================================
   -- CURSOR
@@ -50,7 +53,7 @@ local function apply()
   -- =========================================================
   -- FLOATING WINDOWS / PMENU
   -- =========================================================
-  set(0, "NormalFloat", { fg = c.fg_primary, bg = "NONE" })
+  set(0, "NormalFloat", { fg = c.fg_primary, bg = c.bg_secondary })
   set(0, "FloatBorder", { fg = c.text_faint, bg = "NONE" })
   set(0, "FloatTitle", { fg = c.accent_tertiary, bg = "NONE", bold = true })
   set(0, "FloatFooter", { fg = c.text_faint, bg = "NONE" })
@@ -375,24 +378,6 @@ local function apply()
   set(0, "TelescopeTitle", { fg = c.accent_tertiary, bold = true })
 
   -- =========================================================
-  -- NVIM-TREE
-  -- =========================================================
-  set(0, "NvimTreeNormal", { fg = c.fg_primary, bg = c.bg_primary })
-  set(0, "NvimTreeFolderName", { fg = c.info })
-  set(0, "NvimTreeFolderIcon", { fg = c.info })
-  set(0, "NvimTreeEmptyFolderName", { fg = c.text_faint })
-  set(0, "NvimTreeOpenedFolderName", { fg = c.info, bold = true })
-  set(0, "NvimTreeRootFolder", { fg = c.accent_primary, bold = true })
-  set(0, "NvimTreeSpecialFile", { fg = c.accent_tertiary })
-  set(0, "NvimTreeImageFile", { fg = c.accent_primary })
-  set(0, "NvimTreeGitDirty", { fg = c.warning })
-  set(0, "NvimTreeGitStaged", { fg = c.hint })
-  set(0, "NvimTreeGitMerge", { fg = c.error })
-  set(0, "NvimTreeGitRenamed", { fg = c.accent_primary })
-  set(0, "NvimTreeGitNew", { fg = c.hint })
-  set(0, "NvimTreeGitDeleted", { fg = c.error })
-
-  -- =========================================================
   -- INDENT BLANKLINE
   -- =========================================================
   set(0, "IndentBlanklineChar", { fg = c.bg_tertiary })
@@ -400,36 +385,37 @@ local function apply()
   set(0, "IndentBlanklineContextStart", { sp = c.text_faint, underline = true })
 
   -- =========================================================
-  -- WHICH-KEY
-  -- =========================================================
-  set(0, "WhichKey", { fg = c.accent_primary, bold = true })
-  set(0, "WhichKeyGroup", { fg = c.info })
-  set(0, "WhichKeyDesc", { fg = c.fg_primary })
-  set(0, "WhichKeySeparator", { fg = c.text_faint })
-  set(0, "WhichKeyFloat", { bg = c.bg_primary })
-  set(0, "WhichKeyBorder", { fg = c.text_faint, bg = c.bg_primary })
-
-  -- =========================================================
   -- NOTIFY
   -- =========================================================
-  set(0, "NotifyERRORBorder", { fg = c.error, bg = c.bg_primary })
-  set(0, "NotifyWARNBorder", { fg = c.warning, bg = c.bg_primary })
-  set(0, "NotifyINFOBorder", { fg = c.info, bg = c.bg_primary })
-  set(0, "NotifyDEBUGBorder", { fg = c.text_faint, bg = c.bg_primary })
-  set(0, "NotifyTRACEBorder", { fg = c.accent_primary, bg = c.bg_primary })
-  set(0, "NotifyERRORIcon", { fg = c.error })
-  set(0, "NotifyWARNIcon", { fg = c.warning })
-  set(0, "NotifyINFOIcon", { fg = c.info })
-  set(0, "NotifyDEBUGIcon", { fg = c.text_faint })
-  set(0, "NotifyTRACEIcon", { fg = c.accent_primary })
   set(0, "NotifyERRORTitle", { fg = c.error, bold = true })
+  set(0, "NotifyERRORIcon", { fg = c.error })
+  set(0, "NotifyERRORBody", { fg = c.fg_primary, bg = "NONE" })
+  set(0, "NotifyERRORBorder", { fg = c.error, bg = c.bg_primary })
+
   set(0, "NotifyWARNTitle", { fg = c.warning, bold = true })
+  set(0, "NotifyWARNIcon", { fg = c.warning })
+  set(0, "NotifyWARNBody", { fg = c.fg_primary, bg = "NONE" })
+  set(0, "NotifyWARNBorder", { fg = c.warning, bg = c.bg_primary })
+
   set(0, "NotifyINFOTitle", { fg = c.info, bold = true })
+  set(0, "NotifyINFOIcon", { fg = c.info })
+  set(0, "NotifyINFOBody", { fg = c.fg_primary, bg = "NONE" })
+  set(0, "NotifyINFOBorder", { fg = c.info, bg = c.bg_primary })
+
   set(0, "NotifyDEBUGTitle", { fg = c.text_faint, bold = true })
+  set(0, "NotifyDEBUGIcon", { fg = c.text_faint })
+  set(0, "NotifyDEBUGBody", { fg = c.fg_primary, bg = "NONE" })
+  set(0, "NotifyDEBUGBorder", { fg = c.text_faint, bg = c.bg_primary })
+
   set(0, "NotifyTRACETitle", { fg = c.accent_primary, bold = true })
+  set(0, "NotifyTRACEIcon", { fg = c.accent_primary })
+  set(0, "NotifyTRACEBody", { fg = c.fg_primary, bg = "NONE" })
+  set(0, "NotifyTRACEBorder", { fg = c.accent_primary, bg = c.bg_primary })
+
+  set(0, "NotifyBackground", { bg = "NONE" })
 
   -- =========================================================
-  -- CMP (COMPLETION)
+  -- CMP
   -- =========================================================
   set(0, "CmpItemAbbrMatch", { fg = c.accent_tertiary, bold = true })
   set(0, "CmpItemAbbrMatchFuzzy", { fg = c.accent_tertiary })
@@ -446,17 +432,7 @@ local function apply()
   set(0, "CmpItemKindConstant", { fg = c.fg_secondary })
 
   -- =========================================================
-  -- NEOGIT
-  -- =========================================================
-  set(0, "NeogitBranch", { fg = c.accent_primary, bold = true })
-  set(0, "NeogitRemote", { fg = c.warning, bold = true })
-  set(0, "NeogitHunkHeader", { fg = c.accent_tertiary, bg = c.bg_secondary, bold = true })
-  set(0, "NeogitDiffAdd", { fg = c.hint, bg = c.bg_primary })
-  set(0, "NeogitDiffDelete", { fg = c.error, bg = c.bg_primary })
-  set(0, "NeogitDiffContext", { fg = c.text_muted, bg = c.bg_primary })
-
-  -- =========================================================
-  -- LAZY (PLUGIN MANAGER)
+  -- LAZY
   -- =========================================================
   set(0, "LazyH1", { fg = c.bg_primary, bg = c.info, bold = true })
   set(0, "LazyButton", { fg = c.fg_primary, bg = "NONE" })
@@ -467,22 +443,10 @@ local function apply()
   set(0, "LazyReasonRuntime", { fg = c.accent_secondary })
 
   -- =========================================================
-  -- MASON
+  -- LAZY-GIT
   -- =========================================================
-  set(0, "MasonHeader", { fg = c.bg_primary, bg = c.info, bold = true })
-  set(0, "MasonHighlight", { fg = c.info })
-  set(0, "MasonHighlightBlock", { fg = c.bg_primary, bg = c.info })
-  set(0, "MasonMuted", { fg = c.text_faint })
-  set(0, "MasonMutedBlock", { fg = c.text_faint, bg = c.bg_secondary })
-
-  -- =========================================================
-  -- NOICE
-  -- =========================================================
-  set(0, "NoiceCmdlinePopup", { fg = c.fg_primary, bg = "NONE" })
-  set(0, "NoiceCmdlinePopupBorder", { fg = c.text_faint, bg = "NONE" })
-  set(0, "NoiceCmdlineIcon", { fg = c.info })
-  set(0, "NoiceConfirm", { fg = c.fg_primary, bg = "NONE" })
-  set(0, "NoiceConfirmBorder", { fg = c.text_faint, bg = "NONE" })
+  set(0, "LazyGitFloat", { fg = c.fg_primary, bg = c.bg_primary })
+  set(0, "LazyGitBorder", { fg = c.bg_primary, bg = c.bg_primary })
 
   -- =========================================================
   -- TROUBLE
@@ -496,26 +460,30 @@ local function apply()
   -- MINI.NVIM
   -- =========================================================
   set(0, "MiniIndentscopeSymbol", { fg = c.text_faint })
-  set(0, "MiniStarterHeader", { fg = c.info, bold = true })
-  set(0, "MiniStarterFooter", { fg = c.text_faint, italic = true })
-  set(0, "MiniStarterSection", { fg = c.accent_tertiary, bold = true })
-  set(0, "MiniStarterItem", { fg = c.fg_primary })
-  set(0, "MiniStarterItemPrefix", { fg = c.warning })
-  set(0, "MiniStarterQuery", { fg = c.hint })
+  set(0, "MiniIndentscopeSymbolOff", { fg = c.text_faint })
+  set(0, "MiniCursorWord", { bg = c.bg_secondary })
+  set(0, "MiniCursorWordCurrent", { bg = c.bg_tertiary })
+  set(0, "MiniDiffSignAdd", { fg = c.hint })
+  set(0, "MiniDiffSignChange", { fg = c.info })
+  set(0, "MiniDiffSignDelete", { fg = c.error })
+  set(0, "MiniDiffOverAdd", { fg = c.hint, bg = c.bg_primary })
+  set(0, "MiniDiffOverChange", { fg = c.info, bg = c.bg_primary })
+  set(0, "MiniDiffOverDelete", { fg = c.error, bg = c.bg_primary })
 
   -- =========================================================
-  -- SNACKS.NVIM
+  -- BLINKS-CMP
   -- =========================================================
-  set(0, "SnacksIndent", { fg = c.bg_tertiary })
-  set(0, "SnacksIndentScope", { fg = c.text_faint })
-  set(0, "SnacksIndentBlank", { fg = c.bg_secondary })
-  set(0, "SnacksInput", { fg = c.fg_primary, bg = "NONE" })
-  set(0, "SnacksInputBorder", { fg = c.text_faint, bg = "NONE" })
-  set(0, "SnacksInputTitle", { fg = c.accent_tertiary, bg = "NONE", bold = true })
-  set(0, "SnacksConfirm", { fg = c.fg_primary, bg = "NONE" })
-  set(0, "SnacksConfirmBorder", { fg = c.text_faint, bg = "NONE" })
+  set(0, "BlinkCmpMenu", { fg = c.fg_primary, bg = c.bg_secondary })
+  set(0, "BlinkCmpDoc", { fg = c.fg_primary, bg = c.bg_secondary })
+
+  -- =========================================================
+  -- NEO-TREE
+  -- =========================================================
+  set(0, "NeoTreeNormal", { fg = c.fg_primary, bg = c.bg_primary })
+  set(0, "NeoTreeNormalNC", { fg = c.text_muted, bg = "NONE" })
+  set(0, "NeoTreeWinSeparator", { fg = c.bg_secondary })
+  set(0, "NeoTreeFloatBorder", { fg = c.bg_secondary, bg = "NONE" })
+  set(0, "NeoTreeTitleBar", { fg = c.hint, bg = "NONE" })
 end
 
-apply()
-
-return apply
+return H
