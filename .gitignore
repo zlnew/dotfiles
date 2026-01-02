@@ -9,6 +9,7 @@
 .config/fish/themes/*
 !.config/fish/completions/bun.fish
 !.config/fish/conf.d/colors.fish
+!.config/fish/conf.d/zjstatus_pipe_git.fish
 !.config/fish/functions/nvm_autoload.fish
 
 .local/share/*
