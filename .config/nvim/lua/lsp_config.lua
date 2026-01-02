@@ -1,6 +1,8 @@
 local M = {}
 
 M.servers = {
+  "bash",
+  "fish",
   "gopls",
   "intelephense",
   "laravel_ls",

@@ -386,29 +386,29 @@ function M.setup(colors)
   set(0, "NotifyERRORTitle", { fg = colors.error, bold = true })
   set(0, "NotifyERRORIcon", { fg = colors.error })
   set(0, "NotifyERRORBody", { fg = colors.fg_primary, bg = "NONE" })
-  set(0, "NotifyERRORBorder", { fg = colors.error, bg = colors.bg_primary })
+  set(0, "NotifyERRORBorder", { fg = colors.error, bg = "NONE" })
 
   set(0, "NotifyWARNTitle", { fg = colors.warning, bold = true })
   set(0, "NotifyWARNIcon", { fg = colors.warning })
   set(0, "NotifyWARNBody", { fg = colors.fg_primary, bg = "NONE" })
-  set(0, "NotifyWARNBorder", { fg = colors.warning, bg = colors.bg_primary })
+  set(0, "NotifyWARNBorder", { fg = colors.warning, bg = "NONE" })
 
   set(0, "NotifyINFOTitle", { fg = colors.info, bold = true })
   set(0, "NotifyINFOIcon", { fg = colors.info })
   set(0, "NotifyINFOBody", { fg = colors.fg_primary, bg = "NONE" })
-  set(0, "NotifyINFOBorder", { fg = colors.info, bg = colors.bg_primary })
+  set(0, "NotifyINFOBorder", { fg = colors.info, bg = "NONE" })
 
   set(0, "NotifyDEBUGTitle", { fg = colors.text_faint, bold = true })
   set(0, "NotifyDEBUGIcon", { fg = colors.text_faint })
   set(0, "NotifyDEBUGBody", { fg = colors.fg_primary, bg = "NONE" })
-  set(0, "NotifyDEBUGBorder", { fg = colors.text_faint, bg = colors.bg_primary })
+  set(0, "NotifyDEBUGBorder", { fg = colors.text_faint, bg = "NONE" })
 
   set(0, "NotifyTRACETitle", { fg = colors.accent_primary, bold = true })
   set(0, "NotifyTRACEIcon", { fg = colors.accent_primary })
   set(0, "NotifyTRACEBody", { fg = colors.fg_primary, bg = "NONE" })
-  set(0, "NotifyTRACEBorder", { fg = colors.accent_primary, bg = colors.bg_primary })
+  set(0, "NotifyTRACEBorder", { fg = colors.accent_primary, bg = "NONE" })
 
-  set(0, "NotifyBackground", { bg = "NONE" })
+  set(0, "NotifyBackground", { bg = colors.bg_primary })
 
   -- =========================================================
   -- CMP

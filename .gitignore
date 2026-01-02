@@ -1,6 +1,4 @@
 .config/systemd/user/default.target.wants/
-.config/colors/current-*
-.config/colors/theme
 
 .config/fish/fish_variables
 .config/fish/completions/*
@@ -9,6 +7,7 @@
 .config/fish/themes/*
 !.config/fish/completions/bun.fish
 !.config/fish/conf.d/colors.fish
+!.config/fish/conf.d/zellij_tab_name.fish
 !.config/fish/conf.d/zjstatus_pipe_git.fish
 !.config/fish/functions/nvm_autoload.fish
 

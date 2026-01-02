@@ -9,7 +9,7 @@ function nvm_autoload --on-variable PWD --description "Auto switch Node versions
         set desired_version (string trim < .nvmrc)
     else
         set desired_version (nvm version default 2>/dev/null)
-        if test "$desired_version" = "N/A" -o "$desired_version" = "system"
+        if test "$desired_version" = N/A -o "$desired_version" = system
             set desired_version ""
         end
     end

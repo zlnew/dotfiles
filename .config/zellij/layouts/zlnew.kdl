@@ -9,7 +9,6 @@ layout {
         children
     }
 
-    // ────────────── Tab 1: dotfiles ──────────────
     tab name="dotfiles" {
         pane {
             cwd "~/www/zlnew/dotfiles"
@@ -17,7 +16,6 @@ layout {
         }
     }
 
-    // ────────────── Tab 2: portfolio ──────────────
     tab name="portfolio" {
         pane {
             cwd "~/www/zlnew/neo-portfolio"
@@ -25,7 +23,6 @@ layout {
         }
     }
 
-    // ────────────── Tab 3: aprizqyhub.my.id ──────────────
     tab name="aprizqyhub.my.id" {
         pane {
             cwd "~/www/zlnew/aprizqyhub.my.id"
@@ -33,7 +30,6 @@ layout {
         }
     }
 
-    // ────────────── Tab 4: system-monitor ──────────────
     tab name="system-monitor" {
         pane {
             cwd "~/www/zlnew/system-monitor"
@@ -41,7 +37,6 @@ layout {
         }
     }
 
-    // ────────────── Tab 5: Others ──────────────
     tab name="others" {
         pane {
             cwd "~/www/zlnew"

@@ -10,14 +10,15 @@ gui:
   border: rounded
   theme:
     activeBorderColor:
-      - green
+      - blue
+      - bold
     inactiveBorderColor:
-      - cyan
+      - default
     searchingActiveBorderColor:
       - yellow
       - bold
     optionsTextColor:
-      - default
+      - cyan
     selectedLineBgColor:
       - default
     inactiveViewSelectedLineBgColor:

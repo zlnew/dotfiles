@@ -9,7 +9,6 @@ layout {
         children
     }
 
-    // ────────────── Tab 1: core-api ──────────────
     tab name="core-api" {
         pane split_direction="vertical" {
           pane size="70%" {
@@ -22,7 +21,6 @@ layout {
         }
     }
 
-    // ────────────── Tab 2: dragon-bridge ──────────────
     tab name="dragon-bridge" {
         pane split_direction="vertical" {
           pane size="70%" {
@@ -35,14 +33,12 @@ layout {
         }
     }
 
-    // ────────────── Tab 3: Others ──────────────
     tab name="others" {
         pane {
             cwd "~/www/duanaga"
         }
     }
 
-    // ────────────── Tab 4: PostgreSQL CLI ──────────────
     tab name="pgcli" {
       pane split_direction="vertical" {
         pane {
@@ -53,7 +49,6 @@ layout {
       }
     }
 
-    // ────────────── Tab 5: Background Jobs ──────────────
     tab name="background-jobs" {
         pane split_direction="horizontal" {
           pane {

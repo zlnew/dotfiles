@@ -9,7 +9,6 @@ layout {
         children
     }
 
-    // ────────────── Tab 1: srv ──────────────
     tab name="srv" {
         pane {
             cwd "/srv"
@@ -18,7 +17,6 @@ layout {
         }
     }
 
-    // ────────────── Tab 2: Others ──────────────
     tab name="others" {
         pane {
             cwd "/srv"
