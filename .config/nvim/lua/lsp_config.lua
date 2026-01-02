@@ -12,16 +12,48 @@ M.servers = {
 }
 
 M.custom_configs = {
+  gopls = {
+    settings = {
+      gopls = {
+        gofumpt = true,
+      },
+    },
+  },
   lua_ls = {
     settings = {
       Lua = {
-        runtime = { version = 'LuaJIT' },
-        diagnostics = { globals = { 'vim' } },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file('', true),
-          checkThirdParty = false,
+        runtime = {
+          version = 'LuaJIT',
+          path = vim.split(package.path, ';'),
         },
-        telemetry = { enable = false },
+        diagnostics = {
+          globals = { 'vim' },
+          disable = { 'missing-fields' },
+        },
+        workspace = {
+          library = {
+            vim.env.VIMRUNTIME,
+            "${3rd}/luv/library",
+            "${3rd}/busted/library",
+          },
+          checkThirdParty = false,
+          maxPreload = 10000,
+          preloadFileSize = 10000,
+        },
+        telemetry = {
+          enable = false
+        },
+        format = {
+          enable = true,
+          defaultConfig = {
+            indent_style = "space",
+            indent_size = "2",
+          }
+        },
+        completion = {
+          callSnippet = "Replace",
+          keywordSnippet = "Replace",
+        },
       },
     },
   },
@@ -39,6 +71,22 @@ M.custom_configs = {
           },
         },
       },
+      typescript = {
+        preferences = {
+          importModuleSpecifier = "non-relative",
+        },
+        format = {
+          semicolons = "remove",
+        },
+      },
+      javascript = {
+        preferences = {
+          importModuleSpecifier = "non-relative",
+        },
+        format = {
+          semicolons = "remove",
+        },
+      },
     },
     filetypes = {
       "vue",
@@ -49,7 +97,7 @@ M.custom_configs = {
       'typescriptreact',
       'typescript.tsx',
     },
-  }
+  },
 }
 
 function M.setup_custom_configs()
@@ -145,19 +193,9 @@ function M.setup_keybindings(bufnr)
   vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-  vim.keymap.set("n", "K", function()
-    vim.lsp.buf.hover()
-  end, opts)
-
-  vim.keymap.set("n", "gK", function()
-    vim.lsp.buf.signature_help()
-  end, opts)
-
-  vim.keymap.set("n", "<C-k>", function()
-    vim.lsp.buf.signature_help()
-  end, opts)
-
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
 
@@ -172,7 +210,9 @@ function M.setup_keybindings(bufnr)
 
   vim.keymap.set('n', '<leader>wA', vim.lsp.buf.add_workspace_folder, opts)
   vim.keymap.set('n', '<leader>wR', vim.lsp.buf.remove_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wL', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+  vim.keymap.set('n', '<leader>wL', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, opts)
 end
 
 function M.setup_autocommands()
@@ -188,15 +228,13 @@ function M.setup_autocommands()
 
       M.setup_keybindings(bufnr)
 
-      if client.supports_method('textDocument/completion') then
-        vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+      local has_blink = pcall(require, "blink.cmp")
+
+      if not has_blink then
+        if client.supports_method("textDocument/completion") then
+          vim.lsp.completion.enable(true, client.id, bufnr)
+        end
       end
-
-      -- if client.supports_method('textDocument/inlayHint') then
-      --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      -- end
-
-      -- print(string.format('LSP attached: %s (root: %s)', client.name, client.root_dir or 'N/A'))
     end,
   })
 

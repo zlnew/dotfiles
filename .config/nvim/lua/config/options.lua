@@ -16,7 +16,10 @@ opt.splitright = true
 
 -- Interaction
 opt.mouse = "a"
-opt.timeoutlen = 300
+opt.timeout = false
+opt.timeoutlen = 0
+opt.ttimeout = false
+opt.ttimeoutlen = 0
 opt.updatetime = 200
 opt.confirm = true
 opt.clipboard = "unnamedplus"

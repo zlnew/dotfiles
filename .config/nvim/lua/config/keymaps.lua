@@ -71,12 +71,12 @@ map("n", "<leader>wq", "<cmd>close<CR>", { desc = "Close Current Split" })
 -- =========================================================
 -- Tabs
 -- =========================================================
-map("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "New Tab" })
-map("n", "<leader>tq", "<cmd>tabclose<CR>", { desc = "Close Tab" })
-map("n", "<leader>tl", "<cmd>tabnext<CR>", { desc = "Next Tab" })
-map("n", "<leader>th", "<cmd>tabprevious<CR>", { desc = "Prev Tab" })
-map("n", "<leader>t<Right>", "<cmd>tabnext<CR>", { desc = "Next Tab" })
-map("n", "<leader>t<Left>", "<cmd>tabprevious<CR>", { desc = "Prev Tab" })
+map("n", "<leader><Tab>n", "<cmd>tabnew<CR>", { desc = "New Tab" })
+map("n", "<leader><Tab>q", "<cmd>tabclose<CR>", { desc = "Close Tab" })
+map("n", "<Tab>l", "<cmd>tabnext<CR>", { desc = "Next Tab" })
+map("n", "<Tab>h", "<cmd>tabprevious<CR>", { desc = "Prev Tab" })
+map("n", "<Tab><Right>", "<cmd>tabnext<CR>", { desc = "Next Tab" })
+map("n", "<Tab><Left>", "<cmd>tabprevious<CR>", { desc = "Prev Tab" })
 
 -- =========================================================
 -- neo-tree
@@ -85,7 +85,7 @@ map("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neotree" })
 
 -- =========================================================
 -- telescope
--- =========================================================
+--  ========================================================
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find Files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
@@ -120,8 +120,35 @@ map("n", "<leader>sr",
 -- =========================================================
 -- trouble
 -- =========================================================
-map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics (Trouble)" })
-map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>xX", function()
+  local trouble = require("trouble")
+  if trouble then
+    trouble.toggle({
+      mode = "diagnostics",
+      win = {
+        type = "split",
+        size = 50,
+        position = "right",
+      },
+    })
+  end
+end, { desc = "All Diagnostics" })
+map("n", "<leader>xx", function()
+  local trouble = require("trouble")
+  if trouble then
+    trouble.toggle({
+      mode = "diagnostics",
+      win = {
+        type = "split",
+        size = 50,
+        position = "right",
+      },
+      filter = {
+        buf = 0
+      }
+    })
+  end
+end, { desc = "Buffer Diagnostics" })
 map("n", "<leader>cs", "<cmd>Trouble symbols toggle<cr>", { desc = "Symbols (Trouble)" })
 map("n", "<leader>cS", "<cmd>Trouble lsp toggle<cr>", { desc = "LSP references/definitions/... (Trouble)" })
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
@@ -150,7 +177,5 @@ map("n", "]q",
         vim.notify(err, vim.log.levels.ERROR)
       end
     end
-  end, {
-    desc = "Next Trouble/Quickfix Item"
-  }
+  end, { desc = "Next Trouble/Quickfix Item" }
 )
