@@ -274,7 +274,7 @@ plugins {
     }
 
     zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-        format_left                 "{mode}{pipe_git_repo}{pipe_git_branch}{pipe_git_status}"
+        format_left                 "#[bg=#1d2021,fg=#89b482,italic]{session}: {mode}{pipe_git_repo}{pipe_git_branch}{pipe_git_status}"
         format_center               "#[bg=#1d2021]{tabs}"
         format_right                "#[bg=#1d2021,fg=#504945]{datetime}"
         format_hide_on_overlength   "true"
@@ -312,12 +312,12 @@ plugins {
         tab_fullscreen_indicator  "󰊓 "
         tab_floating_indicator    "󰹙 "
 
-        pipe_git_repo_format    "#[bg=#504945,fg=#89b482] {output} "
+        pipe_git_repo_format    "#[bg=#3c3836,fg=#d4be98] {output} "
         pipe_git_branch_format  "#[fg=#89b482] {output}"
         pipe_git_status_format  "#[fg=#e78a4e] {output}"
 
-        datetime          "#[bg=#504945,fg=#d4be98] {format} "
-        datetime_format   "%H:%M %d/%m"
+        datetime          "#[bg=#ea6962,fg=#1d2021,bold] {format} "
+        datetime_format   "%H:%M:%S %d/%m"
         datetime_timezone "Asia/Jakarta"
     }
 }

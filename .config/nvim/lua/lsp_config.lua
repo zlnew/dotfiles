@@ -333,9 +333,9 @@ end
 
 function M.setup_diagnostics()
   vim.diagnostic.config({
-    virtual_lines = {
+    virtual_text = {
       current_line = false,
-      severity = vim.diagnostic.severity.ERROR,
+      severity = vim.diagnostic.severity.ERROR
     },
     signs = true,
     underline = true,
