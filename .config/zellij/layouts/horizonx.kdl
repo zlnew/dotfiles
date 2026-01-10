@@ -9,16 +9,16 @@ layout {
     children
   }
 
-  tab name="horizonx" {
+  tab name="dashboard" {
     pane {
-      cwd "~/www/server/horizonx"
+      cwd "~/www/server/horizonx-dashboard"
       command "nvim"
     }
   }
 
-  tab name="horizonx-server" {
+  tab name="core" {
     pane {
-      cwd "~/www/server/horizonx-server"
+      cwd "~/www/server/horizonx"
       command "nvim"
     }
   }
@@ -26,16 +26,16 @@ layout {
   tab name="background-jobs" {
     pane split_direction="horizontal" {
       pane {
-        cwd "~/www/server/horizonx"
+        cwd "~/www/server/horizonx-dashboard"
         command "npm"
         args "run" "dev" "--" "--host=127.0.0.1" "--port=5174"
       }
       pane {
-        cwd "~/www/server/horizonx-server"
+        cwd "~/www/server/horizonx"
         command "bin/server"
       }
       pane {
-        cwd "~/www/server/horizonx-server"
+        cwd "~/www/server/horizonx"
         command "sudo"
         args "bin/agent"
       }
@@ -44,7 +44,7 @@ layout {
 
   tab name="pgcli" {
     pane {
-      cwd "~/www/server/horizonx-server"
+      cwd "~/www/server/horizonx"
       command "pgcli"
       args "-u" "postgres" "-d" "horizonx_local"
     }
