@@ -1,0 +1,42 @@
+session_name "clinic"
+attach_to_session true
+
+layout {
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="zjstatus"
+    }
+    children
+  }
+
+  tab name="app" {
+    pane {
+      cwd "~/www/cornerstone-studio/clinic-app"
+      command "nvim"
+    }
+  }
+
+  tab name="api" {
+    pane {
+      cwd "~/www/cornerstone-studio/clinic-api"
+      command "nvim"
+    }
+  }
+
+  tab name="background-jobs" {
+    pane {
+      cwd "~/www/cornerstone-studio/clinic-app"
+      command "npm"
+      args "run" "dev" "--" "--host=127.0.0.1" "--port=5175"
+    }
+  }
+
+  tab name="pgcli" {
+    pane {
+      cwd "~/www/cornerstone-studio/clinic-api"
+      command "pgcli"
+      args "-u" "postgres" "-d" "clinic"
+    }
+  }
+}
+

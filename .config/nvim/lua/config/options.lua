@@ -1,3 +1,5 @@
+vim.g.lsp_file_size_limit = 5000000
+
 local opt = vim.opt
 
 -- UI
