@@ -23,10 +23,10 @@ case "$THEME" in
         ;;
 esac
 
-if ! pgrep -x "swww-daemon" >/dev/null; then
-    swww-daemon &
+if ! pgrep -x "awww-daemon" >/dev/null; then
+    awww-daemon &
     sleep 1
 fi
 
-swww img "$WALLPAPER_PATH" --transition-type any
+awww img "$WALLPAPER_PATH" --transition-type any
 

@@ -327,6 +327,8 @@ load_plugins {
 
 simplified_ui     true
 theme             "gruvbox"
+theme_dir         "/home/zlnew/.config/zellij/themes"
+layout_dir        "/home/zlnew/.config/zellij/layouts"
 
 default_mode      "normal"
 default_shell     "fish"

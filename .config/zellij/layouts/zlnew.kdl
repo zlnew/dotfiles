@@ -2,44 +2,44 @@ session_name "zlnew"
 attach_to_session true
 
 layout {
-    default_tab_template {
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
-        }
-        children
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="compact-bar"
     }
+    children
+  }
 
-    tab name="dotfiles" {
-        pane {
-            cwd "~/www/zlnew/dotfiles"
-            command "nvim"
-        }
+  tab name="dotfiles" {
+    pane {
+      cwd "~/www/zlnew/dotfiles"
+      command "nvim"
     }
+  }
 
-    tab name="portfolio" {
-        pane {
-            cwd "~/www/zlnew/neo-portfolio"
-            command "nvim"
-        }
+  tab name="portfolio" {
+    pane {
+      cwd "~/www/zlnew/neo-portfolio"
+      command "nvim"
     }
+  }
 
-    tab name="aprizqyhub.my.id" {
-        pane {
-            cwd "~/www/zlnew/aprizqyhub.my.id"
-            command "nvim"
-        }
+  tab name="aprizqyhub.my.id" {
+    pane {
+      cwd "~/www/zlnew/aprizqyhub.my.id"
+      command "nvim"
     }
+  }
 
-    tab name="system-monitor" {
-        pane {
-            cwd "~/www/zlnew/system-monitor"
-            command "nvim"
-        }
+  tab name="system-monitor" {
+    pane {
+      cwd "~/www/zlnew/system-monitor"
+      command "nvim"
     }
+  }
 
-    tab name="others" {
-        pane {
-            cwd "~/www/zlnew"
-        }
+  tab name="others" {
+    pane {
+      cwd "~/www/zlnew"
     }
+  }
 }

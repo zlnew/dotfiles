@@ -7,7 +7,7 @@ include "window-rules.kdl"
 include "environment.kdl"
 
 layer-rule {
-  match namespace="^swww-daemon$"
+  match namespace="^awww-daemon$"
   place-within-backdrop true
 }
 

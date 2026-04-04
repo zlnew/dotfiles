@@ -21,12 +21,12 @@ alias bash_update='source ~/.bashrc'
 alias fish_update='source ~/.config/fish/config.fish'
 
 # Zellij
-alias zl="zellij --config ~/.config/zellij/config.kdl"
-alias zl_dnc="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/dnc-local.kdl"
-alias zl_zlnew="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/zlnew.kdl"
-alias zl_server="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/server.kdl"
-alias zl_horizonx="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/horizonx.kdl"
-alias zl_clinic="zellij --config ~/.config/zellij/config.kdl --layout ~/.config/zellij/layouts/clinic.kdl"
+alias zl="zellij"
+alias zl_dnc="zellij --layout dnc-local"
+alias zl_zlnew="zellij --layout zlnew"
+alias zl_server="zellij --layout server"
+alias zl_horizonx="zellij --layout horizonx"
+alias zl_clinic="zellij --layout clinic"
 
 # PHP
 alias reck='vendor/bin/rector'

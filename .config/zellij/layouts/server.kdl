@@ -3,23 +3,23 @@ attach_to_session true
 
 layout {
     default_tab_template {
-        pane size=1 borderless=true {
-            plugin location="zjstatus"
-        }
-        children
+      pane size=1 borderless=true {
+        plugin location="compact-bar"
+      }
+      children
     }
 
     tab name="srv" {
-        pane {
-            cwd "/srv"
-            command "sudo"
-            args "-E" "nvim"
-        }
+      pane {
+        cwd "/srv"
+        command "sudo"
+        args "-E" "nvim"
+      }
     }
 
     tab name="others" {
-        pane {
-            cwd "/srv"
-        }
+      pane {
+        cwd "/srv"
+      }
     }
 }

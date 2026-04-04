@@ -12,12 +12,12 @@ launch_swaybg() {
   swaybg -i "$1" -m fill >/dev/null 2>&1 &
 }
 
-launch_swww() {
-  if ! pgrep -x swww-daemon >/dev/null 2>&1; then
-    swww-daemon >/dev/null 2>&1 &
+launch_awww() {
+  if ! pgrep -x awww-daemon >/dev/null 2>&1; then
+    awww-daemon >/dev/null 2>&1 &
     sleep 0.2
   fi
-  swww img "$1" >/dev/null 2>&1
+  awww img "$1" >/dev/null 2>&1
 }
 
 reload_wallpaper() {
@@ -26,12 +26,12 @@ reload_wallpaper() {
     return
   fi
 
-  if command -v swww >/dev/null 2>&1; then
-    launch_swww "$wallpaper_path"
+  if command -v awww >/dev/null 2>&1; then
+    launch_awww "$wallpaper_path"
   elif command -v swaybg >/dev/null 2>&1; then
     launch_swaybg "$wallpaper_path"
   else
-    log "warning: no wallpaper command (swww or swaybg) available"
+    log "warning: no wallpaper command (awww or swaybg) available"
   fi
 }
 

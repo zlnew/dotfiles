@@ -34,7 +34,7 @@ sudo pacman -S --needed \
 
 ```bash
 sudo pacman -S --needed \
-  hyprland niri waybar mako fuzzel alacritty swaybg swww wl-clipboard \
+  hyprland niri waybar mako fuzzel alacritty swaybg awww wl-clipboard \
   brightnessctl playerctl pipewire wireplumber pavucontrol \
   grim slurp wl-screenrec imagemagick qt5ct qt6ct
 ```
@@ -153,7 +153,7 @@ cd ~/dotfiles
 - **Hyprland**: install `xdg-desktop-portal-hyprland`, `hypridle`, and `hyprpaper` if you extend the setup; reload with `hyprctl reload`.
 - **Niri**: validate config updates before applying: `niri --validate ~/.config/niri/config.kdl` then `niri msg reload-config`.
 - **Waybar/Mako**: the configs expect `wl-clipboard`, `playerctl`, `brightnessctl`, `wireplumber`, and `pavucontrol`.
-- **Wallpaper tools**: `swww` is preferred, but the scripts fall back to `swaybg`.
+- **Wallpaper tools**: `awww` is preferred, but the scripts fall back to `swaybg`.
 
 ## 6. Post-install Tasks
 
