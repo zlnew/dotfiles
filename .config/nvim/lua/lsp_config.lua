@@ -1,6 +1,7 @@
 local M = {}
 
 M.servers = {
+  "basedpyright",
   "bash",
   "fish",
   "gopls",
@@ -8,12 +9,37 @@ M.servers = {
   "laravel_ls",
   "lua_ls",
   "phpactor",
+  "ruff",
   "tailwindcss",
   "vue_ls",
   "vtsls",
 }
 
 M.custom_configs = {
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "recommended",
+          autoImportCompletions = true,
+        },
+      },
+      capabilities = {
+        workspace = {
+          didChangeWatchedFiles = {
+            dynamicRegistration = true,
+          },
+        },
+      },
+    }
+  },
+  ruff = {
+    on_config = function(config)
+      config.on_attach = function(client, _)
+        client.server_capabilities.hoverProvider = false
+      end
+    end
+  },
   gopls = {
     settings = {
       gopls = {
@@ -261,6 +287,18 @@ function M.setup_autocommands()
       end
     end,
   })
+
+  -- vim.api.nvim_create_autocmd("BufWritePre", {
+  --   group = lsp_group,
+  --   pattern = "*.py",
+  --   callback = function()
+  --     vim.lsp.buf.code_action({
+  --       context = { only = { "source.organizeImports", "source.fixAll" } },
+  --       apply = true,
+  --     })
+  --     vim.lsp.buf.format({ async = false })
+  --   end,
+  -- })
 end
 
 function M.setup_commands()
