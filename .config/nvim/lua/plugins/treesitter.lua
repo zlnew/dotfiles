@@ -37,7 +37,7 @@ return {
         "xml",
         "yaml",
       },
-      hightlight = { enable = true },
+      highlight = { enable = true },
       indent = { enable = true }
     },
     config = function(_, opts)
