@@ -1,0 +1,6 @@
+[Unit]
+Description=Backup personal workspace app databases (horizonx, expense_tracker)
+
+[Service]
+Type=oneshot
+ExecStart=/home/zlnew/www/personal/scripts/backup-app-databases.sh 14
