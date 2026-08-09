@@ -25,7 +25,6 @@ alias zl="zellij"
 alias zl_dnc="zellij --layout dnc-local"
 alias zl_zlnew="zellij --layout zlnew"
 alias zl_server="zellij --layout server"
-alias zl_horizonx="zellij --layout horizonx"
 alias zl_clinic="zellij --layout clinic"
 
 # PHP
