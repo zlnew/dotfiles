@@ -1,4 +1,10 @@
 .config/systemd/user/default.target.wants/
+.config/systemd/user/timers.target.wants/
+
+# Editor / tool backup cruft
+*.bak
+*.tmp
+*~
 
 .config/fish/fish_variables
 .config/fish/completions/*
