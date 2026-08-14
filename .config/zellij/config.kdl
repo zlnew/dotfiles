@@ -21,7 +21,7 @@ keybinds clear-defaults=true {
         bind "Ctrl p" { SwitchToMode "normal"; }
         bind "r" { NewPane "right"; SwitchToMode "normal"; }
         bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
-        bind "w" { Run "zellij" "action" "new-pane" "--floating" "--name" "shell"; SwitchToMode "normal"; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
     }
     tab {
@@ -331,7 +331,7 @@ theme_dir         "/home/zlnew/.config/zellij/themes"
 layout_dir        "/home/zlnew/.config/zellij/layouts"
 
 default_mode      "normal"
-// default_shell     "fish"
+default_shell     "fish"
 default_layout    "default"
 
 mouse_mode        true
