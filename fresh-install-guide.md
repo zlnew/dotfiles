@@ -139,19 +139,21 @@ npm install -g \
 ## 4. Dotfiles Bootstrap
 
 ```bash
-git clone git@github.com:zlnew/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone git@github.com:zlnew/dotfiles.git ~/www/dotfiles
+cd ~/www/dotfiles
 ./bin/setup.sh
 ```
 
-- Choose Gruvbox or TokyoNight when prompted; rerun `.config/colors/generate.sh <theme>` to switch later.
+- The colorscheme is **Gruvbox-only** — there is no TokyoNight variant. The
+  generator runs automatically during setup; rerun it any time with
+  `cd ~/www/dotfiles/colorgen && ./colorgen`.
 - Use partial mode to re-link only the sections you need during maintenance.
 - After linking, run `bin/refresh-session.sh` to restart wallpapers, Waybar, and mako with the new theme.
 
 ## 5. Desktop-Specific Notes
 
 - **Hyprland**: install `xdg-desktop-portal-hyprland`, `hypridle`, and `hyprpaper` if you extend the setup; reload with `hyprctl reload`.
-- **Niri**: validate config updates before applying: `niri --validate ~/.config/niri/config.kdl` then `niri msg reload-config`.
+- **Niri**: validate config updates before applying: `niri validate ~/.config/niri/config.kdl` then `niri msg action load-config-file`.
 - **Waybar/Mako**: the configs expect `wl-clipboard`, `playerctl`, `brightnessctl`, `wireplumber`, and `pavucontrol`.
 - **Wallpaper tools**: `awww` is preferred, but the scripts fall back to `swaybg`.
 
@@ -160,6 +162,6 @@ cd ~/dotfiles
 - Generate SSH keys (`ssh-keygen -t ed25519`) and add them to your password manager.
 - Clone the rest of your projects under `~/www` for consistency.
 - Populate language-specific package managers (Composer `global require`, cargo, pip, etc.) as required by your workloads.
-- Run the validation checklist from the `README.md` to confirm everything reloads cleanly.
+- Run the validation checklist from the `README.md` to confirm everything reloads cleanly. The checklist covers `fish -n`, `zellij setup --check`, `niri validate`, and a `systemctl --user daemon-reload`.
 
 You are now ready to daily-drive the dotfiles. Revisit this checklist the next time you reprovision a laptop or VM so new tooling makes it into the base image.
