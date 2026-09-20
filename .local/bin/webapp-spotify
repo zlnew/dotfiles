@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-$WEBAPP --app=https://open.spotify.com/ --new-window --disable-session-crashed-bubble

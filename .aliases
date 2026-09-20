@@ -1,54 +1,5 @@
-# .aliases
-
-# General
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias cl='clear'
-
 # Editors
 alias v='nvim'
-alias vim='nvim'
-alias nano='nvim'
-alias bash_edit='nvim ~/.bashrc'
-alias fish_edit='nvim ~/.config/fish/config.fish'
-alias zl_edit='nvim ~/.config/zellij/config.kdl'
-
-# Shell Updates
-alias bash_update='source ~/.bashrc'
-alias fish_update='source ~/.config/fish/config.fish'
 
 # Zellij
 alias zl="zellij"
-alias zl_dnc="zellij --layout dnc-local"
-alias zl_zlnew="zellij --layout zlnew"
-alias zl_server="zellij --layout server"
-alias zl_clinic="zellij --layout clinic"
-
-# PHP
-alias reck='vendor/bin/rector'
-alias vendro='vendor/bin/pint'
-
-# JavaScript/TypeScript
-alias fjs='bun run format || npm run format'
-alias ljs='bun run lint || npm run lint'
-alias tjs='bun run type-check || npm run type-check'
-alias vendrojs='bun run lint-staged || npm run lint-staged'
-alias vendrojsall='fjs; ljs; tjs'
-
-# Git
-alias gp='git push'
-alias gl='git pull'
-alias gcm='git-commit-message'
-alias gws='git-work-summary'
-alias gas='git add .; vendrojs; tjs; gcm'
-alias clip_diff='git diff --staged | wl-copy'
-
-# Other
-alias dnc_log='~/www/duanaga/logbook/api.sh'
-alias mode_check='powerprofilesctl'
-alias mode_powersave='powerprofilesctl set power-saver'
-alias mode_balance='powerprofilesctl set balanced'
-alias mode_performance='powerprofilesctl set performance'

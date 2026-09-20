@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Spotify (Web App)
-Exec=webapp-spotify
-Icon=spotify
-Type=Application
-StartupNotify=false
-Terminal=false
-Categories=Audio;Music;Player;

@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-$WEBAPP --app=https://chatgpt.com/ --new-window --disable-session-crashed-bubble

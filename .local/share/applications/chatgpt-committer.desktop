@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=ChatGPT Committer (Web App)
-Exec=webapp-chatgpt-committer
-Icon=chatgpt-committer
-Type=Application
-StartupNotify=false
-Terminal=false
-Categories=;Chat;AI;Autocompletion;

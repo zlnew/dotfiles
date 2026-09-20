@@ -1,0 +1,105 @@
+[user]
+    name = USER_NAME
+    email = USER_EMAIL
+
+# Workspace identities (uncomment and adjust gitdir: paths per machine, then
+# create the target files with real [user] blocks — later files override):
+#
+# [includeIf "gitdir:~/www/personal/"]
+#     path = ~/.gitconfig-personal
+#
+# [includeIf "gitdir:~/www/office/"]
+#     path = ~/.gitconfig-office
+
+[core]
+    editor = nvim
+    autocrlf = input
+    fileMode = false
+    pager = delta
+    untrackedCache = true
+
+[init]
+    defaultBranch = main
+
+[color]
+    ui = auto
+
+[column]
+    ui = auto
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
+[merge]
+    tool = nvimdiff
+    conflictstyle = diff3
+
+[diff]
+    tool = nvimdiff
+    algorithm = patience
+    colorMoved = default
+
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+
+[mergetool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$BASE" "$REMOTE" "$MERGED" -c 'wincmd J'
+
+[pull]
+    rebase = false
+
+[rebase]
+    autosquash = true
+    autostash = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
+
+[push]
+    default = current
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[status]
+    short = true
+    branch = true
+    showUntrackedFiles = normal
+
+[log]
+    date = iso
+
+[commit]
+    template = ~/.gitmessage.txt
+    verbose = true
+
+[help]
+    autocorrect = prompt
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = gruvbox-dark
+
+[credential]
+    helper = libsecret
+    helper = store
+
+[alias]
+    st = status -sb
+    co = checkout
+    br = branch --sort=-committerdate
+    ci = commit
+    lg = log --oneline --graph --decorate -20
+    last = log -1 HEAD --stat
+    unstage = reset HEAD --
+    aliases = config --get-regexp ^alias\\.

@@ -1,25 +1,22 @@
-.config/systemd/user/default.target.wants/
-.config/systemd/user/timers.target.wants/
+# Machine secrets (real values live in ~/.env, copied from .env.example)
+.env
+
+# Build output
+pkg/colorgen/colorgen
+
+# Generated debug dump (rewritten on every colorgen run)
+pkg/colorgen/resolved.json
 
 # Editor / tool backup cruft
 *.bak
 *.tmp
 *~
+*.swp
+*.swo
 
+# Fish machine-local state (universal vars, fisher cache)
 .config/fish/fish_variables
-.config/fish/completions/*
-.config/fish/conf.d/*
-.config/fish/functions/*
 .config/fish/themes/*
-!.config/fish/completions/bun.fish
-!.config/fish/conf.d/colors.fish
-!.config/fish/conf.d/zellij_tab_name.fish
-!.config/fish/conf.d/zjstatus_pipe_git.fish
-!.config/fish/functions/nvm_autoload.fish
 
-.local/share/*
-!.local/share/applications/*
-!.local/share/wallpapers/*
-!.local/share/wayland-sessions/*
-
-.local/state/*
+# Local backup dir created by install.sh
+.dotfiles_backup/

@@ -1,0 +1,9 @@
+// ────────────── Output Configuration ──────────────
+// You can run `niri msg outputs` to get the correct name for your displays.
+// You will have to remove "/-" and edit it before it takes effect.
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+
+output "ViewSonic Corporation VA2432 100Hz X9B234520064" {
+    mode "1920x1080@100"
+    scale 1
+}

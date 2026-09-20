@@ -1,0 +1,6 @@
+# <type>(<scope>): <subject> (max 50 chars)
+#
+# Types: feat, fix, docs, style, refactor, perf, test, chore
+#
+# Body: explain what and why (wrap at 72 chars).
+# Footer: Refs: #123, BREAKING CHANGE: ...

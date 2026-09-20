@@ -1,93 +1,93 @@
-# 🧰 Dotfiles
+# Dotfiles (minimal)
 
-Opinionated dotfiles for a CachyOS/Arch Wayland workstation (Hyprland or Niri),
-managed by a symlink-based setup script. Configs cover Fish + Zsh, Zellij,
-Neovim, Waybar, Mako, Fuzzel, Alacritty, systemd user services, and a set of
-`~/.local/bin` helper scripts.
+Opinionated minimal dotfiles. Fish + Neovim + Zellij on Niri, with Alacritty,
+Lazygit, Noctalia, Git, and keyd.
 
 ## Layout
 
 ```
 dotfiles/
-├── bin/                # setup.sh, update.sh, install-themes.sh, refresh-session.sh
-├── colorgen/           # Gruvbox colorscheme generator (palette.yaml → resolved.json)
-├── .config/            # everything symlinked into ~/.config/<dir>
-│   ├── fish/  zellij/  nvim/  alacritty/  waybar/  mako/  fuzzel/
-│   └── systemd/user/   # user services + timers (default.target.wants/)
-├── .local/bin/         # helper scripts symlinked into ~/.local/bin
-├── niri/  hyprland/    # device-specific overlays (chosen at setup time)
-├── etc/                # system-level files to copy under /etc
-├── howto/              # task-specific notes
-└── fresh-install-guide.md
+├── install.sh              # symlink repo -> $HOME (with backup + --check)
+├── .aliases                # shared shell aliases (-> ~/.aliases)
+├── config/                 # symlinked into ~/.config/<app>
+│   ├── fish/               # extend.config.fish (-> conf.d/10-dotfiles.fish), fish_plugins
+│   ├── nvim/               # full LSP set + plugin set, custom Gruvbox colors
+│   ├── zellij/             # config.kdl (kept as-is)
+│   ├── niri/               # config.kdl + cfg/ splits
+│   ├── alacritty/          # alacritty.toml
+│   ├── lazygit/            # config.yml
+│   └── noctalia/           # config.toml
+├── git/.gitconfig          # -> ~/.gitconfig
+├── system/keyd/            # manual: sudo cp to /etc/keyd/
+└── pkg/colorgen/           # palette.yaml + semantic.yaml -> nvim/alacritty colors
 ```
+
+Fish note: `install.sh` does not overwrite `~/.config/fish/config.fish`
+(CachyOS-managed). It installs a `conf.d/10-dotfiles.fish` snippet instead,
+which also exports secrets from `~/.env` (`KEY=VALUE`, `#` comments).
+Run `fisher update` manually for `config/fish/fish_plugins`.
+
+Secrets: copy `.env.example` → `~/.env` (done automatically by `install.sh`
+with mode 600, values left empty for you to fill). `~/.env` is gitignored and
+never linked — only the example is tracked.
+
+Keyd note: system files need root and are never linked automatically:
+`sudo cp system/keyd/*.conf /etc/keyd/ && sudo systemctl restart keyd`.
+
+Git note: `git/.gitconfig` assumes `delta` as pager (also used by lazygit).
+Install it (`sudo pacman -S git-delta`) or change `core.pager`.
+`commit.template` points at `~/.gitmessage.txt`, linked by `install.sh`.
+
+Identities: `git/.gitconfig` ships `USER_*` placeholders as default and a
+commented `includeIf` recipe for per-workspace identities (uncomment, adjust
+`gitdir:` paths per machine, create the target files with real `[user]`
+blocks). SSH auth stays in your own `~/.ssh/config`
+(`github.com` vs `github.office`), which is intentionally not managed here.
 
 ## Install
 
 ```bash
-git clone git@github.com:zlnew/dotfiles.git ~/www/dotfiles
+git clone <repo> ~/www/dotfiles
 cd ~/www/dotfiles
-./bin/setup.sh
+./provision.sh        # system deps (Arch/CachyOS, idempotent) + fisher/npm/go/pipx/composer
+./install.sh          # link + backup real files to ~/.dotfiles_backup/<ts>/
+./install.sh --check  # verify without changing anything
 ```
 
-`setup.sh` symlinks config dirs into `~/.config` (backing up any real files
-first) and links `~/.local/bin` helpers. A menu lets you run a full or partial
-setup. On first run it generates the Gruvbox colorscheme via `colorgen`.
+`install.sh` is link-only and safe. `provision.sh` is CachyOS-only and does the
+privileged/heavy work: one `pacman -S --needed` (all official repos, no AUR
+helper needed — `noctalia` 5.x is in `[extra]`), then standalone nvm + latest
+LTS node as default, fisher (`fisher update` installs `nvm.fish` from
+`fish_plugins`), LSPs from their official toolchains (`uv tool install`
+`basedpyright`/`ruff`, `go install gopls`, composer `pint`;
+only tools with no official distribution — `bash/fish/vtsls/vue/tailwindcss/
+intelephense` servers, `prettierd`, `eslint_d` — come from npm), agents via
+their curl installers (`opencode`, `pi`, `agy`, `herdr` — herdr last so it
+detects the others on PATH), `docker`/`docker-compose` via pacman
+(docker service enabled, user added to group), plus `uv` for
+Python envs. Re-running either script is safe.
 
-## Colorscheme
+## Colors
 
-The generator is **Gruvbox-only** — there is no TokyoNight variant.
+Single source of truth: `pkg/colorgen/palette.yaml` (raw Gruvbox hex) +
+`semantic.yaml` (meaning mapping). Regenerate with:
 
 ```bash
-cd ~/www/dotfiles/colorgen && ./colorgen   # regenerates resolved.json
+cd pkg/colorgen && go run .   # needs Go toolchain
 ```
 
-Then reload the session: `bin/refresh-session.sh`.
-
-## Save / sync
-
-Use `bin/update.sh` to snapshot changed, tracked files into **scoped commits**
-(one commit per changed top-level directory) and push to the current branch.
-It deliberately:
-
-- refuses to run on a detached HEAD,
-- stages only explicit paths (never `git add .`), so unrelated WIP and untracked
-  `*.bak` cruft are never swept into a commit,
-- warns about untracked files without committing them.
+Outputs: `config/nvim/lua/colors/default.lua` (consumed by
+`config/nvim/lua/core/colorscheme.lua`) and `config/alacritty/colors.toml`
+(imported by `alacritty.toml`). `resolved.json` is a debug dump and ignored.
+Fish/Noctalia manage their own theme colors and are not generated.
 
 ## Validation checklist
 
-Run after editing configs to catch breakage before reloading a live session:
-
 ```bash
-# Fish syntax (every .fish file)
-fish -n .config/fish/config.fish
-fish -n .config/fish/conf.d/*.fish
-fish -n .config/fish/functions/*.fish
-
-# Zellij config validity
-zellij setup --check
-
-# Niri config validity (subcommand, takes a path)
+./install.sh --check
+fish -n config/fish/extend.config.fish
 niri validate ~/.config/niri/config.kdl
-
-# Systemd user units parse cleanly
-systemctl --user daemon-reload
-systemctl --user status hermes-gateway.service --no-pager
-
-# Git tree sanity
+zellij setup --check
+nvim --headless "+lazy! sync" +qa
 git status -sb
 ```
-
-## Device overlays
-
-`setup.sh` asks whether to link the Hyprland or Niri overlay. The overlays only
-replace `.config/<compositor>`; the shared `.config/<app>` dirs are linked
-regardless.
-
-## Notes
-
-- `~/.config/zellij` is a symlink to `~/www/dotfiles/.config/zellij`. Editing
-  the live file edits the repo directly.
-- The `gh` Fish wrapper routes `~/www/personal` → personal GitHub identity and
-  `~/www/yodu` → office identity via separate `GH_CONFIG_DIR`s.
-- For a full rebuild, follow `fresh-install-guide.md`.
