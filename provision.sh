@@ -73,9 +73,9 @@ fish -c 'type -q nvm && echo "nvm.fish OK, default: $nvm_default_version"'
 
 section "npm globals (no official toolchain upstream)"
 have npm || { echo "error: npm missing after nvm setup" >&2; exit 1; }
-npm i -g bash-language-server fish-lsp vtsls vue-language-server \
+npm i -g bash-language-server fish-lsp @vtsls/language-server vue-language-server \
   tailwindcss-language-server intelephense \
-  prettierd eslint_d
+  @fsouza/prettierd eslint_d
 
 section "opencode (SST)"
 have opencode || curl -fsSL https://opencode.ai/v2/install | bash
