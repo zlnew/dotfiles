@@ -29,7 +29,12 @@ sudo pacman -S --needed "${PACMAN_FLAGS[@]}" \
   zoxide git-delta ripgrep fd fzf eza bat libsecret libnotify \
   go php composer lua-language-server uv \
   docker docker-compose \
+  tailscale discord zen-browser-bin \
   ttf-jetbrains-mono-nerd
+
+section "tailscale service"
+sudo systemctl enable --now tailscaled
+echo "note: first run needs: sudo tailscale up"
 
 section "docker service"
 sudo systemctl enable --now docker
@@ -53,6 +58,9 @@ nvm install --lts
 nvm alias default 'lts/*'
 nvm use default
 node --version
+
+section "link dotfiles (safe, idempotent — needed before fisher)"
+"$REPO_ROOT/install.sh"
 
 section "fisher + fish plugins (incl. nvm.fish)"
 if ! fish -c 'type -q fisher' 2>/dev/null; then
@@ -84,9 +92,11 @@ section "herdr (agent multiplexer, last so it detects the agents above)"
 have herdr || curl -fsSL https://herdr.dev/install.sh | sh
 # Self-updates via `herdr update`. Integrations: herdr integration install {pi,opencode,antigravity-cli}
 
+section "toolchains on PATH (idempotent have-checks below need these)"
+export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.config/composer/vendor/bin:$PATH"
+
 section "uv tools (official Python distributions)"
 have uv || { echo "error: uv missing" >&2; exit 1; }
-export PATH="$HOME/.local/bin:$PATH"
 have basedpyright-langserver || uv tool install basedpyright
 have ruff || uv tool install ruff
 
@@ -98,8 +108,15 @@ section "composer globals (pint, no npm equivalent)"
 have composer || { echo "error: composer missing" >&2; exit 1; }
 composer global show laravel/pint >/dev/null 2>&1 || composer global require laravel/pint
 
-section "link check"
+section "verify"
 "$REPO_ROOT/install.sh" --check || true
+for b in fish nvim zellij alacritty niri noctalia lazygit delta git keyd \
+  zoxide rg fd fzf node npm uv go gopls composer pint \
+  basedpyright-langserver ruff opencode pi agy herdr docker \
+  tailscale discord zen-browser; do
+  if have "$b"; then printf "%-24s %s\n" "$b" "$(command -v "$b")"
+  else printf "%-24s MISSING\n" "$b"; fi
+done
 
 echo
 echo "done. manual leftovers:"

@@ -31,7 +31,12 @@ backup() {
 # link <src-abs> <dest-abs>: symlink file or dir
 link() {
   local src=$1 dest=$2
-  mkdir -p "$(dirname "$dest")"
+
+  if [[ ! -e "$src" ]]; then
+    echo "error: missing source: $src" >&2
+    return 1
+  fi
+  [[ "$CHECK_ONLY" == "1" ]] || mkdir -p "$(dirname "$dest")"
 
   if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
     echo "ok: $dest"
@@ -93,6 +98,11 @@ fi
 
 echo
 echo "linked/ok: $ok, missing: $missing"
+if ! git config --global user.name >/dev/null 2>&1 || ! git config --global user.email >/dev/null 2>&1; then
+  echo "WARNING: no git identity set — commits will fail until you run:"
+  echo '  git config --global user.name "Your Name"'
+  echo '  git config --global user.email "you@example.com"'
+fi
 echo "note: fish plugins install via 'fisher update' (automated by provision.sh)."
 echo "note: system/keyd/*.conf needs root: sudo cp system/keyd/*.conf /etc/keyd/ && sudo systemctl restart keyd"
 

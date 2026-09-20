@@ -1,9 +1,12 @@
-[user]
-    name = USER_NAME
-    email = USER_EMAIL
-
-# Workspace identities (uncomment and adjust gitdir: paths per machine, then
-# create the target files with real [user] blocks — later files override):
+# No [user] block here on purpose: git must fail loudly until you set a
+# real identity, instead of silently committing as a placeholder.
+# Set it per machine, then optionally add workspace routing below.
+#
+#   git config --global user.name "Your Name"
+#   git config --global user.email "you@example.com"
+#
+# Workspace identities (uncomment and adjust gitdir: paths per machine,
+# then create the target files with real [user] blocks):
 #
 # [includeIf "gitdir:~/www/personal/"]
 #     path = ~/.gitconfig-personal

@@ -38,8 +38,10 @@ Git note: `git/.gitconfig` assumes `delta` as pager (also used by lazygit).
 Install it (`sudo pacman -S git-delta`) or change `core.pager`.
 `commit.template` points at `~/.gitmessage.txt`, linked by `install.sh`.
 
-Identities: `git/.gitconfig` ships `USER_*` placeholders as default and a
-commented `includeIf` recipe for per-workspace identities (uncomment, adjust
+Identities: `git/.gitconfig` ships no `[user]` block on purpose — git fails
+loudly until you set a real identity (placeholders risk silent bad commits).
+After install, run `git config --global user.name/email`. The commented
+`includeIf` recipe covers per-workspace identities (uncomment, adjust
 `gitdir:` paths per machine, create the target files with real `[user]`
 blocks). SSH auth stays in your own `~/.ssh/config`
 (`github.com` vs `github.office`), which is intentionally not managed here.
@@ -49,9 +51,9 @@ blocks). SSH auth stays in your own `~/.ssh/config`
 ```bash
 git clone <repo> ~/www/dotfiles
 cd ~/www/dotfiles
-./provision.sh        # system deps (Arch/CachyOS, idempotent) + fisher/npm/go/pipx/composer
-./install.sh          # link + backup real files to ~/.dotfiles_backup/<ts>/
-./install.sh --check  # verify without changing anything
+./provision.sh        # system deps + linking + toolchains (runs install.sh itself)
+./install.sh          # link-only re-run (backup real files to ~/.dotfiles_backup/<ts>/)
+./install.sh --check  # verify without changing anything (creates nothing)
 ```
 
 `install.sh` is link-only and safe. `provision.sh` is CachyOS-only and does the
