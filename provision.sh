@@ -118,8 +118,8 @@ step "npm globals"
 have npm || { fail "npm missing after nvm setup"; exit 1; }
 run npm i -g bash-language-server fish-lsp @vtsls/language-server vue-language-server \
   tailwindcss-language-server intelephense \
-  @fsouza/prettierd eslint_d
-ok "8 packages"
+  @fsouza/prettierd eslint_d @tobilu/qmd
+ok "9 packages"
 
 step "agents (opencode, pi, agy, herdr)"
 agents_new=0
