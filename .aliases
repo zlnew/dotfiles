@@ -1,5 +1,27 @@
+# Shared shell aliases (-> ~/.aliases). Keep minimal: two letters where possible.
+
 # Editors
 alias v='nvim'
 
+# List / view (eza, bat). Note: CachyOS already owns la/ll/ls/lt/../... —
+# don't redeclare those here (its config.fish runs after conf.d anyway).
+alias l='eza -lh --group-directories-first'
+alias cat='bat -p'
+
+# Git (delta is the pager)
+alias g='git'
+alias gs='git status -sb'
+alias gd='git diff'
+alias gl='git log --oneline -15'
+alias lg='lazygit'
+
+# Docker
+alias d='docker'
+alias dc='docker compose'
+
 # Zellij
 alias zl="zellij"
+
+# Safety net
+alias cp='cp -i'
+alias mv='mv -i'

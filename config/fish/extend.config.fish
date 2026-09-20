@@ -3,8 +3,17 @@ if type -q zoxide
 end
 
 # Shared aliases (tracked .aliases, linked to ~/.aliases).
+# The file is bash syntax (alias name='body'); translate each line since
+# fish alias needs space form (alias name 'body').
 if test -f ~/.aliases
-    source ~/.aliases
+    while read -l line
+        string match -qr -- '^alias ' $line; or continue
+        set -l rest (string replace -- 'alias ' '' $line)
+        set -l kv (string split -m 1 '=' -- $rest)
+        set -l name (string trim -- $kv[1])
+        set -l body (string trim --chars="'\"" -- $kv[2])
+        alias $name $body
+    end < ~/.aliases
 end
 
 # Global secrets (~/.env, never committed). Format: KEY=VALUE, # comments allowed.

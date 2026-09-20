@@ -53,7 +53,7 @@ Provision covers: fisher + `nvm.fish`, standalone nvm with latest LTS as
 default, LSPs from official toolchains (`uv`, `go install gopls`, composer
 `pint`; npm only for tools with no official distribution), agents
 (`opencode`, `pi`, `agy`, `herdr`) plus `pi` extensions from
-`config/pi/extensions.txt`, `docker` (service + group),
+`config/pi/extensions.txt`, `gh`, `docker` (service + group),
 `tailscale`, `discord`, `zen-browser`. Re-running either script is safe.
 Both scripts are quiet by default; pass `--verbose` to stream every command.
 

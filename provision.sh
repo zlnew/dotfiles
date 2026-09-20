@@ -6,16 +6,31 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACMAN_FLAGS=()
+YES=0
 UI_VERBOSE=0
 for arg in "$@"; do
   case "$arg" in
-    --yes) PACMAN_FLAGS+=(--noconfirm) ;;
+    --yes) YES=1 ;;
     --verbose) UI_VERBOSE=1 ;;
-    -h|--help) echo "Usage: ./provision.sh [--yes] [--verbose]"; exit 0 ;;
+    -h|--help)
+      echo "Usage: ./provision.sh [--yes] [--verbose]"
+      echo "  --yes      pass --noconfirm to pacman (implied in quiet mode,"
+      echo "             where the prompt would be invisible)"
+      echo "  --verbose  stream every command (pacman prompt visible, so"
+      echo "             confirmation is asked unless --yes)"
+      exit 0
+      ;;
     *) echo "Unknown arg: $arg" >&2; exit 1 ;;
   esac
 done
+
+# Quiet mode hides pacman's stdout — a [Y/n] prompt there would hang forever
+# with nothing on screen. So quiet implies --noconfirm; verbose shows the
+# prompt and only --yes skips it.
+PACMAN_FLAGS=()
+if [[ "$YES" == "1" || "$UI_VERBOSE" != "1" ]]; then
+  PACMAN_FLAGS+=(--noconfirm)
+fi
 
 if [[ -f "$REPO_ROOT/lib/ui.sh" ]]; then
   # shellcheck disable=SC1091
@@ -45,9 +60,12 @@ have() { command -v "$1" >/dev/null 2>&1; }
 echo "dotfiles :: provision"
 
 step "pacman (official repos, no AUR)"
+if [[ "$YES" != "1" && "$UI_VERBOSE" != "1" ]]; then
+  note "quiet mode implies --noconfirm (prompt would be invisible)"
+fi
 run sudo pacman -S --needed "${PACMAN_FLAGS[@]}" \
   git base-devel fish neovim zellij alacritty niri noctalia lazygit keyd \
-  zoxide git-delta ripgrep fd fzf eza bat libsecret libnotify \
+  zoxide git-delta github-cli ripgrep fd fzf eza bat libsecret libnotify \
   go php composer lua-language-server uv \
   tree-sitter-cli \
   docker docker-compose \
@@ -138,13 +156,14 @@ if ! composer global show laravel/pint >/dev/null 2>&1; then run composer global
 if [[ "$tools_new" -gt 0 ]]; then ok "$tools_new installed"; else ok "present"; fi
 
 step "verify"
+bins=(fish nvim zellij alacritty niri noctalia lazygit delta git gh keyd \
+  zoxide rg fd fzf node npm uv go gopls composer pint \
+  basedpyright-langserver ruff opencode pi agy herdr docker \
+  tailscale discord zen-browser)
 if [[ "$UI_VERBOSE" == "1" ]]; then
   "$REPO_ROOT/install.sh" --check || true
   missing=0
-  for b in fish nvim zellij alacritty niri noctalia lazygit delta git keyd \
-    zoxide rg fd fzf node npm uv go gopls composer pint \
-    basedpyright-langserver ruff opencode pi agy herdr docker \
-    tailscale discord zen-browser; do
+  for b in "${bins[@]}"; do
     if have "$b"; then printf '  %-24s %s\n' "$b" "$(command -v "$b")"
     else printf '  %-24s MISSING\n' "$b"; missing=$((missing + 1)); fi
   done
@@ -152,13 +171,10 @@ if [[ "$UI_VERBOSE" == "1" ]]; then
 else
   run "$REPO_ROOT/install.sh" --check || true
   missing=()
-  for b in fish nvim zellij alacritty niri noctalia lazygit delta git keyd \
-    zoxide rg fd fzf node npm uv go gopls composer pint \
-    basedpyright-langserver ruff opencode pi agy herdr docker \
-    tailscale discord zen-browser; do
+  for b in "${bins[@]}"; do
     have "$b" || missing+=("$b")
   done
-  if [[ "${#missing[@]}" -eq 0 ]]; then ok "28/28 present"; else fail "missing: ${missing[*]}"; fi
+  if [[ "${#missing[@]}" -eq 0 ]]; then ok "${#bins[@]}/${#bins[@]} present"; else fail "missing: ${missing[*]}"; fi
 fi
 
 echo
