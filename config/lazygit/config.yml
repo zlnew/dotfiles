@@ -36,9 +36,9 @@ gui:
     defaultFgColor:
       - default
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: "delta --dark --paging=never"
+      command: "delta --dark --paging=never"
   commit:
     autoWrapCommitMessage: false
     autoWrapWidth: 72
