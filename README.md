@@ -7,8 +7,9 @@ with Alacritty, Lazygit, Git, keyd, and one Gruvbox palette driving every app.
 
 ```
 dotfiles/
-├── install.sh              # link repo -> $HOME (backup, --check, no sudo)
+├── install.sh              # link repo -> $HOME (backup, --check, --verbose, no sudo)
 ├── provision.sh            # CachyOS deps + toolchains (runs install.sh)
+├── lib/ui.sh               # shared installer UI (quiet by default, --verbose streams)
 ├── .aliases                # shared aliases (-> ~/.aliases)
 ├── .env.example            # secrets template (-> ~/.env, mode 600)
 ├── config/                 # symlinked into ~/.config/<app>
@@ -18,7 +19,8 @@ dotfiles/
 │   ├── niri/               # config.kdl + cfg/ splits (incl. generated colors.kdl)
 │   ├── alacritty/          # alacritty.toml + generated colors.toml
 │   ├── lazygit/            # config.yml (terminal-inherited colors)
-│   └── noctalia/           # config.toml + generated palettes/ZlGruvbox.json
+│   ├── noctalia/           # config.toml + generated palettes/ZlGruvbox.json
+│   └── pi/                 # extensions.txt manifest only (~/.pi itself is never linked)
 ├── git/                    # .gitconfig (no identity — see below), .gitmessage.txt
 ├── system/keyd/            # manual: sudo cp to /etc/keyd/
 └── pkg/colorgen/           # palette.yaml + palette-light.yaml + semantic.yaml -> 6 outputs
@@ -50,8 +52,14 @@ cd ~/www/dotfiles
 Provision covers: fisher + `nvm.fish`, standalone nvm with latest LTS as
 default, LSPs from official toolchains (`uv`, `go install gopls`, composer
 `pint`; npm only for tools with no official distribution), agents
-(`opencode`, `pi`, `agy`, `herdr`), `docker` (service + group),
+(`opencode`, `pi`, `agy`, `herdr`) plus `pi` extensions from
+`config/pi/extensions.txt`, `docker` (service + group),
 `tailscale`, `discord`, `zen-browser`. Re-running either script is safe.
+Both scripts are quiet by default; pass `--verbose` to stream every command.
+
+Pi note: `~/.pi` is never symlinked (`auth.json` collects OAuth tokens).
+Only the extension manifest is tracked — add a source there and re-run
+provision, or `pi install` directly and backfill the file.
 
 ## Colors
 

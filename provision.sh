@@ -112,6 +112,18 @@ if ! have herdr; then run_sh "curl -fsSL https://herdr.dev/install.sh | sh"; age
 if [[ "$agents_new" -gt 0 ]]; then ok "$agents_new installed"; else ok "present"; fi
 note "agy first run is interactive (Google OAuth)"
 
+step "pi extensions"
+installed="$(pi list 2>/dev/null | grep -E '^  [^ ]' | awk '{print $1}' || true)"
+ext_new=0
+while IFS= read -r src; do
+  [[ -z "$src" || "$src" == \#* ]] && continue
+  if ! grep -qxF "$src" <<<"$installed"; then
+    run pi install "$src"
+    ext_new=$((ext_new + 1))
+  fi
+done <"$REPO_ROOT/config/pi/extensions.txt"
+if [[ "$ext_new" -gt 0 ]]; then ok "$ext_new installed"; else ok "present"; fi
+
 export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.config/composer/vendor/bin:$PATH"
 
 step "toolchains (uv, gopls, pint)"
