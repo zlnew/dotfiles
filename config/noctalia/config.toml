@@ -3,5 +3,5 @@ polkit_agent = true
 
 [theme]
 mode = "dark"
-source = "builtin"
-builtin = "Gruvbox"
+source = "custom"
+custom_palette = "ZlGruvbox"
