@@ -72,8 +72,9 @@ for app in alacritty lazygit niri noctalia nvim zellij; do
   link "$REPO_ROOT/config/$app" "$HOME/.config/$app"
 done
 
-# --- fish: do NOT overwrite CachyOS config.fish, install as conf.d snippet ---
+# --- fish: do NOT overwrite CachyOS config.fish, install as conf.d snippets ---
 link "$REPO_ROOT/config/fish/extend.config.fish" "$HOME/.config/fish/conf.d/10-dotfiles.fish"
+link "$REPO_ROOT/config/fish/colors.fish" "$HOME/.config/fish/conf.d/11-colors.fish"
 link "$REPO_ROOT/config/fish/fish_plugins" "$HOME/.config/fish/fish_plugins"
 
 # --- home files ---

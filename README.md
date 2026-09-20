@@ -80,9 +80,14 @@ cd pkg/colorgen && go run .   # needs Go toolchain
 ```
 
 Outputs: `config/nvim/lua/colors/default.lua` (consumed by
-`config/nvim/lua/core/colorscheme.lua`) and `config/alacritty/colors.toml`
-(imported by `alacritty.toml`). `resolved.json` is a debug dump and ignored.
+`config/nvim/lua/core/colorscheme.lua`), `config/alacritty/colors.toml`
+(imported by `alacritty.toml`), and `config/fish/colors.fish` (the 9 pure
+base colors — everything else in pure inherits; linked as `conf.d/11-colors.fish`). `resolved.json` is a debug dump and ignored.
 Fish/Noctalia manage their own theme colors and are not generated.
+Niri focus-ring colors and the Zellij gruvbox theme are also generated
+(`config/niri/cfg/colors.kdl`, `config/zellij/themes/gruvbox.kdl`).
+Noctalia uses its builtin `Gruvbox` palette (`[theme]` in `config.toml`).
+Lazygit intentionally uses named ANSI colors and inherits the terminal palette.
 
 ## Validation checklist
 
