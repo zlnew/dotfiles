@@ -96,12 +96,27 @@ else
   ok=$((ok + 1))
 fi
 
+# --- ~/.gitconfig.local (personal values, plain file, never linked) ---
+if [[ ! -e "$HOME/.gitconfig.local" ]]; then
+  if [[ "$CHECK_ONLY" == "1" ]]; then
+    echo "missing: $HOME/.gitconfig.local (personal git identity goes here)"
+    missing=$((missing + 1))
+  else
+    echo "create: $HOME/.gitconfig.local (mode 600 — put your [user] + includes here)"
+    printf '# Personal git config. See the recipe comments in ~/.gitconfig\n' | install -m 600 /dev/stdin "$HOME/.gitconfig.local"
+    ok=$((ok + 1))
+  fi
+else
+  echo "ok: $HOME/.gitconfig.local"
+  ok=$((ok + 1))
+fi
+
 echo
 echo "linked/ok: $ok, missing: $missing"
 if ! git config --global user.name >/dev/null 2>&1 || ! git config --global user.email >/dev/null 2>&1; then
-  echo "WARNING: no git identity set — commits will fail until you run:"
-  echo '  git config --global user.name "Your Name"'
-  echo '  git config --global user.email "you@example.com"'
+  echo "WARNING: no git identity set — commits will fail."
+  echo "  Edit ~/.gitconfig.local (NOT ~/.gitconfig, not git config --global;"
+  echo "  both write into the repo). See the recipe in ~/.gitconfig comments."
 fi
 echo "note: fish plugins install via 'fisher update' (automated by provision.sh)."
 echo "note: system/keyd/*.conf needs root: sudo cp system/keyd/*.conf /etc/keyd/ && sudo systemctl restart keyd"

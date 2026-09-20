@@ -1,18 +1,24 @@
 # No [user] block here on purpose: git must fail loudly until you set a
 # real identity, instead of silently committing as a placeholder.
-# Set it per machine, then optionally add workspace routing below.
 #
-#   git config --global user.name "Your Name"
-#   git config --global user.email "you@example.com"
+# NEVER personalize this file — it is symlinked to the repo, so any edit
+# lands in dotfiles. NEVER use `git config --global` either: it writes
+# here too. Put everything machine-specific in ~/.gitconfig.local
+# (plain file, created by install.sh, never tracked), always included
+# below. Example contents:
 #
-# Workspace identities (uncomment and adjust gitdir: paths per machine,
-# then create the target files with real [user] blocks):
+#   [user]
+#       name = Your Name
+#       email = you@example.com
 #
-# [includeIf "gitdir:~/www/personal/"]
-#     path = ~/.gitconfig-personal
+#   [includeIf "gitdir:~/www/personal/"]
+#       path = ~/.gitconfig-personal
 #
-# [includeIf "gitdir:~/www/office/"]
-#     path = ~/.gitconfig-office
+#   [includeIf "gitdir:~/www/office/"]
+#       path = ~/.gitconfig-office
+
+[include]
+    path = ~/.gitconfig.local
 
 [core]
     editor = nvim

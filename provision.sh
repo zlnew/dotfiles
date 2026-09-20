@@ -28,6 +28,7 @@ sudo pacman -S --needed "${PACMAN_FLAGS[@]}" \
   git base-devel fish neovim zellij alacritty niri noctalia lazygit keyd \
   zoxide git-delta ripgrep fd fzf eza bat libsecret libnotify \
   go php composer lua-language-server uv \
+  tree-sitter-cli \
   docker docker-compose \
   tailscale discord zen-browser-bin \
   ttf-jetbrains-mono-nerd

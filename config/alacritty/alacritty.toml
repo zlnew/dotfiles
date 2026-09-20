@@ -1,6 +1,5 @@
-import = ["colors.toml"]
-
 [general]
+import = ["colors.toml"]
 working_directory = "None"
 live_config_reload = true
 

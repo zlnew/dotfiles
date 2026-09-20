@@ -40,10 +40,11 @@ Install it (`sudo pacman -S git-delta`) or change `core.pager`.
 
 Identities: `git/.gitconfig` ships no `[user]` block on purpose — git fails
 loudly until you set a real identity (placeholders risk silent bad commits).
-After install, run `git config --global user.name/email`. The commented
-`includeIf` recipe covers per-workspace identities (uncomment, adjust
-`gitdir:` paths per machine, create the target files with real `[user]`
-blocks). SSH auth stays in your own `~/.ssh/config`
+Never personalize `~/.gitconfig` and never use `git config --global` — both
+write into the symlinked repo file. Put identity in `~/.gitconfig.local`
+(plain file, auto-created by `install.sh`, always included by the base config);
+the recipe (default `[user]` + `includeIf` workspace routing) is in the base
+config's comments. SSH auth stays in your own `~/.ssh/config`
 (`github.com` vs `github.office`), which is intentionally not managed here.
 
 ## Install
