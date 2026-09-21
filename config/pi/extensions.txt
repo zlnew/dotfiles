@@ -1,6 +1,5 @@
 # pi extensions, one source per line (`#` comments, blank lines ignored).
 # Installed idempotently by provision.sh (`pi list` check, then `pi install`).
-npm:pi-antigravity
 npm:pi-mcp-adapter
 npm:pi-subagents
 npm:pi-web-access
@@ -10,7 +9,6 @@ npm:pi-background-tasks
 npm:billion-context
 npm:pi-lens
 npm:bigpowers
-npm:@dietrichgebert/ponytail
 npm:@amaster.ai/pi-memory-mem0
 npm:pi-memory
 npm:@ff-labs/pi-fff
